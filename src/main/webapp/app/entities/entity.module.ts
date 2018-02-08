@@ -13,6 +13,8 @@ import { RocktionaryComentarCancionModule } from './comentar-cancion/comentar-ca
 import { RocktionaryComentarAlbumModule } from './comentar-album/comentar-album.module';
 import { RocktionaryComentarBandaModule } from './comentar-banda/comentar-banda.module';
 import { RocktionaryUserFollowingUserModule } from './user-following-user/user-following-user.module';
+import { RocktionaryEquipoModule } from './equipo/equipo.module'
+
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -30,6 +32,7 @@ import { RocktionaryUserFollowingUserModule } from './user-following-user/user-f
         RocktionaryComentarAlbumModule,
         RocktionaryComentarBandaModule,
         RocktionaryUserFollowingUserModule,
+        RocktionaryEquipoModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
