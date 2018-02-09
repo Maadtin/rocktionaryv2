@@ -1,7 +1,8 @@
 {
     "equipo":{
+        "title": "Nuestro equipo",
         "menu":{
-            "equipo": "Equipo"
+            "equipo": "El Equipo"
         }
     }
 }

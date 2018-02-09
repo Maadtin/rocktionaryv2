@@ -8,7 +8,7 @@ export const equipoRoute: Routes = [
         component: EquipoComponent,
         data: {
             authorities: ['ROLE_USER'],
-            // pageTitle: 'rocktionaryApp.discografica.home.title'
+            pageTitle: 'rocktionaryApp.equipo.title'
         }
     }
 ];
