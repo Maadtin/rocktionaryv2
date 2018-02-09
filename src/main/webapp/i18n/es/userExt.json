@@ -20,6 +20,8 @@
             "latitud": "Latitud",
             "longitud": "Longitud",
             "localidad": "Localidad",
+            "spotifyToken": "Spotify Token",
+            "refreshToken": "Refresh Token",
             "user": "User"
         }
     }

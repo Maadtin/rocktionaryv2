@@ -2,6 +2,7 @@ package com.rocktionary.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -34,6 +35,14 @@ public class UserExt implements Serializable {
 
     @Column(name = "localidad")
     private String localidad;
+
+    @Size(min = 0)
+    @Column(name = "spotify_token")
+    private String spotifyToken;
+
+    @Size(min = 0)
+    @Column(name = "refresh_token")
+    private String refreshToken;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -113,6 +122,32 @@ public class UserExt implements Serializable {
         this.localidad = localidad;
     }
 
+    public String getSpotifyToken() {
+        return spotifyToken;
+    }
+
+    public UserExt spotifyToken(String spotifyToken) {
+        this.spotifyToken = spotifyToken;
+        return this;
+    }
+
+    public void setSpotifyToken(String spotifyToken) {
+        this.spotifyToken = spotifyToken;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public UserExt refreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+        return this;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
     public User getUser() {
         return user;
     }
@@ -156,6 +191,8 @@ public class UserExt implements Serializable {
             ", latitud=" + getLatitud() +
             ", longitud=" + getLongitud() +
             ", localidad='" + getLocalidad() + "'" +
+            ", spotifyToken='" + getSpotifyToken() + "'" +
+            ", refreshToken='" + getRefreshToken() + "'" +
             "}";
     }
 }
