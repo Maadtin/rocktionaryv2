@@ -27,12 +27,28 @@
         {
             "fieldName": "localidad",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "spotifyToken",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": 0
+        },
+        {
+            "fieldName": "refreshToken",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": 0
         }
     ],
     "changelogDate": "20180203225141",
-    "entityTableName": "user_ext",
     "dto": "no",
-    "pagination": "no",
     "service": "no",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "user_ext",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
 }

@@ -40,6 +40,14 @@
             <column name="localidad" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
+            <column name="spotify_token" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="refresh_token" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="user_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
