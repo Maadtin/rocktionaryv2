@@ -8,6 +8,8 @@ export class UserExt implements BaseEntity {
         public latitud?: number,
         public longitud?: number,
         public localidad?: string,
+        public spotifyToken?: string,
+        public refreshToken?: string,
         public user?: User,
     ) {
     }

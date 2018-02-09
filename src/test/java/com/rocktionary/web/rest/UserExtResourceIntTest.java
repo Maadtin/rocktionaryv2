@@ -53,6 +53,12 @@ public class UserExtResourceIntTest {
     private static final String DEFAULT_LOCALIDAD = "AAAAAAAAAA";
     private static final String UPDATED_LOCALIDAD = "BBBBBBBBBB";
 
+    private static final String DEFAULT_SPOTIFY_TOKEN = "AAAAAAAAAA";
+    private static final String UPDATED_SPOTIFY_TOKEN = "BBBBBBBBBB";
+
+    private static final String DEFAULT_REFRESH_TOKEN = "AAAAAAAAAA";
+    private static final String UPDATED_REFRESH_TOKEN = "BBBBBBBBBB";
+
     @Autowired
     private UserExtRepository userExtRepository;
 
@@ -95,7 +101,9 @@ public class UserExtResourceIntTest {
             .fotoContentType(DEFAULT_FOTO_CONTENT_TYPE)
             .latitud(DEFAULT_LATITUD)
             .longitud(DEFAULT_LONGITUD)
-            .localidad(DEFAULT_LOCALIDAD);
+            .localidad(DEFAULT_LOCALIDAD)
+            .spotifyToken(DEFAULT_SPOTIFY_TOKEN)
+            .refreshToken(DEFAULT_REFRESH_TOKEN);
         return userExt;
     }
 
@@ -124,6 +132,8 @@ public class UserExtResourceIntTest {
         assertThat(testUserExt.getLatitud()).isEqualTo(DEFAULT_LATITUD);
         assertThat(testUserExt.getLongitud()).isEqualTo(DEFAULT_LONGITUD);
         assertThat(testUserExt.getLocalidad()).isEqualTo(DEFAULT_LOCALIDAD);
+        assertThat(testUserExt.getSpotifyToken()).isEqualTo(DEFAULT_SPOTIFY_TOKEN);
+        assertThat(testUserExt.getRefreshToken()).isEqualTo(DEFAULT_REFRESH_TOKEN);
     }
 
     @Test
@@ -160,7 +170,9 @@ public class UserExtResourceIntTest {
             .andExpect(jsonPath("$.[*].foto").value(hasItem(Base64Utils.encodeToString(DEFAULT_FOTO))))
             .andExpect(jsonPath("$.[*].latitud").value(hasItem(DEFAULT_LATITUD.doubleValue())))
             .andExpect(jsonPath("$.[*].longitud").value(hasItem(DEFAULT_LONGITUD.doubleValue())))
-            .andExpect(jsonPath("$.[*].localidad").value(hasItem(DEFAULT_LOCALIDAD.toString())));
+            .andExpect(jsonPath("$.[*].localidad").value(hasItem(DEFAULT_LOCALIDAD.toString())))
+            .andExpect(jsonPath("$.[*].spotifyToken").value(hasItem(DEFAULT_SPOTIFY_TOKEN.toString())))
+            .andExpect(jsonPath("$.[*].refreshToken").value(hasItem(DEFAULT_REFRESH_TOKEN.toString())));
     }
 
     @Test
@@ -178,7 +190,9 @@ public class UserExtResourceIntTest {
             .andExpect(jsonPath("$.foto").value(Base64Utils.encodeToString(DEFAULT_FOTO)))
             .andExpect(jsonPath("$.latitud").value(DEFAULT_LATITUD.doubleValue()))
             .andExpect(jsonPath("$.longitud").value(DEFAULT_LONGITUD.doubleValue()))
-            .andExpect(jsonPath("$.localidad").value(DEFAULT_LOCALIDAD.toString()));
+            .andExpect(jsonPath("$.localidad").value(DEFAULT_LOCALIDAD.toString()))
+            .andExpect(jsonPath("$.spotifyToken").value(DEFAULT_SPOTIFY_TOKEN.toString()))
+            .andExpect(jsonPath("$.refreshToken").value(DEFAULT_REFRESH_TOKEN.toString()));
     }
 
     @Test
@@ -205,7 +219,9 @@ public class UserExtResourceIntTest {
             .fotoContentType(UPDATED_FOTO_CONTENT_TYPE)
             .latitud(UPDATED_LATITUD)
             .longitud(UPDATED_LONGITUD)
-            .localidad(UPDATED_LOCALIDAD);
+            .localidad(UPDATED_LOCALIDAD)
+            .spotifyToken(UPDATED_SPOTIFY_TOKEN)
+            .refreshToken(UPDATED_REFRESH_TOKEN);
 
         restUserExtMockMvc.perform(put("/api/user-exts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -221,6 +237,8 @@ public class UserExtResourceIntTest {
         assertThat(testUserExt.getLatitud()).isEqualTo(UPDATED_LATITUD);
         assertThat(testUserExt.getLongitud()).isEqualTo(UPDATED_LONGITUD);
         assertThat(testUserExt.getLocalidad()).isEqualTo(UPDATED_LOCALIDAD);
+        assertThat(testUserExt.getSpotifyToken()).isEqualTo(UPDATED_SPOTIFY_TOKEN);
+        assertThat(testUserExt.getRefreshToken()).isEqualTo(UPDATED_REFRESH_TOKEN);
     }
 
     @Test

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -44,7 +45,7 @@ public class UserExtResource {
      */
     @PostMapping("/user-exts")
     @Timed
-    public ResponseEntity<UserExt> createUserExt(@RequestBody UserExt userExt) throws URISyntaxException {
+    public ResponseEntity<UserExt> createUserExt(@Valid @RequestBody UserExt userExt) throws URISyntaxException {
         log.debug("REST request to save UserExt : {}", userExt);
         if (userExt.getId() != null) {
             throw new BadRequestAlertException("A new userExt cannot already have an ID", ENTITY_NAME, "idexists");
@@ -66,7 +67,7 @@ public class UserExtResource {
      */
     @PutMapping("/user-exts")
     @Timed
-    public ResponseEntity<UserExt> updateUserExt(@RequestBody UserExt userExt) throws URISyntaxException {
+    public ResponseEntity<UserExt> updateUserExt(@Valid @RequestBody UserExt userExt) throws URISyntaxException {
         log.debug("REST request to update UserExt : {}", userExt);
         if (userExt.getId() == null) {
             return createUserExt(userExt);
