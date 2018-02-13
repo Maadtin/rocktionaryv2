@@ -1,37 +1,66 @@
+.main{
+    background-color: black;
+}
 
+/*----------About-Us---------*/
+.about_us{
+    font-size: 2.7rem;
+    color: white;
+    padding: 1rem;
+    font-family: "New Rocker", cursive;
+    border-radius: 10px;
+}
 
 /*----------Carousel---------*/
 ._carousel{
     padding: 2rem;
 }
 
-.carousel{
-    height: 400px;
+.carousel-item img{
+    width: 100%;
+    border: 2px solid white;
 }
 
 /*----------Descripcion---------*/
 .descripcion {
-    padding: 2rem;
+    padding: 3rem;
 }
 
-.descripcion div{
-    height: 300px;
-}
-
-.container{
-    height: 400px;
+._descripcion{
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    background-color: rgba(0, 0, 0, 0.77);
 }
 
 
 /*----------About-Us---------*/
-
-
 .about-us-info{
     padding: 2rem;
 }
 
-.about-us-info div{
-    height: 2000px;
+.text_miembro{
+    font-size: 3rem;
+    font-family: "New Rocker", cursive;
+    text-shadow: -1px -1px 1px #b69200, 1px 1px 1px #b69200, -1px 1px 1px #b69200, 1px -1px #b69200;
 }
 
+.perfil_miembro img{
+    width:100%;
+}
+.skill_miembro img{
+    width: 100%;
+}
+
+.info_miembro{
+    font-size: 1.3rem;
+}
+
+.frase_preferida{
+    color:#3e3b3b;
+}
+
+.info_miembro span{
+    display: block;
+    margin-top: 20px;
+}
 
