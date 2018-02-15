@@ -116,13 +116,24 @@
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
-                                <!---------------------Equipo--------------------------->
+            <!---------------------Perfil--------------------------->
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="perfil" (click)="collapseNavbar()">
+                    <span>
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <a jhiTranslate="perfil.title"></a>
+                    </span>
+                </a>
+            </li>
+
+
+            <!---------------------Equipo--------------------------->
 
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="equipo" (click)="collapseNavbar()">
                     <span>
                         <i class="fa fa-users" aria-hidden="true"></i>
-                        <a jhiTranslate="equipo.menu.equipo">Equipo</a>
+                        <a jhiTranslate="equipo.menu"></a>
                     </span>
                 </a>
             </li>
