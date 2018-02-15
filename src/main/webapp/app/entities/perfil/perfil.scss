@@ -1,0 +1,79 @@
+.main{
+    padding-top: 2rem;
+    background-image: url('../../../content/images/fondo/fondoPerfil.jpg');
+}
+
+._container {
+    border-radius: 15px;
+    border: 1px solid lightgray;
+    background-color: rgba(0, 0, 0, 0.67);
+    margin-top: 30px;
+    width: 75%;
+    padding: 0 1.5rem;
+    margin:0 auto;
+}
+
+.img_perfil img{
+    width: 100%;
+}
+
+.__perfil{
+    text-align: center;
+}
+
+.nom_perfil {
+    font-family: 'New Rocker', cursive;
+    font-size: 72px;
+    background: -webkit-linear-gradient(#000, #9c936b);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 2px white;
+    text-align: center;
+}
+
+/*<!--Datos de perfil-->*/
+
+.perfil_datos{
+    padding: 1.5rem;
+}
+
+.__perfil_datos{
+    height:350px;
+    background-color: white;
+    border: 2px solid black;
+}
+
+/*<!--top canciones mas escuchados-->*/
+
+
+.top_canciones{
+    text-align: center;
+}
+
+.top_canciones span{
+    font-size: 3rem;
+    color: white;
+}
+
+.__top_canciones_res{
+    height: 500px;
+}
+
+.perfil{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+
+@media (min-width: 1200px){
+    .__perfil{
+        order: 1;
+        text-align: left;
+    }
+    .img_perfil img{
+        width: 120%
+    }
+}
+

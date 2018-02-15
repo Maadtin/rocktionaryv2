@@ -1,5 +1,6 @@
 {
     "equipo":{
+        "menu": "Equipo",
         "title": "El equipo",
         "descripcion": "“Somos cuatro estudiantes de segundo de desarrollo de aplicaciones web, y os invitamos a navegar por ROCKTIONARY porque deseamos reflejar todo lo que hemos aprendido en el curso y compartir además nuestra afición  por la música rock.“",
         "about-us":{
@@ -32,6 +33,5 @@
                 "Frase-preferida2": "“Vive como si fueras a morir mañana, aprende como si fueras a vivir siempre.”"
             }
         }
-
     }
 }
