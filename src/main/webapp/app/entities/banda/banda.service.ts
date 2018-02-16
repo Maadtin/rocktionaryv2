@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Banda } from './banda.model';
 import { createRequestOption } from '../../shared';
+import {WindowService} from '../../windowref.service';
 
 export type EntityResponseType = HttpResponse<Banda>;
 
@@ -14,8 +15,27 @@ export type EntityResponseType = HttpResponse<Banda>;
 export class BandaService {
 
     private resourceUrl =  SERVER_API_URL + 'api/bandas';
+    private token = this.windowRef.getNativeWindow().spotifyToken || 'Bearer eqwe';
 
-    constructor(private http: HttpClient, private dateUtils: JhiDateUtils) { }
+    constructor(private http: HttpClient, private windowRef: WindowService, private dateUtils: JhiDateUtils) { }
+
+    getBanda (id: number) {
+        const headers = { 'Authorization': this.token };
+        return this.http.get(`https://api.spotify.com/v1/artists/${id}`, {headers: headers})
+    }
+
+    getBandaBio (bandaNombre: string) {
+        return this.http.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&api_key=10ceb7a9cb40ae1b5c0b517bc625c8f5&artist=${bandaNombre}&format=json`)
+    }
+
+    getTopTracks (id: number) {
+        const headers = { 'Authorization': this.token };
+        return this.http.get(`https://api.spotify.com/v1/artists/${id}/top-tracks?country=ES`, {headers: headers})
+    }
+
+    getVideoTrack (trackName: string) {
+        return this.http.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${trackName}&maxResults=1&key=AIzaSyBh4jKVZPAs4VFdpr2RAdPa_3bHFVRjQXQ&type=video`)
+    }
 
     create(banda: Banda): Observable<EntityResponseType> {
         const copy = this.convert(banda);

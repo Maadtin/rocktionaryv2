@@ -1,86 +1,153 @@
-
-<div *ngIf="banda">
-    <h2><span jhiTranslate="rocktionaryApp.banda.detail.title">Banda</span> {{banda.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="rocktionaryApp.banda.nombre">Nombre</span></dt>
-        <dd>
-            <span>{{banda.nombre}}</span>
-        </dd>
-        <dt><span jhiTranslate="rocktionaryApp.banda.localizacion">Localizacion</span></dt>
-        <dd>
-            <span>{{banda.localizacion}}</span>
-        </dd>
-        <dt><span jhiTranslate="rocktionaryApp.banda.datacreacion">Datacreacion</span></dt>
-        <dd>
-            <span>{{banda.datacreacion | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="rocktionaryApp.banda.anosactivo">Anosactivo</span></dt>
-        <dd>
-            <span>{{banda.anosactivo | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="rocktionaryApp.banda.temas">Temas</span></dt>
-        <dd>
-            <span>{{banda.temas}}</span>
-        </dd>
-        <dt><span jhiTranslate="rocktionaryApp.banda.discografica">Discografica</span></dt>
-        <dd>
-            <span>{{banda.discografica}}</span>
-        </dd>
-        <dt><span jhiTranslate="rocktionaryApp.banda.foto">Foto</span></dt>
-        <dd>
-            <div *ngIf="banda.foto">
-                <a (click)="openFile(banda.fotoContentType, banda.foto)">
-                    <img [src]="'data:' + banda.fotoContentType + ';base64,' + banda.foto" style="max-width: 100%;" alt="banda image"/>
-                </a>
-                {{banda.fotoContentType}}, {{byteSize(banda.foto)}}
+<div class="banda-detail" *ngIf="banda">
+    <div class="col banda-detail__cover">
+        <div class="blurred-container">
+            <div class="blurred" [ngStyle]="{'background-image':'url('+banda.images[0].url+')'}">
             </div>
-        </dd>
-        <dt><span jhiTranslate="rocktionaryApp.banda.logo">Logo</span></dt>
-        <dd>
-            <div *ngIf="banda.logo">
-                <a (click)="openFile(banda.logoContentType, banda.logo)">
-                    <img [src]="'data:' + banda.logoContentType + ';base64,' + banda.logo" style="max-width: 100%;" alt="banda image"/>
-                </a>
-                {{banda.logoContentType}}, {{byteSize(banda.logo)}}
+            <!--<img data-ng-src="{{'data:' + vm.banda.fotoContentType + ';base64,' + vm.banda.foto}}" alt="Imagen de banda"/>-->
+        </div>
+        <div class="container container-mid">
+            <div class="banda-detail__picture-container">
+                <img [src]="banda.images[0].url"  alt="Imagen de banda"/>
             </div>
-        </dd>
-        <dt><span jhiTranslate="rocktionaryApp.banda.pais">Pais</span></dt>
-        <dd>
-            <span>{{banda.pais}}</span>
-        </dd>
-        <dt><span jhiTranslate="rocktionaryApp.banda.estado">Estado</span></dt>
-        <dd>
-            <span>{{banda.estado}}</span>
-        </dd>
-        <dt><span jhiTranslate="rocktionaryApp.banda.genero">Genero</span></dt>
-        <dd>
-            <span>{{banda.genero}}</span>
-        </dd>
-        <dt><span jhiTranslate="rocktionaryApp.banda.biografia">Biografia</span></dt>
-        <dd>
-            <span>{{banda.biografia}}</span>
-        </dd>
-        <dt><span jhiTranslate="rocktionaryApp.banda.discografica">Discografica</span></dt>
-        <dd>
-            <span *ngFor="let discografica of banda.discograficas; let last = last">
-                <a [routerLink]="['/discografica', discografica?.id ]">{{discografica.nombre}}</a>{{last ? '' : ', '}}
-            </span>
-        </dd>
-    </dl>
+            <div class="banda-detail__stats">
+                <a class="active" (click)="triggerClass($event)" href="">General</a>
+                <!--<a ng-click="vm.triggerClass($event)" href="">Seguidores {{vm.banda.followers.total}}</a>-->
+                <a (click)="triggerClass($event)" href="">Comentarios</a>
+            </div>
+        </div>
+    </div>
+    <div class="col banda-detail__resumen">
+        <div class="container">
+            <div class="div-50 tabs">
+                <section class="top-tracks-container">
+                    <h3 class="text-white">Top canciones de {{banda.name}}</h3>
+                    <ul class="grid">
+                        <li (click)="toggleIcon(track.id, $event)" *ngFor="let track of topTracks.tracks" >
+                            <h5>{{track.name}}</h5>
+                            <div class="img-audio-container">
+                                <img [src]="track.album.images[1].url">
+                                <i
+                                    [ngClass]="{'fa-play': !activePlayer, 'fa-pause': activeButton === track.id }"
+                                    class="track-icon-play fa"
+                                >
+                                </i>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+                <!--<div ng-if="vm.showGeneral" class="general">-->
+                <!--<span class="resumen-label">INFORMACIÓN GENERAL</span>-->
+                <!--<p>{{vm.banda.localizacion}}</p>-->
+                <!--</div>-->
+                <!--<div ng-if="vm.showSeguidores" class="seguidores">-->
+                <!--<span class="resumen-label">SEGUIDORES</span>-->
+                <!--<p>{{vm.banda.localizacion}}</p>-->
+                <!--</div>-->
+                <!--<div ng-if="vm.showComentarios" class="comentarios">-->
+                <!--<span class="resumen-label">COMENTARIOS</span>-->
+                <!--<form ng-submit="vm.addComment()" name="addComentForm" class="commentarios__form">-->
+                <!--<textarea name="comment" ng-model="vm.commentText" placeholder="Deja tú comentario..." required></textarea>-->
+                <!--<button ng-disabled="addComentForm.$invalid" type="submit">Enviar</button>-->
+                <!--</form>-->
+                <!--</div>-->
+            </div>
 
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
+            <div class="div-50 more-info">
+                <h1 class="artist-name text-white">{{banda.name}}</h1>
+                <h3><a class="text-white artist-spotify-profile" target="_blank" [href]="banda.external_urls.spotify">Perfil de {{banda.name}} en Spotify</a></h3>
+                <p class="text-white">Seguidores <span class="followers">{{banda.followers.total}}</span></p>
+                <button (click)="showTruncatedText = !showTruncatedText" class="leer-mas">{{ !showTruncatedText ? 'Leer menos' : 'Leer mas' }}</button>
+                <p *ngIf="showTruncatedText" class="text-justify text-white">
+                    {{ bandaBio.artist.bio.content.length > 300 ? (bandaBio.artist.bio.content | slice:0:300 ) +'..': (bandaBio.artist.bio.content) }}
+                </p>
+                <p class="text-justify text-white" *ngIf="!showTruncatedText">
+                    {{ bandaBio.artist.bio.content }}
+                </p>
+            </div>
+        </div>
+    </div>
+<!--<div *ngIf="banda">-->
+    <!--<h2><span jhiTranslate="rocktionaryApp.banda.detail.title">Banda</span> {{banda.id}}</h2>-->
+    <!--<hr>-->
+    <!--<jhi-alert-error></jhi-alert-error>-->
+    <!--<dl class="row-md jh-entity-details">-->
+        <!--<dt><span jhiTranslate="rocktionaryApp.banda.nombre">Nombre</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{banda.nombre}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span jhiTranslate="rocktionaryApp.banda.localizacion">Localizacion</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{banda.localizacion}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span jhiTranslate="rocktionaryApp.banda.datacreacion">Datacreacion</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{banda.datacreacion | date:'mediumDate'}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span jhiTranslate="rocktionaryApp.banda.anosactivo">Anosactivo</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{banda.anosactivo | date:'mediumDate'}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span jhiTranslate="rocktionaryApp.banda.temas">Temas</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{banda.temas}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span jhiTranslate="rocktionaryApp.banda.discografica">Discografica</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{banda.discografica}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span jhiTranslate="rocktionaryApp.banda.foto">Foto</span></dt>-->
+        <!--<dd>-->
+            <!--<div *ngIf="banda.foto">-->
+                <!--<a (click)="openFile(banda.fotoContentType, banda.foto)">-->
+                    <!--<img [src]="'data:' + banda.fotoContentType + ';base64,' + banda.foto" style="max-width: 100%;" alt="banda image"/>-->
+                <!--</a>-->
+                <!--{{banda.fotoContentType}}, {{byteSize(banda.foto)}}-->
+            <!--</div>-->
+        <!--</dd>-->
+        <!--<dt><span jhiTranslate="rocktionaryApp.banda.logo">Logo</span></dt>-->
+        <!--<dd>-->
+            <!--<div *ngIf="banda.logo">-->
+                <!--<a (click)="openFile(banda.logoContentType, banda.logo)">-->
+                    <!--<img [src]="'data:' + banda.logoContentType + ';base64,' + banda.logo" style="max-width: 100%;" alt="banda image"/>-->
+                <!--</a>-->
+                <!--{{banda.logoContentType}}, {{byteSize(banda.logo)}}-->
+            <!--</div>-->
+        <!--</dd>-->
+        <!--<dt><span jhiTranslate="rocktionaryApp.banda.pais">Pais</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{banda.pais}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span jhiTranslate="rocktionaryApp.banda.estado">Estado</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{banda.estado}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span jhiTranslate="rocktionaryApp.banda.genero">Genero</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{banda.genero}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span jhiTranslate="rocktionaryApp.banda.biografia">Biografia</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{banda.biografia}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span jhiTranslate="rocktionaryApp.banda.discografica">Discografica</span></dt>-->
+        <!--<dd>-->
+            <!--<span *ngFor="let discografica of banda.discograficas; let last = last">-->
+                <!--<a [routerLink]="['/discografica', discografica?.id ]">{{discografica.nombre}}</a>{{last ? '' : ', '}}-->
+            <!--</span>-->
+        <!--</dd>-->
+    <!--</dl>-->
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'banda/'+ banda.id + '/edit'} }]"
-            replaceUrl="true"
-            queryParamsHandling="merge"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
-</div>
+    <!--<button type="submit"-->
+            <!--(click)="previousState()"-->
+            <!--class="btn btn-info">-->
+        <!--<span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>-->
+    <!--</button>-->
+
+    <!--<button type="button"-->
+            <!--[routerLink]="['/', { outlets: { popup: 'banda/'+ banda.id + '/edit'} }]"-->
+            <!--replaceUrl="true"-->
+            <!--queryParamsHandling="merge"-->
+            <!--class="btn btn-primary">-->
+        <!--<span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>-->
+    <!--</button>-->
+<!--</div>-->

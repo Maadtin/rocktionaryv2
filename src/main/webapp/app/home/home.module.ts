@@ -1,9 +1,14 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { RocktionarySharedModule } from '../shared';
+import { WindowService } from '../windowref.service'
 
-import { HOME_ROUTE, HomeComponent } from './';
+import { RocktionarySharedModule } from '../shared';
+import {
+    HOME_ROUTE,
+    HomeComponent,
+    HomeService
+} from './';
 
 @NgModule({
     imports: [
@@ -16,6 +21,8 @@ import { HOME_ROUTE, HomeComponent } from './';
     entryComponents: [
     ],
     providers: [
+        HomeService,
+        WindowService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

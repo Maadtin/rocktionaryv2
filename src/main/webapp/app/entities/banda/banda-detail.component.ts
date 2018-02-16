@@ -9,13 +9,20 @@ import { BandaService } from './banda.service';
 
 @Component({
     selector: 'jhi-banda-detail',
-    templateUrl: './banda-detail.component.html'
+    templateUrl: './banda-detail.component.html',
+    styleUrls: ['banda-detail.scss']
 })
-export class BandaDetailComponent implements OnInit, OnDestroy {
+export class BandaDetailComponent implements OnInit {
 
-    banda: Banda;
+    banda: any;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
+    private showGeneral: boolean;
+    private bandaBio: object;
+    private topTracks: object;
+    public showTruncatedText: boolean;
+    public activePlayer: boolean;
+    private activeButton: number;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -26,10 +33,23 @@ export class BandaDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.subscription = this.route.params.subscribe((params) => {
-            this.load(params['id']);
+        this.activePlayer = false;
+        this.showTruncatedText = true;
+        this.showGeneral = true;
+        this.subscription = this.route.params.subscribe(params => {
+            this.bandaService.getBanda(params['id'])
+                .subscribe(banda => {
+                    this.banda = banda;
+                    this.bandaService.getBandaBio(this.banda.name)
+                        .subscribe(info => this.bandaBio = info)
+                });
+
+            this.bandaService.getTopTracks(params['id'])
+                .subscribe(topTracks => this.topTracks = topTracks)
+
         });
-        this.registerChangeInBandas();
+
+        //this.registerChangeInBandas();
     }
 
     load(id) {
@@ -45,19 +65,72 @@ export class BandaDetailComponent implements OnInit, OnDestroy {
     openFile(contentType, field) {
         return this.dataUtils.openFile(contentType, field);
     }
+
     previousState() {
         window.history.back();
     }
 
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-        this.eventManager.destroy(this.eventSubscriber);
+
+
+    toggleIcon (playerId, $e) {
+        this.activeButton = playerId;
+        $e.target.parentElement.querySelector('i.fa').classList.remove('fa-pause', 'fa-play');
+
+        if ($e.target.parentElement.querySelector('i.fa').classList.contains('fa-pause')) {
+            $e.target.parentElement.querySelector('i.fa').classList.add('fa-play')
+        } else {
+            $e.target.parentElement.querySelector('i.fa').classList.add('fa-pause')
+        }
+            // this.activePlayer = !this.activePlayer;
+        //
+        // if ($e.target.classList.contains('fa-pause') && this.activeButton === playerId) {
+        //     // $e.target.remove('fa-pause');
+        //     // $e.target.add('fa-play')
+        //     this.activePlayer = false;
+        //     console.log('has Paused')
+        // } else if ($e.target.classList.contains('fa-play') && this.activeButton === playerId) {
+        //     // $e.target.classList.add('fa-play');
+        //     // $e.target.classList.remove('fa-pause')
+        //     this.activePlayer = true;
+        //     console.log('has Play')
+        // }
+
+
+
+        // angular.element($e.target).toggleClass('fa-pause');
+        // angular.element('.track-icon-play').not($e.target).removeClass('fa-pause').addClass('fa-play')
+
+        // BandaService.getBandaVideoTrack($e.target.dataset.trackName).get()
+        //     .$promise
+        //     .then(res => {
+        //         const { videoId } = res.items[0].id;
+        //         angular.element('#videoPlayer').html('').html(
+        //             `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1" frameborder="0"    allowfullscreen></iframe>`
+        //         ).css('display', 'block');
+        //     })
     }
 
-    registerChangeInBandas() {
-        this.eventSubscriber = this.eventManager.subscribe(
-            'bandaListModification',
-            (response) => this.load(this.banda.id)
-        );
-    }
+
+    triggerClass  ($e) {
+        // angular.element($e.target).siblings().removeClass('active')
+        // angular.element($e.target).addClass('active');
+        //
+        // switch ($e.target.textContent) {
+        //     case 'General': vm.showGeneral = true;vm.showComentarios=false;vm.showSeguidores=false;break;
+        //     case 'Seguidores': vm.showSeguidores = true;vm.showGeneral=false;vm.showComentarios=false;break;
+        //     case 'Comentarios': vm.showComentarios = true;vm.showGeneral=false;vm.showSeguidores=false;break;
+        // }
+    };
+
+    // ngOnDestroy() {
+    //     this.subscription.unsubscribe();
+    //     this.eventManager.destroy(this.eventSubscriber);
+    // }
+
+    // registerChangeInBandas() {
+    //     this.eventSubscriber = this.eventManager.subscribe(
+    //         'bandaListModification',
+    //         (response) => this.load(this.banda.id)
+    //     );
+    // }
 }
