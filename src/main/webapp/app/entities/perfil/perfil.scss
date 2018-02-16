@@ -1,5 +1,5 @@
 .main{
-    padding-top: 2rem;
+    padding: 1.6rem;
     background-image: url('../../../content/images/fondo/fondoPerfil.jpg');
 }
 
@@ -21,9 +21,9 @@
     text-align: center;
 }
 
-.nom_perfil {
+.nom_perfil{
     font-family: 'New Rocker', cursive;
-    font-size: 72px;
+    font-size: 4rem;
     background: -webkit-linear-gradient(#000, #9c936b);
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
@@ -51,18 +51,32 @@
 }
 
 .top_canciones span{
-    font-size: 3rem;
+    font-size: 2rem;
     color: white;
 }
 
 .__top_canciones_res{
-    height: 500px;
+    height: 300px;
 }
 
 .perfil{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+
+@media (min-width: 768px){
+    .nom_perfil{
+        font-size: 4.5rem;
+    }
+}
+
+
+@media (min-width: 992px){
+    .nom_perfil{
+        font-size: 5rem;
+    }
 }
 
 
@@ -75,5 +89,13 @@
     .img_perfil img{
         width: 120%
     }
+
+    .top_canciones span{
+        font-size: 2.6rem;
+    }
+    .nom_perfil{
+        font-size: 5.5rem;
+    }
+
 }
 
