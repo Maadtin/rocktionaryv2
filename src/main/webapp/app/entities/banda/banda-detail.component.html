@@ -22,14 +22,13 @@
                 <section class="top-tracks-container">
                     <h3 class="text-white">Top canciones de {{banda.name}}</h3>
                     <ul class="grid">
-                        <li *ngFor="let track of topTracks.tracks" >
+                        <li (click)="toggleIcon(track.id, $event)" *ngFor="let track of topTracks.tracks" >
                             <h5>{{track.name}}</h5>
                             <div class="img-audio-container">
                                 <img [src]="track.album.images[1].url">
                                 <i
-                                    [class.activePlayer]="activePlayerId === track.id"
-                                    (click)="toggleIcon(track.id)"
-                                    class="track-icon-play fa fa-play"
+                                    [ngClass]="{'fa-play': !activePlayer, 'fa-pause': activeButton === track.id }"
+                                    class="track-icon-play fa"
                                 >
                                 </i>
                             </div>

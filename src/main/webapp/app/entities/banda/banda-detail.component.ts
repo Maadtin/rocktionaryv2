@@ -21,6 +21,8 @@ export class BandaDetailComponent implements OnInit {
     private bandaBio: object;
     private topTracks: object;
     public showTruncatedText: boolean;
+    public activePlayer: boolean;
+    private activeButton: number;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -31,6 +33,7 @@ export class BandaDetailComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.activePlayer = false;
         this.showTruncatedText = true;
         this.showGeneral = true;
         this.subscription = this.route.params.subscribe(params => {
@@ -69,9 +72,29 @@ export class BandaDetailComponent implements OnInit {
 
 
 
-    toggleIcon (playerId) {
+    toggleIcon (playerId, $e) {
+        this.activeButton = playerId;
+        $e.target.parentElement.querySelector('i.fa').classList.remove('fa-pause', 'fa-play');
 
-        console.log(playerId)
+        if ($e.target.parentElement.querySelector('i.fa').classList.contains('fa-pause')) {
+            $e.target.parentElement.querySelector('i.fa').classList.add('fa-play')
+        } else {
+            $e.target.parentElement.querySelector('i.fa').classList.add('fa-pause')
+        }
+            // this.activePlayer = !this.activePlayer;
+        //
+        // if ($e.target.classList.contains('fa-pause') && this.activeButton === playerId) {
+        //     // $e.target.remove('fa-pause');
+        //     // $e.target.add('fa-play')
+        //     this.activePlayer = false;
+        //     console.log('has Paused')
+        // } else if ($e.target.classList.contains('fa-play') && this.activeButton === playerId) {
+        //     // $e.target.classList.add('fa-play');
+        //     // $e.target.classList.remove('fa-pause')
+        //     this.activePlayer = true;
+        //     console.log('has Play')
+        // }
+
 
 
         // angular.element($e.target).toggleClass('fa-pause');
