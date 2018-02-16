@@ -25,7 +25,7 @@
             </ul>
         </figure>
     </div>
-    <div class="col5 mx-auto mt-2">
+    <div class="col col-md-4 text-center mx-auto mt-2">
         <h2>Buscar</h2>
         <div class="botones-container">
             <button [class.activeFilter]="clickedButton === 'canciones'" (click)="handleOnChangePlaceHolderText('canciones');">Canciones</button>
@@ -33,18 +33,51 @@
             <button [class.activeFilter]="clickedButton === 'bandas'" (click)="handleOnChangePlaceHolderText('bandas');">Bandas</button>
         </div>
         <form class="search-form form">
-            <div class="form-group">
-                <a class="btn btn-primary" href="/api/account/login-spotify">Login con Spotify</a>
-                <input
-                    [(ngModel)]="inputSearchText"
-                    (keyup)="handleOnInputSearch()"
-                    name="inputSearchText"
-                    placeholder="Buscar en {{ placeHolderText }}"
-                    class="form-control"
-                >
+            <a class="btn btn-primary" href="/api/account/login-spotify">Login con Spotify</a>
+            <input
+                [(ngModel)]="inputSearchText"
+                (keyup)="handleOnInputSearch()"
+                name="inputSearchText"
+                placeholder="Buscar en {{ placeHolderText }}"
+                class="form-control"
+                autocomplete="off"
+            >
+        </form>
+        <div *ngIf="showResultsContainer" class="search-results-container col-12">
+            <div *ngIf="isLoading" class="la-ball-clip-rotate-multiple la-2x">
+                <div></div>
+                <div></div>
             </div>
 
-        </form>
+            <div *ngIf="!isLoading">
+                <span class="text-white" *ngIf="isError">
+                    {{ errorText }}
+                </span>
+                <div *ngIf="!isError">
+                    <span class="text-white">
+                        Resultados en {{ inputSearchText }}
+                    </span>
+                    <div [ngSwitch]="placeHolderText">
+                        <section *ngSwitchCase="'albumes'" >
+                            <div *ngFor="let album of results">
+                                <p>{{ album | json }}</p>
+                            </div>
+                        </section>
+                        <section *ngSwitchCase="'canciones'">
+                            <div *ngFor="let cancion of results">
+                                <p>{{ cancion | json }}</p>
+                            </div>
+                        </section>
+                        <section *ngSwitchCase="'bandas'">
+                            <div class="banda-card-container" *ngFor="let banda of results">
+                                <a [routerLink]="['/banda', banda.id]" class="d-block text-white">{{ banda.name }}</a>
+                                <img *ngIf="banda.images.length > 0" [src]="banda.images[1].url" alt="">
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!--<div class="col-md-3">-->
         <!--<span class="hipster img-fluid rounded"></span>-->

@@ -5,6 +5,7 @@ import { JhiEventManager } from 'ng-jhipster';
 import { Account, LoginModalService, Principal } from '../shared';
 
 import { HomeService } from './home.service'
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
     selector: 'jhi-home',
@@ -23,6 +24,12 @@ export class HomeComponent implements OnInit {
     private clickedButton: string;
     private searchCriteria: string;
     private timeOut: any;
+    private isLoading: boolean;
+    private results: any;
+    private isError: boolean;
+    private resultsText: string;
+    private errorText: string;
+    private showResultsContainer: boolean;
 
     constructor(private principal: Principal,
                 private loginModalService: LoginModalService,
@@ -34,6 +41,10 @@ export class HomeComponent implements OnInit {
         this.placeHolderText = 'albumes';
         this.clickedButton = 'albumes';
         this.searchCriteria = 'album';
+        this.isLoading = true;
+        this.isError = false;
+        this.errorText = '';
+        this.showResultsContainer = false;
 
         this.principal.identity().then((account) => {
             this.account = account;
@@ -80,6 +91,10 @@ export class HomeComponent implements OnInit {
     }
 
     handleOnInputSearch() {
+
+        this.showResultsContainer = !!this.inputSearchText;
+        this.isLoading = true;
+
         const params: any = {
             searchCriteria: this.searchCriteria,
             searchQuery: this.inputSearchText
@@ -89,23 +104,37 @@ export class HomeComponent implements OnInit {
             this.homeService
                 .getSearchResults(params)
                 .subscribe(
-                    this.handleOnSuccess,
-                    this.handleOnError
+                    data => this.handleOnSuccess(data),
+                    error => this.handleOnError(error)
                 )
         }, 500);
     }
 
     // error handling
-    handleOnSuccess (res) { console.log(res)}
+    handleOnSuccess (res) {
+        console.log(res);
+        this.isLoading = false;
+        if (res[this.searchCriteria+'s'].items.length === 0) {
+            this.isError = true;
+            this.errorText = 'No hubo resultados con la búsqueda ' + this.inputSearchText;
+        } else {
+            this.isError = false;
+            this.resultsText = 'Resultados de tú búsqueda con ' + this.inputSearchText
+            this.results = res[this.searchCriteria+'s'].items;
+        }
+    }
     handleOnError (err) {
-        switch (err.status) {
-            case 401:break;
-            case 404:break;
-            case 400:break;
+        this.isLoading = false;
+        switch(err.status) {
+            case 401: this.errorText = err.statusText; break;
+            case 404: this.errorText = err.statusText; break;
+            case 500: this.errorText = err.statusText;  break;
         }
     }
 
 }
+
+
 
 
 
