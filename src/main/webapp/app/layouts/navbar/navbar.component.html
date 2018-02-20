@@ -5,7 +5,7 @@
         </a>
         <a class="navbar-brand logo float-left" routerLink="/" (click)="collapseNavbar()">
             <span class="logo-img"></span>
-            <span jhiTranslate="global.title" class="navbar-title">Rocktionary</span> <span class="navbar-version">{{version}}</span>
+            <span jhiTranslate="global.title" class="navbar-title">Rocktionary</span>
         </a>
     </div>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
@@ -133,7 +133,7 @@
                 <a class="nav-link" routerLink="equipo" (click)="collapseNavbar()">
                     <span>
                         <i class="fa fa-users" aria-hidden="true"></i>
-                        <a jhiTranslate="equipo.menu"></a>
+                        <a jhiTranslate="global.menu.team"></a>
                     </span>
                 </a>
             </li>
@@ -252,3 +252,4 @@
         </ul>
     </div>
 </nav>
+

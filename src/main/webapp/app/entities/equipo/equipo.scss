@@ -9,6 +9,8 @@
     padding: 1rem;
     font-family: "New Rocker", cursive;
     border-radius: 10px;
+    text-shadow: -1px -1px 1px #dab213, 1px 1px 1px #ffffff, -1px 1px 1px #efece3, 1px -1px #e6e5de;
+    color: #000000;
 }
 
 /*----------Carousel---------*/
@@ -48,8 +50,10 @@
 .text_miembro{
     font-size: 3.5rem;
     font-family: "New Rocker", cursive;
-    text-shadow: -1px -1px 1px #b69200, 1px 1px 1px #b69200, -1px 1px 1px #b69200, 1px -1px #b69200;
+    text-shadow: -1px -1px 1px #e8e6de, 1px 1px 1px #b69200, -1px 1px 1px #b69200, 1px -1px #b69200;
+    color: #000000;
 }
+
 
 .perfil_miembro img{
     width:100%;
