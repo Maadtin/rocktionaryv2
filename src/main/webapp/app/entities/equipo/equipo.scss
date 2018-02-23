@@ -2,6 +2,10 @@
     background:url("../../../content/images/fondo/fondoEquipo.jpg") center / cover no-repeat fixed;
 }
 
+.container{
+    max-width: 90%;
+}
+
 /*----------About-Us---------*/
 .about_us{
     font-size: 2.9rem;
@@ -21,6 +25,11 @@
 .carousel-item img{
     width: 100%;
     border: 2px solid white;
+}
+
+#carouselIndicators{
+    max-width: 85%;
+    margin: 0 auto;
 }
 
 /*----------Descripcion---------*/
@@ -56,23 +65,39 @@
 
 
 .perfil_miembro img{
-    width:100%;
+    width: 100%;
+    transform: scale(1.8);
+    margin-top: 5em;
 }
+.skill_miembro{
+    padding-bottom: 2em;
+}
+
 .skill_miembro img{
     height: 94%;
     width: 100%;
+
+}
+
+.__skill_miembro{
+    height: 100%;
+    background-color: #323232;
 }
 
 .inf_mem{
-    padding: 2.7rem 1rem 0 1rem
+    padding: 5.7rem 1rem 0 1rem;
 }
 
 .info_miembro{
     padding: 1.1rem;
     background-color: #616161;
+    padding: 1.3rem 2rem;
+}
+.info_miembro span:nth-child(3){
+    color:#000000;
 }
 
-.info_miembro span:nth-child(3),.info_miembro span:last-child{
+.info_miembro span:last-child{
     color: #252020;
 }
 
@@ -89,22 +114,51 @@
     .info_miembro{
         font-size: 1.1rem;
     }
+
+    .perfil_miembro{
+        margin-top: 1em;
+    }
+
+    .skill_miembro img{
+        height: 100%;
+        width: 92%;
+    }
+
+
+
 }
 
 
 
 @media (min-width: 768px){
+    .inf_mem{
+        padding: 4.7rem 2rem 0 2rem;
+    }
+
     .text_miembro{
         font-size: 4.5rem;
     }
 
     .info_miembro{
-        font-size:  1.4rem;
-        padding: 3rem;
+        font-size: 1.2rem;
+        padding: 2rem 3rem;
     }
 
     ._descripcion {
         font-size: 1.6rem;
+    }
+    .perfil_miembro img{
+        width: 100%;
+        transform: scale(1.2);
+        margin-top: 1em;
+    }
+
+    .skill_miembro{
+        padding: 0 2rem 3rem 2rem;
+    }
+
+    .skill_miembro img{
+        width: 82%;
     }
 }
 
@@ -112,6 +166,7 @@
     .text_miembro{
         font-size: 3.2rem;
     }
+    
 
     .inf_mem {
         padding: 2.7rem 0 1.2rem 0;
@@ -119,7 +174,8 @@
 
     .info_miembro{
         font-size: 1rem;
-        padding: 0.5rem 1rem 1rem 1rem;
+        padding: 0.5rem 2rem 1rem 2rem;
+
     }
 
     ._descripcion{
@@ -128,11 +184,10 @@
     }
     .skill_miembro{
         width: 100%;
-        width: 100%;
-        padding: 2.7rem 1.6rem 1.2rem 0;
+        padding: 2.7rem 0.7rem 1.2rem 0;
     }
-    .skill_miembro img {
-        height: 100%;
+    .__skill_miembro{
+        padding-top: 1rem;
     }
 
     .perfil_miembro{
@@ -140,16 +195,14 @@
         flex-wrap: wrap;
         padding: 0;
         align-items: center;
+        flex-basis: 38%;
     }
-    .perfil_miembro img{
-        width: 100%;
-        transform: scale(1.4);
-    }
+
 }
 
 @media (min-width: 1200px){
     .info_miembro{
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 }
 
