@@ -65,9 +65,7 @@
 
 
 .perfil_miembro img{
-    width: 100%;
-    transform: scale(1.8);
-    margin-top: 5em;
+    max-width: 100%;
     z-index: 1;
 }
 .skill_miembro{
@@ -86,7 +84,7 @@
 }
 
 .inf_mem{
-    padding: 5.7rem 1rem 0 1rem;
+    padding: 1.7rem 1rem 0 1rem;
 }
 
 .info_miembro{
@@ -112,19 +110,15 @@
 }
 
 @media (min-width: 576px){
-    .info_miembro{
-        font-size: 1.1rem;
-    }
-
-    .perfil_miembro{
-        margin-top: 1em;
-    }
-
-    .skill_miembro img{
-        height: 100%;
-        width: 92%;
-    }
-
+    //.info_miembro{
+    //    font-size: 1.1rem;
+    //}
+    //
+    //.skill_miembro img{
+    //    height: 100%;
+    //    width: 92%;
+    //}
+    //
 
 
 }
@@ -132,9 +126,9 @@
 
 
 @media (min-width: 768px){
-    .inf_mem{
-        padding: 4.7rem 2rem 0 2rem;
-    }
+    //.inf_mem{
+    //    padding: 4.7rem 2rem 0 2rem;
+    //}
 
     .text_miembro{
         font-size: 4.5rem;
@@ -148,14 +142,14 @@
     ._descripcion {
         font-size: 1.6rem;
     }
-    .perfil_miembro img{
-        width: 100%;
-        transform: scale(1.2);
-        margin-top: 1em;
-    }
+    //.perfil_miembro img{
+    //    width: 100%;
+    //    transform: scale(1.2);
+    //    margin-top: 1em;
+    //}
 
     .skill_miembro{
-        padding: 0 2rem 3rem 2rem;
+        padding: 0 1rem 3rem 1rem;
     }
 
     .skill_miembro img{
