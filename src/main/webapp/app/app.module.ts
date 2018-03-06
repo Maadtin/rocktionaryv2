@@ -27,6 +27,8 @@ import {
     ActiveMenuDirective,
     ErrorComponent
 } from './layouts';
+import { VideoPlayerComponent } from './video-player/video-player.component';
+import {VideoPlayerGlobals} from './video-player-globals';
 
 @NgModule({
     imports: [
@@ -47,9 +49,11 @@ import {
         PageRibbonComponent,
         ActiveMenuDirective,
         FooterComponent,
+        VideoPlayerComponent,
 
     ],
     providers: [
+        VideoPlayerGlobals,
         ProfileService,
         PaginationConfig,
         UserRouteAccessService,

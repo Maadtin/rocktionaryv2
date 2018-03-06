@@ -8,7 +8,6 @@ import { JhiLanguageHelper } from '../../shared';
     templateUrl: './main.component.html'
 })
 export class JhiMainComponent implements OnInit {
-
     constructor(
         private jhiLanguageHelper: JhiLanguageHelper,
         private router: Router

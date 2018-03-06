@@ -5,6 +5,7 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { Album } from './album.model';
 import { createRequestOption } from '../../shared';
+import {WindowService} from '../../windowref.service';
 
 export type EntityResponseType = HttpResponse<Album>;
 
@@ -12,8 +13,32 @@ export type EntityResponseType = HttpResponse<Album>;
 export class AlbumService {
 
     private resourceUrl =  SERVER_API_URL + 'api/albums';
+    private token = this.windowRef.getNativeWindow().spotifyToken || 'Bearer eqwe';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private windowRef: WindowService) { }
+
+    getAlbum (id: number) {
+        const headers = { 'Authorization': this.token };
+        return this.http.get(`https://api.spotify.com/v1/albums/${id}`, {headers: headers})
+    }
+
+    getAlbumTracks (id) {
+        const headers = { 'Authorization': this.token };
+        return this.http.get(
+            `https://api.spotify.com/v1/albums/${id}/tracks`,
+            {headers: headers}
+        )
+    }
+
+
+
+
+
+
+
+
+
+
 
     create(album: Album): Observable<EntityResponseType> {
         const copy = this.convert(album);

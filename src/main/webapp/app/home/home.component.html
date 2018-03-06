@@ -28,12 +28,11 @@
     <div class="col col-md-4 text-center mx-auto mt-2">
         <h2>Buscar</h2>
         <div class="botones-container">
-            <button [class.activeFilter]="clickedButton === 'canciones'" (click)="handleOnChangePlaceHolderText('canciones');">Canciones</button>
-            <button [class.activeFilter]="clickedButton === 'albumes'" (click)="handleOnChangePlaceHolderText('albumes');">Albumes</button>
-            <button [class.activeFilter]="clickedButton === 'bandas'" (click)="handleOnChangePlaceHolderText('bandas');">Bandas</button>
+            <button [class.activeFilter]="clickedButton === 'canciones'" (click)="handleOnChangePlaceHolderText('canciones');handleOnInputSearch()">Canciones</button>
+            <button [class.activeFilter]="clickedButton === 'albumes'" (click)="handleOnChangePlaceHolderText('albumes');handleOnInputSearch()">Albumes</button>
+            <button [class.activeFilter]="clickedButton === 'bandas'" (click)="handleOnChangePlaceHolderText('bandas');handleOnInputSearch()">Bandas</button>
         </div>
         <form class="search-form form">
-            <a class="btn btn-primary" href="/api/account/login-spotify">Login con Spotify</a>
             <input
                 [(ngModel)]="inputSearchText"
                 (keyup)="handleOnInputSearch()"
@@ -54,18 +53,36 @@
                     {{ errorText }}
                 </span>
                 <div *ngIf="!isError">
-                    <span class="text-white">
+                    <span class="text-white py-3 font-weight-bold d-block text-uppercase">
                         Resultados en {{ inputSearchText }}
                     </span>
                     <div [ngSwitch]="placeHolderText">
                         <section *ngSwitchCase="'albumes'" >
-                            <div *ngFor="let album of results">
-                                <p>{{ album | json }}</p>
+                            <div class="album-card-container" *ngFor="let album of results">
+                                <a [routerLink]="['/album', album.id]" class="d-block text-white">{{ album.name }}</a>
+                                <img *ngIf="album.images.length > 0" [src]="album.images[1].url" alt="">
                             </div>
                         </section>
                         <section *ngSwitchCase="'canciones'">
-                            <div *ngFor="let cancion of results">
-                                <p>{{ cancion | json }}</p>
+                            <div class="cancion-card-container" *ngFor="let cancion of results">
+                                <section [routerLink]="['/cancion', cancion.id]" class="busqueda-cancion-container">
+                                    <img class="cancion-img"
+                                         *ngIf="cancion.album.images.length > 0"
+                                         [src]="cancion.album.images[1].url"
+                                         alt="Foto">
+                                    <div class="cancion-artistas">
+                                        <p class="text-uppercase busqueda-track-name">{{cancion.name}}</p>
+                                        <div class="busqueda-artistas-name">
+                                            <p *ngFor="let artista of cancion.artists">{{artista.name}}</p>
+                                        </div>
+                                    </div>
+                                </section>
+                                <audio *ngIf="cancion.preview_url !== null" class="home-audio" controls>
+                                    <source [src]="sanitizeUrl(cancion.preview_url)">
+                                </audio>
+                                <p class="no-preview" *ngIf="cancion.preview_url === null">
+                                    Esta canción no tiene preview disponible.
+                                </p>
                             </div>
                         </section>
                         <section *ngSwitchCase="'bandas'">

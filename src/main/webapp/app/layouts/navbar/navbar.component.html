@@ -138,6 +138,16 @@
                 </a>
             </li>
 
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" href="/api/account/login-spotify" (click)="collapseNavbar()">
+                    <span>
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        <a>Login con Spotify</a>
+                    </span>
+                </a>
+            </li>
+
+
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>

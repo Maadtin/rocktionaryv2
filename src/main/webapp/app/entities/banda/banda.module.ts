@@ -14,6 +14,7 @@ import {
     bandaRoute,
     bandaPopupRoute,
 } from './';
+import {UtilsService} from '../../utils.service';
 
 const ENTITY_STATES = [
     ...bandaRoute,
@@ -43,6 +44,7 @@ const ENTITY_STATES = [
     providers: [
         BandaService,
         BandaPopupService,
+        UtilsService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

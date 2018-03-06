@@ -6,6 +6,8 @@ import { Account, LoginModalService, Principal } from '../shared';
 
 import { HomeService } from './home.service'
 import {HttpErrorResponse} from '@angular/common/http';
+import {UtilsService} from '../utils.service';
+import {SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
     selector: 'jhi-home',
@@ -34,12 +36,15 @@ export class HomeComponent implements OnInit {
     constructor(private principal: Principal,
                 private loginModalService: LoginModalService,
                 private eventManager: JhiEventManager,
-                private homeService: HomeService) {
+                private homeService: HomeService,
+                private utilsService: UtilsService
+    ) {
     }
 
     ngOnInit() {
         this.placeHolderText = 'albumes';
         this.clickedButton = 'albumes';
+        this.inputSearchText = '';
         this.searchCriteria = 'album';
         this.isLoading = true;
         this.isError = false;
@@ -50,6 +55,10 @@ export class HomeComponent implements OnInit {
             this.account = account;
         });
         this.registerAuthenticationSuccess();
+    }
+
+    sanitizeUrl (url: string): SafeResourceUrl {
+        return this.utilsService.sanitizeUrl(url);
     }
 
     registerAuthenticationSuccess() {
@@ -91,23 +100,27 @@ export class HomeComponent implements OnInit {
     }
 
     handleOnInputSearch() {
-
         this.showResultsContainer = !!this.inputSearchText;
-        this.isLoading = true;
 
-        const params: any = {
-            searchCriteria: this.searchCriteria,
-            searchQuery: this.inputSearchText
-        };
-        clearTimeout(this.timeOut);
-        this.timeOut = setTimeout(() => {
-            this.homeService
-                .getSearchResults(params)
-                .subscribe(
-                    data => this.handleOnSuccess(data),
-                    error => this.handleOnError(error)
-                )
-        }, 500);
+        if (this.inputSearchText !== '') {
+
+            this.isLoading = true;
+
+            const params: any = {
+                searchCriteria: this.searchCriteria,
+                searchQuery: this.inputSearchText
+            };
+            clearTimeout(this.timeOut);
+            this.timeOut = setTimeout(() => {
+                this.homeService
+                    .getSearchResults(params)
+                    .subscribe(
+                        data => this.handleOnSuccess(data),
+                        error => this.handleOnError(error)
+                    )
+            }, 500);
+        }
+
     }
 
     // error handling

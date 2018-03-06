@@ -264,3 +264,63 @@ Social button
     color: #fff;
 }
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+
+// video player globals
+
+#videoPlayerContainer {
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+    z-index: 20;
+    background-color: #000;
+    color: #fff;
+    width: 500px;
+
+    .volver-banda {
+        color: #fff;
+        font-size: 13px;
+    }
+
+    .controls  {
+        position: absolute;
+        right: 5px;
+        bottom: 10px;
+
+        button {
+            outline: 0;
+            background-color: #000;
+            border: thin solid rgba(#fff, 0.5);
+            cursor: pointer;
+            transition: all ease-in 0.2s;
+            padding: 5px;
+            font-size: 14px;
+            &:hover {
+                border-color: #fff;
+            }
+        }
+    }
+
+    .videoInfo {
+        position: relative;
+        padding: 10px;
+        font-size: 15px;
+        p {
+            margin-bottom: 0;
+        }
+        .song-name {
+            font-weight: bold;
+            word-wrap: break-word;
+        }
+    }
+
+    .videoContainer {
+        width: 100%;
+        height: 300px;
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+

@@ -6,29 +6,51 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { Album } from './album.model';
 import { AlbumService } from './album.service';
+import {UtilsService} from '../../utils.service';
 
 @Component({
     selector: 'jhi-album-detail',
-    templateUrl: './album-detail.component.html'
+    templateUrl: './album-detail.component.html',
+    styleUrls: ['./album-detail.scss']
 })
-export class AlbumDetailComponent implements OnInit, OnDestroy {
+export class AlbumDetailComponent implements OnInit {
 
-    album: Album;
+    public album: any;
+    public albumTracks: any;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
     constructor(
         private eventManager: JhiEventManager,
         private albumService: AlbumService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private utilsService: UtilsService
     ) {
     }
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe((params) => {
-            this.load(params['id']);
+
+            this.albumService.getAlbum(params['id']).subscribe(album => {
+                this.album = album;
+            });
+
+            this.albumService.getAlbumTracks(params['id']).subscribe(albumTrack => {
+                this.albumTracks = albumTrack
+            })
+
+            // this.load(params['id']);
         });
-        this.registerChangeInAlbums();
+        //this.registerChangeInAlbums();
+    }
+
+
+    sanitizeUrl (url) {
+        return this.utilsService.sanitizeUrl(url);
+    }
+
+    parseMillis (millis) {
+        return this.utilsService.parseMillis(millis);
     }
 
     load(id) {
@@ -41,10 +63,10 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
         window.history.back();
     }
 
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-        this.eventManager.destroy(this.eventSubscriber);
-    }
+    // ngOnDestroy() {
+    //     this.subscription.unsubscribe();
+    //     this.eventManager.destroy(this.eventSubscriber);
+    // }
 
     registerChangeInAlbums() {
         this.eventSubscriber = this.eventManager.subscribe(

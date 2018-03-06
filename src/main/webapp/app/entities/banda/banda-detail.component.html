@@ -3,11 +3,15 @@
         <div class="blurred-container">
             <div class="blurred" [ngStyle]="{'background-image':'url('+banda.images[0].url+')'}">
             </div>
+            <p>{{ showVideoPlayer }}</p>
             <!--<img data-ng-src="{{'data:' + vm.banda.fotoContentType + ';base64,' + vm.banda.foto}}" alt="Imagen de banda"/>-->
         </div>
         <div class="container container-mid">
             <div class="banda-detail__picture-container">
-                <img [src]="banda.images[0].url"  alt="Imagen de banda"/>
+                <!--<div class="frame-overlay"></div>-->
+                <!--<div class="img-overlay-container">-->
+                    <img [src]="banda.images[0].url"  alt="Imagen de banda"/>
+                <!--</div>-->
             </div>
             <div class="banda-detail__stats">
                 <a class="active" (click)="triggerClass($event)" href="">General</a>
@@ -22,7 +26,7 @@
                 <section class="top-tracks-container">
                     <h3 class="text-white">Top canciones de {{banda.name}}</h3>
                     <ul class="grid">
-                        <li (click)="toggleIcon(track.id, $event)" *ngFor="let track of topTracks.tracks" >
+                        <li (click)="toggleIcon(track.id, $event, track.name)" *ngFor="let track of topTracks.tracks" >
                             <h5>{{track.name}}</h5>
                             <div class="img-audio-container">
                                 <img [src]="track.album.images[1].url">
@@ -55,7 +59,7 @@
             <div class="div-50 more-info">
                 <h1 class="artist-name text-white">{{banda.name}}</h1>
                 <h3><a class="text-white artist-spotify-profile" target="_blank" [href]="banda.external_urls.spotify">Perfil de {{banda.name}} en Spotify</a></h3>
-                <p class="text-white">Seguidores <span class="followers">{{banda.followers.total}}</span></p>
+                <p class="text-white">Seguidores <span class="followers">{{banda.followers.total | number }}</span></p>
                 <button (click)="showTruncatedText = !showTruncatedText" class="leer-mas">{{ !showTruncatedText ? 'Leer menos' : 'Leer mas' }}</button>
                 <p *ngIf="showTruncatedText" class="text-justify text-white">
                     {{ bandaBio.artist.bio.content.length > 300 ? (bandaBio.artist.bio.content | slice:0:300 ) +'..': (bandaBio.artist.bio.content) }}
@@ -66,6 +70,7 @@
             </div>
         </div>
     </div>
+
 <!--<div *ngIf="banda">-->
     <!--<h2><span jhiTranslate="rocktionaryApp.banda.detail.title">Banda</span> {{banda.id}}</h2>-->
     <!--<hr>-->

@@ -6,6 +6,9 @@ import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 
 import { Banda } from './banda.model';
 import { BandaService } from './banda.service';
+import {UtilsService} from '../../utils.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import {VideoPlayerGlobals} from '../../video-player-globals';
 
 @Component({
     selector: 'jhi-banda-detail',
@@ -28,7 +31,10 @@ export class BandaDetailComponent implements OnInit {
         private eventManager: JhiEventManager,
         private dataUtils: JhiDataUtils,
         private bandaService: BandaService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private utils: UtilsService,
+        private sanitizer: DomSanitizer,
+        private videoPlayerGlobals: VideoPlayerGlobals
     ) {
     }
 
@@ -36,6 +42,7 @@ export class BandaDetailComponent implements OnInit {
         this.activePlayer = false;
         this.showTruncatedText = true;
         this.showGeneral = true;
+
         this.subscription = this.route.params.subscribe(params => {
             this.bandaService.getBanda(params['id'])
                 .subscribe(banda => {
@@ -72,7 +79,7 @@ export class BandaDetailComponent implements OnInit {
 
 
 
-    toggleIcon (playerId, $e) {
+    toggleIcon (playerId, $e, trackName) {
         this.activeButton = playerId;
         $e.target.parentElement.querySelector('i.fa').classList.remove('fa-pause', 'fa-play');
 
@@ -81,34 +88,34 @@ export class BandaDetailComponent implements OnInit {
         } else {
             $e.target.parentElement.querySelector('i.fa').classList.add('fa-pause')
         }
-            // this.activePlayer = !this.activePlayer;
-        //
-        // if ($e.target.classList.contains('fa-pause') && this.activeButton === playerId) {
-        //     // $e.target.remove('fa-pause');
-        //     // $e.target.add('fa-play')
-        //     this.activePlayer = false;
-        //     console.log('has Paused')
-        // } else if ($e.target.classList.contains('fa-play') && this.activeButton === playerId) {
-        //     // $e.target.classList.add('fa-play');
-        //     // $e.target.classList.remove('fa-pause')
-        //     this.activePlayer = true;
-        //     console.log('has Play')
-        // }
 
+        this.bandaService.getVideoTrack(trackName).subscribe(video => {
+            // this.videoPlayerGlobals.videoTrackId = video.items[0].id.videoId;
+            this.videoPlayerGlobals.videoInfo = {
+                nombre: video.items[0].snippet.title,
+                bandaNombre: this.banda.name,
+                bandaId: this.banda.id
+            };
 
-
-        // angular.element($e.target).toggleClass('fa-pause');
-        // angular.element('.track-icon-play').not($e.target).removeClass('fa-pause').addClass('fa-play')
-
-        // BandaService.getBandaVideoTrack($e.target.dataset.trackName).get()
-        //     .$promise
-        //     .then(res => {
-        //         const { videoId } = res.items[0].id;
-        //         angular.element('#videoPlayer').html('').html(
-        //             `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1" frameborder="0"    allowfullscreen></iframe>`
-        //         ).css('display', 'block');
-        //     })
+            console.log(video);
+            this.videoPlayerGlobals.videoUrl = this
+                .sanitizer
+                .bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${video.items[0].id.videoId}?rel=0&autoplay=1`);
+            this.videoPlayerGlobals.showVideoPlayer = true;
+            this.videoPlayerGlobals.showVideo = true;
+        });
     }
+
+    // closeYoutubeVideo (e) {
+    //     this.videoPlayerGlobals.closeYoutubeVideo(e);
+    // }
+    // minimizeYoutubeVideo () {
+    //     this.videoPlayerGlobals.minimizeYoutubeVideo()
+    // }
+
+    // sanitizeUrl (url) {
+    //     return this.sanitizer.bypassSecurityTrustUrl(url);
+    // }
 
 
     triggerClass  ($e) {

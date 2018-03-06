@@ -8,6 +8,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 import { Banda } from './banda.model';
 import { createRequestOption } from '../../shared';
 import {WindowService} from '../../windowref.service';
+import {YoutubeModel} from '../../models/Youtube';
 
 export type EntityResponseType = HttpResponse<Banda>;
 
@@ -33,7 +34,7 @@ export class BandaService {
         return this.http.get(`https://api.spotify.com/v1/artists/${id}/top-tracks?country=ES`, {headers: headers})
     }
 
-    getVideoTrack (trackName: string) {
+    getVideoTrack (trackName: string): Observable<YoutubeModel> {
         return this.http.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${trackName}&maxResults=1&key=AIzaSyBh4jKVZPAs4VFdpr2RAdPa_3bHFVRjQXQ&type=video`)
     }
 
