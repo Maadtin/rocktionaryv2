@@ -33,7 +33,6 @@ export class NavbarComponent implements OnInit {
         private router: Router
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
-        this.isNavbarCollapsed = true;
     }
 
     ngOnInit() {
