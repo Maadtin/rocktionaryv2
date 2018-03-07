@@ -1,8 +1,95 @@
 .footer{
-    background: linear-gradient(#d3b173,black);
-    height: 200px;
+    background-image: url('../../../content/images/fondo/fondoFooter.jpg');
+    background-size: 50%;
+    padding-top: 4em;
 }
 
-.list-unstyled i{
-    padding: 0.2em;
+.logo_stucom{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: white;
 }
+
+.logo_stucom span{
+    width: 100%;
+    text-align: center;
+}
+
+.logo_stucom a{
+    text-align: center;
+}
+
+.logo_stucom img{
+    max-width: 73%;
+}
+
+
+.footer_links{
+    display: flex;
+    background-color: rgba(211,206,206,0.22);
+    border-radius: 12px;
+    text-shadow: -1px -1px 0px #0e0d0d, 1px 1px 1px #101010, -1px 1px 1px #080808, 2px -1px #151414;
+    font-weight: 600;
+    flex-wrap: wrap;
+    align-items: center;
+    height: auto;
+    text-decoration: none;
+}
+
+.footer_links a {
+    color: white;
+}
+
+.footer_links span{
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.footer_links a:not(:first-child){
+    width: 33%;
+    text-align: center;
+    font-weight: 400;
+}
+
+.copy_right{
+    display: block;
+    color: white;
+    text-align: center;
+}
+
+.__footer div:not(:nth-child(2)){
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+.socials{
+    display: flex;
+    color: white;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: center;
+}
+.socials span{
+    width: 100%;
+    text-align: center;
+}
+
+.socials a {
+    color: black;
+    background: #dea300;
+    font-size: 1.2em;
+    margin: 1em;
+    text-align: center;
+    width: 9%;
+    height: 24%;
+}
+
+.socials a:first-child{
+    margin-left: 4em;
+}
+
+
+
