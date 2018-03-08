@@ -1,6 +1,6 @@
 .footer{
-    background-image: url('../../../content/images/fondo/fondoFooter.jpg');
-    background-size: 50%;
+    background: url('../../../content/images/fondo/fondoFooter.jpg') no-repeat;
+    background-size: 100% 100%;
     padding-top: 4em;
 }
 
@@ -21,13 +21,20 @@
 }
 
 .logo_stucom img{
-    max-width: 73%;
+    max-width: 50%;
 }
 
+.logo_stucom img:hover{
+    content: url('../../../content/images/logo/stucom_logo.png');
+}
+
+.__footer{
+    padding-bottom: 2em;
+}
 
 .footer_links{
     display: flex;
-    background-color: rgba(211,206,206,0.22);
+    background-color: rgba(130, 122, 122, 0.22);
     border-radius: 12px;
     text-shadow: -1px -1px 0px #0e0d0d, 1px 1px 1px #101010, -1px 1px 1px #080808, 2px -1px #151414;
     font-weight: 600;
@@ -35,6 +42,7 @@
     align-items: center;
     height: auto;
     text-decoration: none;
+    padding-bottom: 1em;
 }
 
 .footer_links a {
@@ -67,9 +75,7 @@
 
 .socials{
     display: flex;
-    color: white;
     flex-wrap: wrap;
-    margin: 0 auto;
     justify-content: center;
 }
 .socials span{
@@ -77,15 +83,31 @@
     text-align: center;
 }
 
-.socials a {
-    color: black;
-    background: #dea300;
-    font-size: 1.2em;
-    margin: 1em;
-    text-align: center;
-    width: 9%;
-    height: 24%;
+.socials a{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1.2em;
 }
+
+
+
+.socials a:nth-child(2) img{max-width: 55%;}
+.socials a:nth-child(2) img:hover{content: url('../../../content/images/logo/facebook_logo.png');}
+
+.socials a:nth-child(3) img{max-width: 40%;}
+.socials a:nth-child(3) img:hover{content: url('../../../content/images/logo/instagram_logo.png');}
+
+.socials a:nth-child(4) img{max-width: 38%;}
+.socials a:nth-child(4) img:hover{content: url('../../../content/images/logo/googleplus_logo.png');}
+
+
+.socials a:last-child img{max-width: 38%;}
+.socials a:last-child img:hover{content: url('../../../content/images/logo/twitter_logo.png');}
+
+
+
 
 .socials a:first-child{
     margin-left: 4em;
