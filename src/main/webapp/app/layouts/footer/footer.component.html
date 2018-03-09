@@ -7,10 +7,33 @@
 
        <div class="col-6 footer_links">
                <span>Links</span>
-               <a jhiTranslate="global.menu.home" routerLink="/"></a>
-               <a jhiTranslate="global.menu.profile" routerLink="perfil"></a>
-               <a jhiTranslate="global.menu.team" routerLink="equipo"></a>
-               <a jhiTranslate="global.menu.language" class="dropdown-toggle"></a>
+                <ul class="__footer_links">
+                    <li class="__footer_links-item">
+                        <a class="active" href="" jhiTranslate="global.menu.home" routerLink="/"></a>
+                    </li>
+
+                    <li class="__footer_links-item">
+                        <a class="active" jhiTranslate="global.menu.profile" routerLink="perfil"></a>
+                    </li>
+
+                    <li class="__footer_links-item">
+                        <a class="active" jhiTranslate="global.menu.team" routerLink="equipo"></a>
+                    </li>
+
+                    <li class=" __footer_links-item">
+                            <a class="active" [jhiActiveMenu]="language" *ngFor="let language of languages" (click)="changeLanguage(language)" >{{language | findLanguageFromKey}}</a>
+                    </li>
+                    <!--<li ngbDropdown class="dropup pointer __footer_links-item" *ngIf="languages">-->
+                        <!--<a class="dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown" *ngIf="languages.length > 1">-->
+                                <!--<span jhiTranslate="global.menu.language">Language</span>-->
+                        <!--</a>-->
+                        <!--<ul class="dropdown-menu" ngbDropdownMenu *ngIf="languages.length > 1">-->
+                            <!--<li *ngFor="let language of languages">-->
+                                <!--<a class="dropdown-item" [jhiActiveMenu]="language" href="javascript:void(0);" (click)="changeLanguage(language);collapseNavbar();">{{language | findLanguageFromKey}}</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                </ul>
        </div>
 
        <div class="col-3 socials">
