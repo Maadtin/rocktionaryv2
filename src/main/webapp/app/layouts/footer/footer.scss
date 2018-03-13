@@ -126,27 +126,27 @@
 }
 
 
-.socials a:nth-child(2) img{max-width: 38%;}
+.socials a:nth-child(2) img{max-width: 65%;}
 .socials a:nth-child(2) img:hover{content: url('../../../content/images/logo/facebook_logo.png');}
 
-.socials a:nth-child(3) img{max-width: 27%;}
+.socials a:nth-child(3) img{max-width: 47%;}
 .socials a:nth-child(3) img:hover{content: url('../../../content/images/logo/instagram_logo.png');}
 
-.socials a:nth-child(4) img{max-width: 25%;}
+.socials a:nth-child(4) img{max-width: 45%;}
 .socials a:nth-child(4) img:hover{content: url('../../../content/images/logo/googleplus_logo.png');}
 
-.socials a:nth-child(5) img{max-width: 25%;}
+.socials a:nth-child(5) img{max-width: 45%;}
 .socials a:nth-child(5) img:hover{content: url('../../../content/images/logo/twitter_logo.png');}
 
-.socials a:nth-child(6) img{max-width: 25%;}
+.socials a:nth-child(6) img{max-width: 45%;}
 .socials a:nth-child(6) img:hover{content: url('../../../content/images/logo/spotify_logo.png');}
 
-.socials a:last-child img{max-width: 25%;}
+.socials a:last-child img{max-width: 45%;}
 .socials a:last-child img:hover{content: url('../../../content/images/logo/youtube_logo.png');}
 
 
 .socials a:first-child{
-    margin-left: 4em;
+    margin-left:3em;
 }
 
 span{
@@ -154,7 +154,7 @@ span{
 }
 
 .col-3 {
-    flex: 0 0 25%;
-    max-width: 25%;
+    flex: 0 0 15%;
+    max-width: 15%;
 }
 
