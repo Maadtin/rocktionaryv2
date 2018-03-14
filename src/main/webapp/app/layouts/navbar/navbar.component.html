@@ -117,7 +117,7 @@
                 </ul>
             </li>
             <!---------------------Perfil--------------------------->
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="perfil" (click)="collapseNavbar()">
                     <span>
                         <i class="fa fa-user" aria-hidden="true"></i>
@@ -129,7 +129,7 @@
 
             <!---------------------Equipo--------------------------->
 
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li  class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="equipo" (click)="collapseNavbar()">
                     <span>
                         <i class="fa fa-users" aria-hidden="true"></i>
@@ -138,7 +138,7 @@
                 </a>
             </li>
 
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *ngSwitchCase="false"  class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" href="/api/account/login-spotify" (click)="collapseNavbar()">
                     <span>
                         <i class="fa fa-sign-in" aria-hidden="true"></i>

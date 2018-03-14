@@ -29,6 +29,7 @@ import {
 } from './layouts';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import {VideoPlayerGlobals} from './video-player-globals';
+import {NavbarService} from "./layouts/navbar/navbar.service";
 
 @NgModule({
     imports: [
@@ -53,6 +54,7 @@ import {VideoPlayerGlobals} from './video-player-globals';
 
     ],
     providers: [
+        NavbarService,
         VideoPlayerGlobals,
         ProfileService,
         PaginationConfig,
