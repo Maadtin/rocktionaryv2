@@ -28,7 +28,7 @@
     <div class="col col-md-4 text-center mx-auto mt-2">
         <h2>Buscar</h2>
         <div class="botones-container">
-            <button [class.activeFilter]="clickedButton === 'canciones'" (click)="handleOnChangePlaceHolderText('canciones');handleOnInputSearch()">Canciones</button>
+            <button [class.activeFilter]="clickedButton === 'canciones'" (click)="handleOnChangePlaceHolderText('canciones');handleOnInputSearch()" jhiTranslate="home.canciones"></button>
             <button [class.activeFilter]="clickedButton === 'albumes'" (click)="handleOnChangePlaceHolderText('albumes');handleOnInputSearch()">Albumes</button>
             <button [class.activeFilter]="clickedButton === 'bandas'" (click)="handleOnChangePlaceHolderText('bandas');handleOnInputSearch()">Bandas</button>
         </div>

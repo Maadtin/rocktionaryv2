@@ -1,7 +1,7 @@
 <div class="footer">
    <div class="row __footer">
        <div class="logo_stucom col-md-3">
-           <span>Con el soporte de:</span>
+           <span jhiTranslate="footer.soporte"></span>
            <a href="https://www.stucom.com" target="_blank"><img src="../../../content/images/logo/stucom_logoyellow.png" alt=""></a>
        </div>
 
@@ -23,21 +23,12 @@
                     <li class=" __footer_links-item">
                             <a class="active" [jhiActiveMenu]="language" *ngFor="let language of languages" (click)="changeLanguage(language)" >{{language | findLanguageFromKey}}</a>
                     </li>
-                    <!--<li ngbDropdown class="dropup pointer __footer_links-item" *ngIf="languages">-->
-                        <!--<a class="dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown" *ngIf="languages.length > 1">-->
-                                <!--<span jhiTranslate="global.menu.language">Language</span>-->
-                        <!--</a>-->
-                        <!--<ul class="dropdown-menu" ngbDropdownMenu *ngIf="languages.length > 1">-->
-                            <!--<li *ngFor="let language of languages">-->
-                                <!--<a class="dropdown-item" [jhiActiveMenu]="language" href="javascript:void(0);" (click)="changeLanguage(language);collapseNavbar();">{{language | findLanguageFromKey}}</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
+
                 </ul>
        </div>
 
        <div class="col-3 socials">
-           <span class="text-white">Siguenos en:</span>
+           <span class="text-white" jhiTranslate="footer.siguenos"></span>
            <a href="https://www.facebook.com" target="_blank"><img src="../../../content/images/logo/facebook_logoyellow.png" alt=""></a>
            <a href="https://instagram.com" target="_blank"><img src="../../../content/images/logo/instagram_logoyellow.png" alt=""></a>
            <a href="https://plus.google.com" target="_blank"><img src="../../../content/images/logo/googleplus_logoyellow.png" alt=""></a>
