@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     private errorText: string;
     private showResultsContainer: boolean;
 
-    constructor(private principal: Principal,
+    constructor (private principal: Principal,
                 private loginModalService: LoginModalService,
                 private eventManager: JhiEventManager,
                 private homeService: HomeService,
@@ -137,12 +137,15 @@ export class HomeComponent implements OnInit {
         }
     }
     handleOnError (err) {
+
         this.isLoading = false;
+        this.isError = true;
         switch(err.status) {
-            case 401: this.errorText = err.statusText; break;
+            case 401: this.errorText = 'Debes logearte con tu cuenta de para poder usar el buscador'; break;
             case 404: this.errorText = err.statusText; break;
             case 500: this.errorText = err.statusText;  break;
         }
+
     }
 
 }

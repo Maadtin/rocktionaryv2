@@ -14,6 +14,7 @@ import {
     cancionRoute,
     cancionPopupRoute,
 } from './';
+import {YoutubePlayerModule} from 'ngx-youtube-player';
 
 const ENTITY_STATES = [
     ...cancionRoute,
@@ -23,7 +24,8 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         RocktionarySharedModule,
-        RouterModule.forChild(ENTITY_STATES)
+        RouterModule.forChild(ENTITY_STATES),
+        YoutubePlayerModule
     ],
     declarations: [
         CancionComponent,

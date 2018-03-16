@@ -1,6 +1,6 @@
 <div class="row home">
     <div class="col-12">
-        <figure class='book' id="book">
+        <figure [class.open]="inputSearchText" class='book' id="book">
 
             <ul class='hardcover_front'>
                 <li>
@@ -49,8 +49,9 @@
             </div>
 
             <div *ngIf="!isLoading">
-                <span class="text-white" *ngIf="isError">
+                <span class="text-white py-3 d-block" *ngIf="isError">
                     {{ errorText }}
+                    <a class="btn btn-success mt-2 rock-btn" href="/api/account/login-spotify">Logear con spotify</a>
                 </span>
                 <div *ngIf="!isError">
                     <span class="text-white py-3 font-weight-bold d-block text-uppercase">

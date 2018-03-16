@@ -25,21 +25,24 @@ import {
     ProfileService,
     PageRibbonComponent,
     ActiveMenuDirective,
-    ErrorComponent
+    ErrorComponent,
 } from './layouts';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import {VideoPlayerGlobals} from './video-player-globals';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {YoutubePlayerModule} from 'ngx-youtube-player';
 
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         RocktionaryAppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
         RocktionarySharedModule,
         RocktionaryHomeModule,
         RocktionaryAdminModule,
         RocktionaryAccountModule,
-        RocktionaryEntityModule,
+        RocktionaryEntityModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
@@ -50,7 +53,6 @@ import {VideoPlayerGlobals} from './video-player-globals';
         ActiveMenuDirective,
         FooterComponent,
         VideoPlayerComponent,
-
     ],
     providers: [
         VideoPlayerGlobals,

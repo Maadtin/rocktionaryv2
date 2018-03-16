@@ -264,7 +264,17 @@ Social button
     color: #fff;
 }
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+// btn-global
 
+.rock-btn {
+    background-color: rgba(#DEA300, 0.8);
+    outline: 0;
+    box-shadow: none;
+}
+
+.rock-btn:hover {
+    background-color:  darken(rgba(#DEA300, 0.8), 20) !important;
+}
 
 // video player globals
 

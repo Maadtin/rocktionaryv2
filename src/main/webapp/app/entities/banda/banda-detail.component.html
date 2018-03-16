@@ -61,10 +61,10 @@
                 <h3><a class="text-white artist-spotify-profile" target="_blank" [href]="banda.external_urls.spotify">Perfil de {{banda.name}} en Spotify</a></h3>
                 <p class="text-white">Seguidores <span class="followers">{{banda.followers.total | number }}</span></p>
                 <button (click)="showTruncatedText = !showTruncatedText" class="leer-mas">{{ !showTruncatedText ? 'Leer menos' : 'Leer mas' }}</button>
-                <p *ngIf="showTruncatedText" class="text-justify text-white">
+                <p *ngIf="showTruncatedText" class="text-justify text-white mb-0 pb-3">
                     {{ bandaBio.artist.bio.content.length > 300 ? (bandaBio.artist.bio.content | slice:0:300 ) +'..': (bandaBio.artist.bio.content) }}
                 </p>
-                <p class="text-justify text-white" *ngIf="!showTruncatedText">
+                <p class="text-justify text-white mb-0 pb-3" *ngIf="!showTruncatedText">
                     {{ bandaBio.artist.bio.content }}
                 </p>
             </div>

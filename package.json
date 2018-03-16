@@ -8,6 +8,7 @@
     "node_modules"
   ],
   "dependencies": {
+    "@angular/animations": "^5.2.8",
     "@angular/common": "5.2.0",
     "@angular/compiler": "5.2.0",
     "@angular/core": "5.2.0",
@@ -26,6 +27,7 @@
     "ngx-cookie": "2.0.1",
     "ngx-infinite-scroll": "0.5.1",
     "ngx-webstorage": "2.0.1",
+    "ngx-youtube-player": "^0.1.0",
     "reflect-metadata": "0.1.10",
     "rxjs": "5.5.6",
     "swagger-ui": "2.2.10",
@@ -38,6 +40,7 @@
     "@ngtools/webpack": "1.8.5",
     "@types/jasmine": "2.5.53",
     "@types/node": "8.0.18",
+    "@types/youtube": "^0.0.32",
     "angular2-template-loader": "0.6.2",
     "awesome-typescript-loader": "3.2.2",
     "browser-sync": "2.18.13",
