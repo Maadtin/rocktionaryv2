@@ -49,13 +49,13 @@
             "language": "Idioma"
         },
         "form": {
-            "username": "Iniciar sessió",
+            "username": "Iniciar sessió:",
             "username.placeholder": "Nom d'usuari",
-            "newpassword": "Nova Contrassenya",
+            "newpassword": "Nova Contrassenya:",
             "newpassword.placeholder": "Nova Contrassenya",
-            "confirmpassword": "Confirmació de la nova contrasenya",
+            "confirmpassword": "Confirmació de la nova contrasenya:",
             "confirmpassword.placeholder": "Confirmació de la nova contrasenya",
-            "email": "Correu electrònic",
+            "email": "Correu electrònic:",
             "email.placeholder": "Correu electrònic"
         },
         "messages": {

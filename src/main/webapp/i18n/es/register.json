@@ -19,6 +19,7 @@
                 "userexists": "<strong>¡El nombre de usuario ya está registrado!</strong> Por favor, escoja otro usuario.",
                 "emailexists": "<strong>¡El correo electrónico ya está en uso!</strong> Por favor, escoja otro email."
             }
-        }
+        },
+        "inicia-session":"Inicia sesión con"
     }
 }

@@ -117,4 +117,11 @@ public class UserExtResource {
         userExtRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+
+    @PostMapping("/user-ext")
+    public UserExt insertUser (@RequestBody UserExt user) {
+        return this.userExtRepository.save(user);
+    }
+
 }

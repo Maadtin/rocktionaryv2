@@ -49,13 +49,13 @@
             "language": "Idioma"
         },
         "form": {
-            "username": "Usuario",
+            "username": "Usuario:",
             "username.placeholder": "Nombre de usuario",
-            "newpassword": "Nueva contraseña",
-            "newpassword.placeholder": "Nueva contraseña",
-            "confirmpassword": "Confirmación de la nueva contraseña",
+            "newpassword": "Nueva contraseña:",
+            "newpassword.placeholder": "Nueva contraseña:",
+            "confirmpassword": "Confirmación de la nueva contraseña:",
             "confirmpassword.placeholder": "Confirmación de la nueva contraseña",
-            "email": "Correo electrónico",
+            "email": "Correo electrónico:",
             "email.placeholder": "Su correo electrónico"
         },
         "messages": {
