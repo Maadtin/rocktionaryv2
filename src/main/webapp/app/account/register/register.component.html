@@ -1,7 +1,7 @@
 <div class="register-page col-12">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <span class="titulo" jhiTranslate="register.title">Registration</span>
+        <div class="col-md-8 titulo">
+            <span class="__titulo" jhiTranslate="register.title">Registration</span>
 
             <div class="alert alert-success" *ngIf="success" jhiTranslate="register.messages.success">
                 <strong>Registration saved!</strong> Please check your email for confirmation.
@@ -26,7 +26,7 @@
     </div>
 
     <div class="container form">
-        <div class="row">
+        <div class="row __formulario">
             <div class="col-md-6">
                 <form (ngSubmit)="register()" #registerForm="ngForm" *ngIf="!success">
                     <div class="form-group">
@@ -120,14 +120,25 @@
                         </div>
                     </div>
 
-                    <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary" jhiTranslate="register.form.button"></button>
+                    <div class="form_submit">
+                        <button type="submit" [disabled]="registerForm.form.invalid"  jhiTranslate="register.form.button"></button>
+                        <img src="../../../content/images/register-page/manoregistro.png" alt="">
+                    </div>
+
                 </form>
             </div>
 
             <div class="col-md-6 log-in-socials">
-                <span  class="fa fa-google-plus" jhiTranslate="register.inicia-session"></span>
-                <span jhiTranslate="register.inicia-session" class="fa fa-facebook"></span>
-                <span jhiTranslate="register.inicia-session" class="fa fa-twitter"></span>
+                <div class="">
+                    <a jhiTranslate="register.inicia-session"></a><span>G+</span>
+                </div>
+                <div class="">
+                    <a jhiTranslate="register.inicia-session"></a><span>f</span>
+                </div>
+                <div class="">
+                    <a jhiTranslate="register.inicia-session"></a><img src="../../../content/images/register-page/twitterdrawing.png" alt="">
+                </div>
+
 
                 <!--<jhi-social provider="google"></jhi-social>-->
                 <!--<jhi-social provider="facebook"></jhi-social>-->
