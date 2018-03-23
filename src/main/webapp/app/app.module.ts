@@ -31,6 +31,8 @@ import { VideoPlayerComponent } from './video-player/video-player.component';
 import {VideoPlayerGlobals} from './video-player-globals';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {YoutubePlayerModule} from 'ngx-youtube-player';
+import {NavbarService} from './layouts/navbar/navbar.service';
+import { YoutubePlayerWrapperComponent } from './youtube-player-wrapper/youtube-player-wrapper.component';
 
 @NgModule({
     imports: [
@@ -43,6 +45,7 @@ import {YoutubePlayerModule} from 'ngx-youtube-player';
         RocktionaryAdminModule,
         RocktionaryAccountModule,
         RocktionaryEntityModule,
+        YoutubePlayerModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
@@ -53,13 +56,15 @@ import {YoutubePlayerModule} from 'ngx-youtube-player';
         ActiveMenuDirective,
         FooterComponent,
         VideoPlayerComponent,
-
+        NavbarComponent,
+        YoutubePlayerWrapperComponent
     ],
     providers: [
         VideoPlayerGlobals,
         ProfileService,
         PaginationConfig,
         UserRouteAccessService,
+        NavbarService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

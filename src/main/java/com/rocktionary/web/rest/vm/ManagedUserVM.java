@@ -15,6 +15,8 @@ public class ManagedUserVM extends UserDTO {
     @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
 
+    private String localidad;
+
     public ManagedUserVM() {
         // Empty constructor needed for Jackson.
     }
@@ -27,9 +29,18 @@ public class ManagedUserVM extends UserDTO {
         this.password = password;
     }
 
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
     @Override
     public String toString() {
         return "ManagedUserVM{" +
             "} " + super.toString();
     }
+
 }

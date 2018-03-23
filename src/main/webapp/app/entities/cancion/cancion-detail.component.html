@@ -56,17 +56,12 @@
                         (change)="onStateChange($event)"
                     ></youtube-player>
 
-
-                    <button (click)="loadVideoClick()">Load video</button>
-
-                    <input [(ngModel)]="rangeVal" (change)="dragg()" type="range" step="0.1"  min="0" [max]="max">
-
-                    <p>{{ rangeVal }}</p>
-
-                    <button class="fa" [ngClass]="{'fa-pause': isPlaying, 'fa-play': !isPlaying}" (click)="toggleVideo()">{{ isPlaying ? 'Pause' : 'Play'  }}</button>
                     <h1 class="album-name">{{cancion.name}}</h1>
                     <div class="player-controls">
-                        <i class="fa fa-play"></i>
+                        <img [src]="videoThumbImg" alt="">
+                        <i class="fa player-trigger" [ngClass]="{'fa-pause': isPlaying, 'fa-play': !isPlaying}" (click)="toggleVideo()"></i>
+                        <input class="player-slider" [(ngModel)]="rangeVal" (input)="dragg()" (change)="dragg()" type="range" step="0.1"  min="0" [max]="max">
+                        <p class="font-weight-bold mb-0">{{ currentDuration }} / {{ totalDuration }}</p>
                     </div>
                     <h3>
                         <a class="album-spotify-profile" target="_blank" [href]="cancion.external_urls.spotify">Escucha {{cancion.name}} en Spotify</a>

@@ -32,6 +32,10 @@ export class CancionDetailComponent implements OnInit {
     public rangeVal: number;
     public isPlaying: boolean;
     private timer: string;
+    public currentDuration: string;
+    public totalDuration: string;
+    public videoInterval: any;
+    public videoThumbImg: string;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -44,7 +48,7 @@ export class CancionDetailComponent implements OnInit {
 
     ngOnInit() {
 
-        this.isPlaying = true;
+        this.isPlaying = false;
         this.rangeVal = 0;
 
         this.subscription = this.route.params.subscribe((params) => {
@@ -53,6 +57,8 @@ export class CancionDetailComponent implements OnInit {
                 this.cancion = cancion;
                 this.bandaService.getBanda(this.cancion.album.artists[0].id).subscribe(banda => this.banda = banda);
                 this.cancionService.getYoutubeVideo(this.cancion.album.artists[0].name, this.cancion.name).subscribe(video => {
+                    console.log(video);
+                    console.log(cancion);
                     this.id = video.items[0].id.videoId;
                     //this.videoUrl = this.utilsService.sanitizeUrl(`https://www.youtube.com/embed/${video.items[0].id.videoId}?autoplay=1&rel=0`);
                 })
@@ -64,51 +70,66 @@ export class CancionDetailComponent implements OnInit {
     }
 
     dragg () {
+        console.log('ewqewq');
         this.player.seekTo(this.rangeVal, true);
     }
 
+
+    secondsToMinutes (seconds: number): string {
+        let minutes = Math.floor(seconds / 60);
+        return minutes + ':' + this.pad( (seconds - minutes * 60) );
+    }
+
+    pad(num) {
+        return ("0"+num).slice(-2);
+    }
+
+
+
+
     savePlayer (player) {
-        console.log('Player ', player);
+        console.log(player.getDuration());
         this.player = player;
-
+        player.a.hidden = true;
         setTimeout(() => {
-            this.player.loadVideoById(this.id);
-            this.player.playVideo();
-            this.initInterval();
-            this.max = this.player.getDuration();
-
+            this.player.cueVideoById(this.id);
         }, 500);
-
-
     }
 
     initInterval () {
-        setInterval(() => {
-            this.timer = this.player.getCurrentTime().toFixed(2);
-            this.rangeVal = parseInt(this.timer);
-            console.log('Current time ', this.player.getCurrentTime());
-            console.log('Get Duration ', this.player.getDuration())
-            console.log('Available PlayBackRate', this.player.getAvailablePlaybackRates())
-            console.log('Get PlayBackRate ', this.player.getPlaybackRate())
-        }, 100);
-    }
+        this.videoInterval = setInterval(() => {
+            let currentTime = parseInt(this.player.getCurrentTime().toFixed(0));
+            let totalDuration = parseInt(this.player.getDuration().toFixed(1));
+            this.rangeVal = currentTime;
+            this.max = totalDuration;
+            this.currentDuration = this.secondsToMinutes(currentTime);
+            this.totalDuration = this.secondsToMinutes(totalDuration);
 
-    loadVideoClick (id) {
-        this.player.loadVideoById(id)
+            console.log('current Duration ->', this.currentDuration);
+            console.log('total Duration ->', this.totalDuration)
+        }, 1000);
     }
 
     toggleVideo () {
         if (this.player.getPlayerState() === 1) {
             this.isPlaying = false;
+            clearInterval(this.videoInterval);
             this.player.pauseVideo();
         } else {
             this.isPlaying = true;
             this.player.playVideo();
+            this.initInterval();
         }
     }
 
     onStateChange ($e) {
-        console.log($e)
+       // if ($e.data === 2) {
+       //     this.isPlaying = false;
+       //     clearInterval(this.videoInterval)
+       // } else {
+       //     this.isPlaying = true;
+       //     this.initInterval();
+       // }
     }
 
     load(id) {
@@ -117,19 +138,5 @@ export class CancionDetailComponent implements OnInit {
                 this.cancion = cancionResponse.body;
             });
     }
-    previousState() {
-        window.history.back();
-    }
 
-    // ngOnDestroy() {
-    //     this.subscription.unsubscribe();
-    //     this.eventManager.destroy(this.eventSubscriber);
-    // }
-
-    // registerChangeInCancions() {
-    //     this.eventSubscriber = this.eventManager.subscribe(
-    //         'cancionListModification',
-    //         (response) => this.load(this.cancion.id)
-    //     );
-    // }
 }

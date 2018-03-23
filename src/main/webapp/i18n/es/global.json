@@ -50,6 +50,7 @@
         },
         "form": {
             "username": "Usuario:",
+            "localidad": "Localidad",
             "username.placeholder": "Nombre de usuario",
             "newpassword": "Nueva contraseña:",
             "newpassword.placeholder": "Nueva contraseña:",

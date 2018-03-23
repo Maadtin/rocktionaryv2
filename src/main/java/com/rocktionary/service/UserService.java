@@ -2,14 +2,17 @@ package com.rocktionary.service;
 
 import com.rocktionary.domain.Authority;
 import com.rocktionary.domain.User;
+import com.rocktionary.domain.UserExt;
 import com.rocktionary.repository.AuthorityRepository;
 import com.rocktionary.config.Constants;
+import com.rocktionary.repository.UserExtRepository;
 import com.rocktionary.repository.UserRepository;
 import com.rocktionary.security.AuthoritiesConstants;
 import com.rocktionary.security.SecurityUtils;
 import com.rocktionary.service.util.RandomUtil;
 import com.rocktionary.service.dto.UserDTO;
 
+import com.rocktionary.web.rest.vm.ManagedUserVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -41,11 +44,14 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, AuthorityRepository authorityRepository) {
+    private final UserExtRepository userExtRepository;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, AuthorityRepository authorityRepository, UserExtRepository userExtRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.socialService = socialService;
         this.authorityRepository = authorityRepository;
+        this.userExtRepository = userExtRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -83,7 +89,7 @@ public class UserService {
             });
     }
 
-    public User registerUser(UserDTO userDTO, String password) {
+    public User registerUser(ManagedUserVM userDTO, String password) {
 
         User newUser = new User();
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
@@ -105,6 +111,14 @@ public class UserService {
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
+
+        UserExt userExt = new UserExt();
+
+        userExt.setUser(newUser);
+        userExt.setLocalidad(userDTO.getLocalidad());
+        userExtRepository.save(userExt);
+
+
         return newUser;
     }
 
