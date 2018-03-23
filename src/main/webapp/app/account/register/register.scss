@@ -1,0 +1,125 @@
+.register-page{
+    background: url("../../../content/images/fondo/fondoRegistro.jpg") no-repeat fixed ;
+
+    padding-bottom: 1em;
+}
+
+.container{
+    height: 700px;
+}
+
+.titulo{
+    margin-top: 2em;
+}
+.__titulo{
+    text-shadow: -1px -1px 1px #e8e6de, 1px 1px 1px #b4b3b7, -1px 1px 1px #b4b3b7, 1px -1px #e8ac02;
+    display: block;
+    text-align: center;
+    font-size: 4rem;
+    font-family: 'New Rocker', cursive;
+}
+
+.form{
+    background: url("../../../content/images/register-page/libro.png") no-repeat;
+    background-size: 128%;
+    background-position: center;
+    transform: scale(1);
+    padding: 5em 6em 0em 8em;
+    font-size: 1.1rem;
+}
+
+form{
+    padding: 3em 1.2em 0em 1em;
+}
+
+.form-group span{
+    display: block;
+    font-weight: 400;
+    font-size: 1.1rem;
+    font-family: 'UnifrakturMaguntia', cursive;
+}
+
+.form-group div{
+    font-size: 0.8rem;
+}
+
+.form-group input{
+    width: 100%;
+    display: block;
+    background: none;
+    border: none;
+    border-bottom-width: 1.5px;
+    border-bottom-style: dashed;
+    font-size: 1.1rem;
+    outline: 0;
+}
+
+.log-in-socials{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-self:center;
+}
+
+
+.__formulario{
+    padding-right: 5em;
+}
+
+.__formulario img{
+    max-width: 100%;
+}
+
+.log-in-socials div:not(:last-child) span{
+    font-family: 'New Rocker', cursive;
+    text-shadow: -1px -1px 1px #e8e6de, 1px 1px 1px #b4b3b7, -1px 1px 1px #b4b3b7, 1px -1px #e8ac02;
+    font-size: 2.1rem;
+    margin-left: 0.2em;
+}
+
+.log-in-socials div{
+    width: 100%;
+    font-size: 1.6rem;
+    font-weight: 400 !important;
+    padding: 1em;
+    padding-left: 5em;
+}
+
+.log-in-socials a {
+    font-weight: 400 !important;
+    text-decoration: none;
+    font-family: 'UnifrakturMaguntia', cursive;
+
+}
+
+.log-in-socials a:hover{
+    text-decoration: underline;
+}
+
+.log-in-socials div:first-child span{ color: darkred;}
+
+.log-in-socials div:nth-child(2) span { color: darkblue;}
+
+
+.form_submit button{
+    background: none;
+    color: black;
+    font-size: 1.3rem;
+    border:none;
+    font-family: 'UnifrakturMaguntia', cursive;
+}
+
+.form_submit{
+    text-align: center;
+    margin-top: 2em;
+}
+
+.form_submit img{
+    max-width: 20%;
+}
+
+.log-in-socials img{
+    max-width: 20%;
+}
+
+

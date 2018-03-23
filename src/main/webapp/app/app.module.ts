@@ -25,7 +25,7 @@ import {
     ProfileService,
     PageRibbonComponent,
     ActiveMenuDirective,
-    ErrorComponent,
+    ErrorComponent
 } from './layouts';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import {VideoPlayerGlobals} from './video-player-globals';
@@ -42,7 +42,7 @@ import {YoutubePlayerModule} from 'ngx-youtube-player';
         RocktionaryHomeModule,
         RocktionaryAdminModule,
         RocktionaryAccountModule,
-        RocktionaryEntityModule
+        RocktionaryEntityModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
@@ -53,6 +53,7 @@ import {YoutubePlayerModule} from 'ngx-youtube-player';
         ActiveMenuDirective,
         FooterComponent,
         VideoPlayerComponent,
+
     ],
     providers: [
         VideoPlayerGlobals,

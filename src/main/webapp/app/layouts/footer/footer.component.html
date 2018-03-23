@@ -1,48 +1,40 @@
 <div class="footer">
    <div class="row __footer">
        <div class="logo_stucom col-md-3">
-           <span>Con el soporte de:</span>
+           <span jhiTranslate="footer.soporte"></span>
            <a href="https://www.stucom.com" target="_blank"><img src="../../../content/images/logo/stucom_logoyellow.png" alt=""></a>
        </div>
 
-       <div class="col-6 footer_links">
+       <div class="col-md-6 footer_links">
                <span>Links</span>
                 <ul class="__footer_links">
-                    <li class="__footer_links-item">
-                        <a class="active" href="" jhiTranslate="global.menu.home" routerLink="/"></a>
+                    <li class="__footer_links-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >
+                        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" href="" jhiTranslate="global.menu.home" routerLink="/"></a>
                     </li>
 
-                    <li class="__footer_links-item">
-                        <a class="active" jhiTranslate="global.menu.profile" routerLink="perfil"></a>
+                    <li class="__footer_links-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" jhiTranslate="global.menu.profile" routerLink="perfil"></a>
                     </li>
 
-                    <li class="__footer_links-item">
-                        <a class="active" jhiTranslate="global.menu.team" routerLink="equipo"></a>
+                    <li class="__footer_links-item" >
+                        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" jhiTranslate="global.menu.team" routerLink="equipo"></a>
                     </li>
 
                     <li class=" __footer_links-item">
                             <a class="active" [jhiActiveMenu]="language" *ngFor="let language of languages" (click)="changeLanguage(language)" >{{language | findLanguageFromKey}}</a>
                     </li>
-                    <!--<li ngbDropdown class="dropup pointer __footer_links-item" *ngIf="languages">-->
-                        <!--<a class="dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown" *ngIf="languages.length > 1">-->
-                                <!--<span jhiTranslate="global.menu.language">Language</span>-->
-                        <!--</a>-->
-                        <!--<ul class="dropdown-menu" ngbDropdownMenu *ngIf="languages.length > 1">-->
-                            <!--<li *ngFor="let language of languages">-->
-                                <!--<a class="dropdown-item" [jhiActiveMenu]="language" href="javascript:void(0);" (click)="changeLanguage(language);collapseNavbar();">{{language | findLanguageFromKey}}</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
+
                 </ul>
        </div>
 
-       <div class="col-3 socials">
-           <span class="text-white">Siguenos en:</span>
+       <div class="col-md-3 socials">
+           <span class="text-white" jhiTranslate="footer.siguenos"></span>
            <a href="https://www.facebook.com" target="_blank"><img src="../../../content/images/logo/facebook_logoyellow.png" alt=""></a>
            <a href="https://instagram.com" target="_blank"><img src="../../../content/images/logo/instagram_logoyellow.png" alt=""></a>
            <a href="https://plus.google.com" target="_blank"><img src="../../../content/images/logo/googleplus_logoyellow.png" alt=""></a>
            <a href="https://twitter.com" target="_blank"><img src="../../../content/images/logo/twitter_logoyellow.png" alt=""></a>
-
+           <a href="https://spotify.com" target="_blank"><img src="../../../content/images/logo/spotify_logoyellow.png" alt=""></a>
+           <a href="https://youtube.com" target="_blank"><img src="../../../content/images/logo/youtube_logoyellow.png" alt=""></a>
        </div>
    </div>
     <span class="copy_right">RockTionary © 2018 DAW2 STUCOM</span>

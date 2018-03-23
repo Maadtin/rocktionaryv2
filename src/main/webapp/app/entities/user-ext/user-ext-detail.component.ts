@@ -36,6 +36,7 @@ export class UserExtDetailComponent implements OnInit, OnDestroy {
         this.userExtService.find(id)
             .subscribe((userExtResponse: HttpResponse<UserExt>) => {
                 this.userExt = userExtResponse.body;
+
             });
     }
     byteSize(field) {

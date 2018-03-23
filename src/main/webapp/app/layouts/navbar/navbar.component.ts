@@ -7,6 +7,7 @@ import { ProfileService } from '../profiles/profile.service';
 import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from '../../shared';
 
 import { VERSION } from '../../app.constants';
+import {NavbarService} from "./navbar.service";
 
 @Component({
     selector: 'jhi-navbar',
@@ -22,6 +23,7 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    perfilShow: boolean;
 
     constructor(
         private loginService: LoginService,
@@ -30,9 +32,11 @@ export class NavbarComponent implements OnInit {
         private principal: Principal,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
-        private router: Router
+        private router: Router,
+        private navbarService: NavbarService
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
+        this.perfilShow = navbarService.showPerfil;
     }
 
     ngOnInit() {
@@ -48,6 +52,10 @@ export class NavbarComponent implements OnInit {
 
     changeLanguage(languageKey: string) {
       this.languageService.changeLanguage(languageKey);
+    }
+
+    getPerfilShow(){
+        return this.perfilShow;
     }
 
     collapseNavbar() {
