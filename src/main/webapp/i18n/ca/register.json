@@ -19,6 +19,7 @@
                 "userexists": "<strong>El nom d'usuari ja existeix!</strong> Si us plau, esculli'n un altre.",
                 "emailexists": "<strong>L'adreça de correu electronic ja existeix!</strong> Si us plau, esculli'n una altre."
             }
-        }
+        },
+        "inicia-session":"Inicia sessió amb"
     }
 }
