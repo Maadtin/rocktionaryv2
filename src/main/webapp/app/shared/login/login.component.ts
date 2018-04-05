@@ -9,7 +9,8 @@ import {NavbarService} from "../../layouts/navbar/navbar.service";
 
 @Component({
     selector: 'jhi-login-modal',
-    templateUrl: './login.component.html'
+    templateUrl: './login.component.html',
+    styleUrls: ['login.scss']
 })
 export class JhiLoginModalComponent implements AfterViewInit {
     authenticationError: boolean;

@@ -1,6 +1,5 @@
 .register-page{
     background: url("../../../content/images/fondo/fondoRegistro.jpg") no-repeat fixed ;
-
     padding-bottom: 1em;
 }
 
@@ -48,8 +47,7 @@ form{
     display: block;
     background: none;
     border: none;
-    border-bottom-width: 1.5px;
-    border-bottom-style: dashed;
+    border-bottom: 1px solid black;
     font-size: 1.1rem;
     outline: 0;
 }
@@ -111,7 +109,10 @@ form{
 
 .form_submit{
     text-align: center;
-    margin-top: 2em;
+}
+
+.form_submit :hover{
+    text-decoration: underline;
 }
 
 .form_submit img{
