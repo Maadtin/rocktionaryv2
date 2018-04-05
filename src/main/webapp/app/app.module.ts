@@ -32,7 +32,7 @@ import {VideoPlayerGlobals} from './video-player-globals';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {YoutubePlayerModule} from 'ngx-youtube-player';
 import {NavbarService} from './layouts/navbar/navbar.service';
-import { YoutubePlayerWrapperComponent } from './youtube-player-wrapper/youtube-player-wrapper.component';
+// import { YoutubePlayerWrapperComponent } from './youtube-player-wrapper/youtube-player-wrapper.component';
 
 @NgModule({
     imports: [
@@ -56,8 +56,8 @@ import { YoutubePlayerWrapperComponent } from './youtube-player-wrapper/youtube-
         ActiveMenuDirective,
         FooterComponent,
         VideoPlayerComponent,
-        NavbarComponent,
-        YoutubePlayerWrapperComponent
+        NavbarComponent
+        // YoutubePlayerWrapperComponent
     ],
     providers: [
         VideoPlayerGlobals,
