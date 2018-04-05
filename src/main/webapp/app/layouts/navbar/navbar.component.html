@@ -138,14 +138,14 @@
                 </a>
             </li>
 
-            <li *ngSwitchCase="false"  class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" href="/api/account/login-spotify" (click)="collapseNavbar()">
-                    <span>
-                        <i class="fa fa-sign-in" aria-hidden="true"></i>
-                        <a>Login con Spotify</a>
-                    </span>
-                </a>
-            </li>
+            <!--<li *ngSwitchCase="false"  class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+                <!--<a class="nav-link" href="/api/account/login-spotify" (click)="collapseNavbar()">-->
+                    <!--<span>-->
+                        <!--<i class="fa fa-sign-in" aria-hidden="true"></i>-->
+                        <!--<a>Login con Spotify</a>-->
+                    <!--</span>-->
+                <!--</a>-->
+            <!--</li>-->
 
 
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
@@ -245,15 +245,21 @@
                             <span jhiTranslate="global.menu.account.logout">Sign out</span>
                         </a>
                     </li>
+
                     <li *ngSwitchCase="false">
-                        <a class="dropdown-item" (click)="login()" id="login">
+                        <a class="dropdown-item" href="/api/account/login-spotify"  id="login">
                             <i class="fa fa-fw fa-sign-in" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.account.login">Sign in</span>
                         </a>
+
+                        <!--<a class="dropdown-item"(click)="login()" id="login">-->
+                            <!--<i class="fa fa-fw fa-sign-in" aria-hidden="true"></i>-->
+                            <!--<span jhiTranslate="global.menu.account.login">Sign in</span>-->
+                        <!--</a>-->
                     </li>
                     <li *ngSwitchCase="false">
                         <a class="dropdown-item" routerLink="register" routerLinkActive="active" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-user-plus" aria-hidden="true"></i>s
+                            <i class="fa fa-fw fa-user-plus" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.account.register">Register</span>
                         </a>
                     </li>
