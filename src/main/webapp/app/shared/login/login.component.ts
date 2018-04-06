@@ -19,6 +19,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
     username: string;
     credentials: any;
 
+
     constructor(
         private eventManager: JhiEventManager,
         private loginService: LoginService,
@@ -52,14 +53,13 @@ export class JhiLoginModalComponent implements AfterViewInit {
             password: this.password,
             rememberMe: this.rememberMe
         }).then(() => {
-            this.navbarService.showPerfil = true;
+            this.router.navigate(['logged-in']);
             this.authenticationError = false;
             this.activeModal.dismiss('login success');
             if (this.router.url === '/register' || (/^\/activate\//.test(this.router.url)) ||
                 (/^\/reset\//.test(this.router.url))) {
                 this.router.navigate(['']);
             }
-
             this.eventManager.broadcast({
                 name: 'authenticationSuccess',
                 content: 'Sending Authentication Success'

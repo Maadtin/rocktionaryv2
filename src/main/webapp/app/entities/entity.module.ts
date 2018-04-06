@@ -15,6 +15,8 @@ import { RocktionaryComentarBandaModule } from './comentar-banda/comentar-banda.
 import { RocktionaryUserFollowingUserModule } from './user-following-user/user-following-user.module';
 import { RocktionaryEquipoModule } from './equipo/equipo.module';
 import { PerfilModule } from './perfil/perfil.module';
+import { RoctionaryLoggedInModule } from "./logged-in/logged-in.module";
+
 
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
@@ -34,7 +36,8 @@ import { PerfilModule } from './perfil/perfil.module';
         RocktionaryComentarBandaModule,
         RocktionaryUserFollowingUserModule,
         RocktionaryEquipoModule,
-        PerfilModule
+        PerfilModule,
+        RoctionaryLoggedInModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
