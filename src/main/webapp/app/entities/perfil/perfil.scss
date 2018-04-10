@@ -23,14 +23,22 @@
     text-align: center;
 }
 
+.edit_profile{
+    width: 40%;
+    border: black;
+    background-color: rgba(160, 147, 147, 0.63);
+    padding: 0.5em 2em;
+    font-size: 1.2rem;
+}
+
 .nom_perfil{
+    display: block;
     font-family: 'New Rocker', cursive;
     font-size: 4rem;
     background: -webkit-linear-gradient(#000, #9c936b);
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     -webkit-text-stroke: 2px white;
-    text-align: center;
 }
 
 /*<!--Datos de perfil-->*/
@@ -88,6 +96,7 @@
     .__perfil{
         order: 1;
         text-align: left;
+        padding-left: 4em;
     }
     .img_perfil img{
         width: 120%

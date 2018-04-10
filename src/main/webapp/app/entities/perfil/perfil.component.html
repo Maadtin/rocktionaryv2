@@ -4,7 +4,10 @@
     <div class="_container">
         <div class="row perfil">
             <div class="__perfil col-lg-7">
-                <span class="nom_perfil">Username</span>
+                <span class="nom_perfil ">{{settingsAccount.login}}</span>
+                <a routerLink="/settings" routerLinkActive="active"  class="btn btn-primary edit_profile">
+                    <span>Edit profile</span>
+                </a>
             </div>
             <div class="img_perfil col-lg-5">
                 <img src="../../../content/images/perfil/fotoperfilAlbert.png" alt="">
@@ -14,7 +17,21 @@
         <div class="row">
             <div class="perfil_datos  col-lg-6">
                 <div class="__perfil_datos">
+                    <div class="d-flex flex-wrap flex-row p-3 font-">
+                        <div class="w-100 p-3 h4">
+                            <span>First Name:</span>
+                            <span>{{settingsAccount.firstName}}</span>
+                        </div>
+                        <div class="w-100 p-3 h4">
+                            <span>Last Name:</span>
+                            <span>{{settingsAccount.lastName}}</span>
+                        </div>
 
+                        <div class="w-100 p-3 h4">
+                            <span>Email:</span>
+                            <span>{{settingsAccount.email}}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="top_canciones col-lg-6  ">
