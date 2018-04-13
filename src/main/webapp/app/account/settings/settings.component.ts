@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JhiLanguageService } from 'ng-jhipster';
 
 import { Principal, AccountService, JhiLanguageHelper } from '../../shared';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'jhi-settings',
@@ -15,6 +16,7 @@ export class SettingsComponent implements OnInit {
     languages: any[];
 
     constructor(
+        private router: Router,
         private account: AccountService,
         private principal: Principal,
         private languageService: JhiLanguageService,
@@ -33,6 +35,7 @@ export class SettingsComponent implements OnInit {
 
     save() {
         this.account.save(this.settingsAccount).subscribe(() => {
+            this.router.navigate(['perfil']);
             this.error = null;
             this.success = 'OK';
             this.principal.identity(true).then((account) => {

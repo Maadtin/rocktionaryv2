@@ -1,4 +1,22 @@
-div{
-    background: url('../../../content/images/fondo/fondoRegistro.jpg') center fixed;
+.__main{
+    background-image: url('../../../content/images/fondo/fondoPerfil.jpg');
+    font-size: 1.5rem;
     color: white;
+    padding: 5em;
+}
+
+button[type='submit']{
+    margin: auto;
+    display: block;
+    padding: .5em 3em;
+    font-size: 1.2rem;
+}
+
+.__change_password{
+    width: 25%;
+    border: black;
+    background-color: rgba(160, 147, 147, 0.63);
+    padding: 0.5em 2em;
+    font-size: 1.2rem;
+    margin-top: 2em;
 }
