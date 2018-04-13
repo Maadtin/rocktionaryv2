@@ -32,6 +32,8 @@ import {VideoPlayerGlobals} from './video-player-globals';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {YoutubePlayerModule} from 'ngx-youtube-player';
 import {NavbarService} from './layouts/navbar/navbar.service';
+import {BarRatingModule} from 'ngx-bar-rating';
+import { StarRatingComponent } from './star-rating/star-rating.component';
 // import { YoutubePlayerWrapperComponent } from './youtube-player-wrapper/youtube-player-wrapper.component';
 
 @NgModule({
@@ -45,7 +47,8 @@ import {NavbarService} from './layouts/navbar/navbar.service';
         RocktionaryAdminModule,
         RocktionaryAccountModule,
         RocktionaryEntityModule,
-        YoutubePlayerModule
+        YoutubePlayerModule,
+        BarRatingModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
@@ -56,7 +59,8 @@ import {NavbarService} from './layouts/navbar/navbar.service';
         ActiveMenuDirective,
         FooterComponent,
         VideoPlayerComponent,
-        NavbarComponent
+        NavbarComponent,
+        StarRatingComponent
         // YoutubePlayerWrapperComponent
     ],
     providers: [

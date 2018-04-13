@@ -16,6 +16,7 @@ import { RocktionaryUserFollowingUserModule } from './user-following-user/user-f
 import { RocktionaryEquipoModule } from './equipo/equipo.module';
 import { PerfilModule } from './perfil/perfil.module';
 import { RoctionaryLoggedInModule } from "./logged-in/logged-in.module";
+import {BarRatingModule} from 'ngx-bar-rating';
 
 
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
@@ -37,7 +38,8 @@ import { RoctionaryLoggedInModule } from "./logged-in/logged-in.module";
         RocktionaryUserFollowingUserModule,
         RocktionaryEquipoModule,
         PerfilModule,
-        RoctionaryLoggedInModule
+        RoctionaryLoggedInModule,
+        BarRatingModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

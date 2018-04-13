@@ -46,6 +46,7 @@ export class BandaDetailComponent implements OnInit {
         this.subscription = this.route.params.subscribe(params => {
             this.bandaService.getBanda(params['id'])
                 .subscribe(banda => {
+                    console.log('Informacion Banda ->', banda);
                     this.banda = banda;
                     this.bandaService.getBandaBio(this.banda.name)
                         .subscribe(info => this.bandaBio = info)

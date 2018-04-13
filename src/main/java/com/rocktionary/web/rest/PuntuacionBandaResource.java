@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.rocktionary.domain.PuntuacionBanda;
 
 import com.rocktionary.repository.PuntuacionBandaRepository;
+import com.rocktionary.repository.UserRepository;
+import com.rocktionary.security.SecurityUtils;
 import com.rocktionary.web.rest.errors.BadRequestAlertException;
 import com.rocktionary.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.security.Security;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +35,11 @@ public class PuntuacionBandaResource {
 
     private final PuntuacionBandaRepository puntuacionBandaRepository;
 
-    public PuntuacionBandaResource(PuntuacionBandaRepository puntuacionBandaRepository) {
+    private final UserRepository userRepository;
+
+    public PuntuacionBandaResource(PuntuacionBandaRepository puntuacionBandaRepository, UserRepository userRepository) {
         this.puntuacionBandaRepository = puntuacionBandaRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -49,6 +56,10 @@ public class PuntuacionBandaResource {
         if (puntuacionBanda.getId() != null) {
             throw new BadRequestAlertException("A new puntuacionBanda cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        puntuacionBanda.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get());
+        puntuacionBanda.setFechaPuntuacion(ZonedDateTime.now());
+
         PuntuacionBanda result = puntuacionBandaRepository.save(puntuacionBanda);
         return ResponseEntity.created(new URI("/api/puntuacion-bandas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

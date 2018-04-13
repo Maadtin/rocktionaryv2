@@ -1,4 +1,12 @@
 @import '../../../content/scss/variables';
+@import '~ngx-bar-rating/themes/br-stars-theme';
+
+.br-stars .br-unit {
+    background-image: url('/content/images/ratingicon.png')
+}
+.br-unit.br-selected, .br-unit.br-active{
+    background-image: url('/content/images/ratingicon2.png')
+}
 
 
 .banda-detail {

@@ -58,6 +58,7 @@
 
             <div class="div-50 more-info">
                 <h1 class="artist-name text-white">{{banda.name}}</h1>
+                <jhi-star-rating></jhi-star-rating>
                 <h3><a class="text-white artist-spotify-profile" target="_blank" [href]="banda.external_urls.spotify">Perfil de {{banda.name}} en Spotify</a></h3>
                 <p class="text-white">Seguidores <span class="followers">{{banda.followers.total | number }}</span></p>
                 <button (click)="showTruncatedText = !showTruncatedText" class="leer-mas">{{ !showTruncatedText ? 'Leer menos' : 'Leer mas' }}</button>

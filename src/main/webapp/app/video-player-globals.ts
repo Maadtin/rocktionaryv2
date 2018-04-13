@@ -22,4 +22,6 @@ export class VideoPlayerGlobals implements OnInit {
     minimizeYoutubeVideo () {
         this.showVideo = !this.showVideo;
     }
+
+
 }

@@ -15,6 +15,7 @@ import {
     bandaPopupRoute,
 } from './';
 import {UtilsService} from '../../utils.service';
+import {BarRatingModule} from 'ngx-bar-rating';
 
 const ENTITY_STATES = [
     ...bandaRoute,
@@ -24,7 +25,8 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         RocktionarySharedModule,
-        RouterModule.forChild(ENTITY_STATES)
+        RouterModule.forChild(ENTITY_STATES),
+        BarRatingModule
     ],
     declarations: [
         BandaComponent,
@@ -32,7 +34,7 @@ const ENTITY_STATES = [
         BandaDialogComponent,
         BandaDeleteDialogComponent,
         BandaPopupComponent,
-        BandaDeletePopupComponent,
+        BandaDeletePopupComponent
     ],
     entryComponents: [
         BandaComponent,
