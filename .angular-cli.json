@@ -20,9 +20,21 @@
         "mobile": false,
         "styles": [
             "content/scss/vendor.scss",
-            "content/scss/global.scss"
+            "content/scss/global.scss",
+
+
+            "content/css/animate.css",
+            "content/css/icomoon.css",
+            "content/css/style.css"
         ],
-        "scripts": []
+        "scripts": [
+            "content/js/jquery.min.js",
+            "content/js/jquery.easing.1.3.js",
+            "content/js/jquery.waypoints.min.js",
+            "content/js/jquery.stellar.min.js",
+            "content/js/jquery.countTo.js",
+            "content/js/main.js"
+        ]
     }],
     "lint": [{
             "project": "../../../tsconfig.json"
