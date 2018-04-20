@@ -24,8 +24,7 @@ export class HomeService {
                   : this.windowRef.getNativeWindow().spotifyToken
       };
 
-      return this.http
-          .get(`https://api.spotify.com/v1/search/?q=${params.searchQuery}&type=${params.searchCriteria}&genre:rock`, {headers: headers})
+      return this.http.get(`https://api.spotify.com/v1/search/?q=${params.searchQuery}&type=${params.searchCriteria}&genre:rock`, {headers: headers})
   }
 
 
