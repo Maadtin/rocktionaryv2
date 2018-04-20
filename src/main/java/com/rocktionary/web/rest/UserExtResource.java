@@ -104,6 +104,14 @@ public class UserExtResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userExt));
     }
 
+    @GetMapping("/user-exts/by-user/{id}")
+    @Timed
+    public ResponseEntity<UserExt> getUserExtByUserId(@PathVariable Long id) {
+        log.debug("REST request to get UserExt by User: {}", id);
+        UserExt userExt = userExtRepository.findByUserId(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userExt));
+    }
+
     /**
      * DELETE  /user-exts/:id : delete the "id" userExt.
      *

@@ -18,6 +18,7 @@ import { PerfilModule } from './perfil/perfil.module';
 import { RoctionaryLoggedInModule } from "./logged-in/logged-in.module";
 
 
+import { RocktionaryPruebaModule } from './prueba/prueba.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -37,7 +38,8 @@ import { RoctionaryLoggedInModule } from "./logged-in/logged-in.module";
         RocktionaryUserFollowingUserModule,
         RocktionaryEquipoModule,
         PerfilModule,
-        RoctionaryLoggedInModule
+        RoctionaryLoggedInModule,
+        RocktionaryPruebaModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

@@ -15,8 +15,18 @@
     padding-bottom: 2em;
 }
 
+.img_perfil{
+    padding: 2em 4em;
+    width: 400px;
+}
 .img_perfil img{
-    width: 100%;
+    width: 245px;
+}
+
+._add_profPic{
+    margin-left: 50px;
+    display: block;
+    width: 20%;
 }
 
 .__perfil{
@@ -48,9 +58,7 @@
 }
 
 .__perfil_datos{
-    height:350px;
-    background-color: white;
-    border: 2px solid black;
+    color: white;
 }
 
 /*<!--top canciones mas escuchados-->*/
@@ -63,11 +71,6 @@
 .top_canciones span{
     font-size: 2rem;
     color: white;
-}
-
-.__top_canciones_res{
-    height: 300px;
-    background-color: white;
 }
 
 .perfil{
@@ -98,9 +101,7 @@
         text-align: left;
         padding-left: 4em;
     }
-    .img_perfil img{
-        width: 120%
-    }
+
 
     .top_canciones span{
         font-size: 2.6rem;

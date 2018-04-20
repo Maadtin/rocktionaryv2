@@ -12,6 +12,7 @@ export type EntityResponseType = HttpResponse<UserExt>;
 export class UserExtService {
 
     private resourceUrl =  SERVER_API_URL + 'api/user-exts';
+    private resourceUrl2 =  SERVER_API_URL + 'api/user-exts/by-user';
 
     constructor(private http: HttpClient) { }
 
@@ -29,6 +30,11 @@ export class UserExtService {
 
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<UserExt>(`${this.resourceUrl}/${id}`, { observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    findByUser(id: number): Observable<EntityResponseType> {
+        return this.http.get<UserExt>(`${this.resourceUrl2}/${id}`, { observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 

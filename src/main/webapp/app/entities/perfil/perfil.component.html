@@ -9,10 +9,16 @@
                     <span>Edit profile</span>
                 </a>
             </div>
+
             <div class="img_perfil col-lg-5">
-                <img src="../../../content/images/perfil/fotoperfilAlbert.png" alt="">
+                    <img [src]="'data:' + userExt.fotoContentType + ';base64,' + userExt.foto" alt="userExt image"/>
             </div>
         </div>
+
+        <button class="btn btn-primary _add_profPic" [routerLink]="['/', { outlets: { popup: 'user-ext/'+ userExt.id + '/edit'} }]">
+            <i class="fa fa-plus"></i>
+            <span>Upload New Picture</span>
+        </button>
 
         <div class="row">
             <div class="perfil_datos  col-lg-6">

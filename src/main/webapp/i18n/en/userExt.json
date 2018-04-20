@@ -5,7 +5,8 @@
             "home": {
                 "title": "User Exts",
                 "createLabel": "Create a new User Ext",
-                "createOrEditLabel": "Create or edit a User Ext"
+                "createOrEditLabel": "Create or edit a User Ext",
+                "uploadNewPicture": "Upload new picture"
             },
             "created": "A new User Ext is created with identifier {{ param }}",
             "updated": "A User Ext is updated with identifier {{ param }}",

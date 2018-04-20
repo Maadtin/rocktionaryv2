@@ -169,8 +169,11 @@
 
     .info_miembro{
         font-size: 0.8rem;
-        padding: 0.5rem 4.5rem 1rem 2rem;
+        padding: 0.5rem 2.5rem 1.3rem 2.5rem;
+    }
 
+    ._info_miembro_2{
+        padding: 1.5rem 2.5rem 1.6rem 2.5rem;
     }
 
     ._descripcion{
@@ -197,7 +200,7 @@
 
 @media (min-width: 1200px){
     .info_miembro{
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 }
 

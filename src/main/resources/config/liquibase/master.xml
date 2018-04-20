@@ -18,6 +18,7 @@
     <include file="config/liquibase/changelog/20180203225143_added_entity_ComentarAlbum.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180203225144_added_entity_ComentarBanda.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180203225145_added_entity_UserFollowingUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180419082921_added_entity_Prueba.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180203225133_added_entity_constraints_Banda.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180203225135_added_entity_constraints_Componente.xml" relativeToChangelogFile="false"/>

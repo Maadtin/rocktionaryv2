@@ -3,21 +3,21 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
-import { UserExt } from './user-ext.model';
-import { UserExtService } from './user-ext.service';
+import { Prueba } from './prueba.model';
+import { PruebaService } from './prueba.service';
 import { Principal } from '../../shared';
 
 @Component({
-    selector: 'jhi-user-ext',
-    templateUrl: './user-ext.component.html'
+    selector: 'jhi-prueba',
+    templateUrl: './prueba.component.html'
 })
-export class UserExtComponent implements OnInit, OnDestroy {
-    userExts: UserExt[];
+export class PruebaComponent implements OnInit, OnDestroy {
+pruebas: Prueba[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
     constructor(
-        private userExtService: UserExtService,
+        private pruebaService: PruebaService,
         private jhiAlertService: JhiAlertService,
         private dataUtils: JhiDataUtils,
         private eventManager: JhiEventManager,
@@ -26,9 +26,9 @@ export class UserExtComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.userExtService.query().subscribe(
-            (res: HttpResponse<UserExt[]>) => {
-                this.userExts = res.body;
+        this.pruebaService.query().subscribe(
+            (res: HttpResponse<Prueba[]>) => {
+                this.pruebas = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -38,14 +38,14 @@ export class UserExtComponent implements OnInit, OnDestroy {
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
-        this.registerChangeInUserExts();
+        this.registerChangeInPruebas();
     }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: UserExt) {
+    trackId(index: number, item: Prueba) {
         return item.id;
     }
 
@@ -56,8 +56,8 @@ export class UserExtComponent implements OnInit, OnDestroy {
     openFile(contentType, field) {
         return this.dataUtils.openFile(contentType, field);
     }
-    registerChangeInUserExts() {
-        this.eventSubscriber = this.eventManager.subscribe('userExtListModification', (response) => this.loadAll());
+    registerChangeInPruebas() {
+        this.eventSubscriber = this.eventManager.subscribe('pruebaListModification', (response) => this.loadAll());
     }
 
     private onError(error) {

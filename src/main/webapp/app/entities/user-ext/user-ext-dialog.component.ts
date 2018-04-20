@@ -10,6 +10,7 @@ import { UserExt } from './user-ext.model';
 import { UserExtPopupService } from './user-ext-popup.service';
 import { UserExtService } from './user-ext.service';
 import { User, UserService } from '../../shared';
+import { Router} from "@angular/router";
 
 @Component({
     selector: 'jhi-user-ext-dialog',
@@ -23,6 +24,7 @@ export class UserExtDialogComponent implements OnInit {
     users: User[];
 
     constructor(
+        private router : Router,
         public activeModal: NgbActiveModal,
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
@@ -68,6 +70,7 @@ export class UserExtDialogComponent implements OnInit {
             this.subscribeToSaveResponse(
                 this.userExtService.create(this.userExt));
         }
+
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<UserExt>>) {

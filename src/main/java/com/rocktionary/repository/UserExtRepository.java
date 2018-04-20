@@ -13,4 +13,6 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface UserExtRepository extends JpaRepository<UserExt, Long> {
 
+
+    UserExt findByUserId(Long id);
 }
