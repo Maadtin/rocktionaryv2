@@ -1,4 +1,11 @@
 @import 'bootstrap-variables';
+@import '~ngx-bar-rating/themes/br-stars-theme';
+.br-stars .br-unit {
+    background-image: url(https://s3.eu-west-3.amazonaws.com/imagenes-rocktionary/ratingicon.png) !important
+}
+.br-unit.br-selected, .br-unit.br-active{
+    background-image: url(https://s3.eu-west-3.amazonaws.com/imagenes-rocktionary/ratingicon2.png) !important
+}
 
 
 /* ==============================================================

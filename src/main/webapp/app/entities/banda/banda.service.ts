@@ -17,12 +17,12 @@ export class BandaService {
 
     private resourceUrl =  SERVER_API_URL + 'api/bandas';
     private token = this.windowRef.getNativeWindow().spotifyToken || 'Bearer eqwe';
+    private headers = { 'Authorization': this.token }
 
     constructor(private http: HttpClient, private windowRef: WindowService, private dateUtils: JhiDateUtils) { }
 
     getBanda (id: number) {
-        const headers = { 'Authorization': this.token };
-        return this.http.get(`https://api.spotify.com/v1/artists/${id}`, {headers: headers})
+        return this.http.get(`https://api.spotify.com/v1/artists/${id}`, {headers: this.headers})
     }
 
     getBandaBio (bandaNombre: string) {
@@ -30,8 +30,7 @@ export class BandaService {
     }
 
     getTopTracks (id: number) {
-        const headers = { 'Authorization': this.token };
-        return this.http.get(`https://api.spotify.com/v1/artists/${id}/top-tracks?country=ES`, {headers: headers})
+        return this.http.get(`https://api.spotify.com/v1/artists/${id}/top-tracks?country=ES`, {headers: this.headers})
     }
 
     getVideoTrack (trackName: string): Observable<YoutubeModel> {
@@ -42,6 +41,10 @@ export class BandaService {
         const copy = this.convert(banda);
         return this.http.post<Banda>(this.resourceUrl, copy, { observe: 'response' })
             .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    updateRating (newRating: number) {
+        return this.http.post(`${this.resourceUrl}/update-rating`, { newRating })
     }
 
     update(banda: Banda): Observable<EntityResponseType> {

@@ -25,7 +25,7 @@ export class HomeService {
       };
 
       return this.http
-          .get(`https://api.spotify.com/v1/search/?q=${params.searchQuery}&type=${params.searchCriteria}`, {headers: headers})
+          .get(`https://api.spotify.com/v1/search/?q=${params.searchQuery}&type=${params.searchCriteria}&genre:rock`, {headers: headers})
   }
 
 

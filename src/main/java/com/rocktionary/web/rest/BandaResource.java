@@ -55,6 +55,13 @@ public class BandaResource {
             .body(result);
     }
 
+
+    //
+    @PostMapping("/bandas/update-rating")
+    public String updateRatinq (@RequestBody String newPuntuacion) {
+        return newPuntuacion;
+    }
+
     /**
      * PUT  /bandas : Updates an existing banda.
      *
@@ -103,6 +110,8 @@ public class BandaResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(banda));
     }
 
+
+
     /**
      * DELETE  /bandas/:id : delete the "id" banda.
      *
@@ -116,4 +125,6 @@ public class BandaResource {
         bandaRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+
 }

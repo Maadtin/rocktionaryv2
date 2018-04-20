@@ -16,6 +16,7 @@ import {
 } from './';
 import {UtilsService} from '../../utils.service';
 import {BarRatingModule} from 'ngx-bar-rating';
+import {StarRatingComponent} from '../../star-rating/star-rating.component';
 
 const ENTITY_STATES = [
     ...bandaRoute,
@@ -34,7 +35,8 @@ const ENTITY_STATES = [
         BandaDialogComponent,
         BandaDeleteDialogComponent,
         BandaPopupComponent,
-        BandaDeletePopupComponent
+        BandaDeletePopupComponent,
+        StarRatingComponent
     ],
     entryComponents: [
         BandaComponent,

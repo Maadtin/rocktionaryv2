@@ -47,8 +47,7 @@ import { StarRatingComponent } from './star-rating/star-rating.component';
         RocktionaryAdminModule,
         RocktionaryAccountModule,
         RocktionaryEntityModule,
-        YoutubePlayerModule,
-        BarRatingModule
+        YoutubePlayerModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
@@ -59,8 +58,7 @@ import { StarRatingComponent } from './star-rating/star-rating.component';
         ActiveMenuDirective,
         FooterComponent,
         VideoPlayerComponent,
-        NavbarComponent,
-        StarRatingComponent
+        NavbarComponent
         // YoutubePlayerWrapperComponent
     ],
     providers: [

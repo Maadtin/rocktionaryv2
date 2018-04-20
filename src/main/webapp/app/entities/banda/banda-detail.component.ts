@@ -9,6 +9,7 @@ import { BandaService } from './banda.service';
 import {UtilsService} from '../../utils.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {VideoPlayerGlobals} from '../../video-player-globals';
+import {Principal} from '../../shared';
 
 @Component({
     selector: 'jhi-banda-detail',
@@ -34,7 +35,8 @@ export class BandaDetailComponent implements OnInit {
         private route: ActivatedRoute,
         private utils: UtilsService,
         private sanitizer: DomSanitizer,
-        private videoPlayerGlobals: VideoPlayerGlobals
+        private videoPlayerGlobals: VideoPlayerGlobals,
+        private principal: Principal
     ) {
     }
 
@@ -58,6 +60,10 @@ export class BandaDetailComponent implements OnInit {
         });
 
         //this.registerChangeInBandas();
+    }
+
+    isLoggedIn () {
+        return this.principal.isAuthenticated();
     }
 
     load(id) {

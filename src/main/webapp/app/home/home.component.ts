@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
     private resultsText: string;
     private errorText: string;
     private showResultsContainer: boolean;
+    private isError2: boolean;
 
     constructor (private principal: Principal,
                 private loginModalService: LoginModalService,
@@ -125,19 +126,19 @@ export class HomeComponent implements OnInit {
 
     // error handling
     handleOnSuccess (res) {
-        console.log(res);
         this.isLoading = false;
         if (res[this.searchCriteria+'s'].items.length === 0) {
             this.isError = true;
             this.errorText = 'No hubo resultados con la búsqueda ' + this.inputSearchText;
         } else {
             this.isError = false;
-            this.resultsText = 'Resultados de tú búsqueda con ' + this.inputSearchText
+            this.resultsText = 'Resultados de tú búsqueda con ' + this.inputSearchText;
             this.results = res[this.searchCriteria+'s'].items;
+
         }
     }
-    handleOnError (err) {
 
+    handleOnError (err) {
         this.isLoading = false;
         this.isError = true;
         switch(err.status) {
