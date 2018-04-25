@@ -16,11 +16,22 @@
 }
 
 .img_perfil{
-    padding: 2em 4em;
     width: 400px;
+    position: relative;
 }
-.img_perfil img{
-    width: 245px;
+.img_perfil img:first-child{
+    width: 457px;
+    z-index: 1;
+    position: relative;
+}
+
+.img_perfil img:last-child{
+    position: absolute;
+    height: 215px;
+    border-radius: 50%;
+    width: 215px;
+    left: 31%;
+    top: 15%;
 }
 
 ._add_profPic{
