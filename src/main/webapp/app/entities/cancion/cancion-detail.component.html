@@ -66,6 +66,11 @@
                     <h3>
                         <a class="album-spotify-profile" target="_blank" [href]="cancion.external_urls.spotify">Escucha {{cancion.name}} en Spotify</a>
                     </h3>
+
+                    <div class="available-markets mt-3">
+                        <h3 class="font-weight-light mb-3">{{ cancion.name }} está disponible en los siguientes países</h3>
+                        <img *ngFor="let market of cancion.available_markets" [alt]="market" [title]="market" src="http://www.countryflags.io/{{ market }}/flat/24.png" class="text-white">
+                    </div>
                     <!--<p>Canciones <span class="album-canciones-total">{{albumTracks.total}}</span></p>-->
                     <!--<p>{{vm.bandaBio}}</p>-->
                 </div>
