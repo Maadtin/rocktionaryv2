@@ -89,6 +89,9 @@ will generate few files:
 
 ## Building for production
 
+Update this varible when deploying to production: http://rocktionary.com
+public static final String URL_REDIRECT_SPOTIFY = "http://localhost:9060";
+
 To optimize the rocktionary application for production, run:
 
     ./mvnw -Pprod clean package
