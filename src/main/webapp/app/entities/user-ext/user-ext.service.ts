@@ -5,6 +5,7 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { UserExt } from './user-ext.model';
 import { createRequestOption } from '../../shared';
+import {WindowService} from "../../windowref.service";
 
 export type EntityResponseType = HttpResponse<UserExt>;
 
@@ -13,8 +14,27 @@ export class UserExtService {
 
     private resourceUrl =  SERVER_API_URL + 'api/user-exts';
     private resourceUrl2 =  SERVER_API_URL + 'api/user-exts/by-user';
+    private spotifyToken;
 
-    constructor(private http: HttpClient) { }
+
+    constructor(private http: HttpClient, private nativeWindow: WindowService) {
+
+        this.spotifyToken = this.nativeWindow.getNativeWindow().spotifyToken;
+
+    }
+
+
+    getUserPlayList () {
+        return this.http.get('https://api.spotify.com/v1/me/playlists', {
+            headers: {Authorization: this.spotifyToken}
+        })
+    }
+
+    getUserTracksByPlayList () {
+        return this.http.get('https://api.spotify.com/v1/users/rustyjonas/playlists/4WC2eDbEvucAjovfbFJ1cY/tracks', {
+            headers: {Authorization: this.spotifyToken}
+        })
+    }
 
     create(userExt: UserExt): Observable<EntityResponseType> {
         const copy = this.convert(userExt);

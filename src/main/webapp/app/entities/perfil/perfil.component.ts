@@ -4,8 +4,9 @@ import {Principal} from "../../shared/auth/principal.service";
 import {UserExt} from "../user-ext/user-ext.model";
 import { UserExtService} from "../user-ext/user-ext.service";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import { JhiAlertService} from "ng-jhipster";
+import {JhiAlertService, JhiEventManager} from "ng-jhipster";
 import {User} from "../../shared/user/user.model";
+import {Subscription} from "rxjs/Subscription";
 
 
 @Component({
@@ -19,13 +20,17 @@ export class PerfilComponent implements OnInit {
    settingsAccount: any;
     userExt: UserExt;
     user : User;
+    eventSubscriber: Subscription;
 
-  constructor(
+
+    constructor(
       private account: AccountService,
       private principal: Principal,
       private userExtService: UserExtService,
+      private eventManager: JhiEventManager,
 
-) {
+
+  ) {
 
   }
 
@@ -33,6 +38,10 @@ export class PerfilComponent implements OnInit {
       this.principal.identity().then((account) => {
           this.settingsAccount = this.copyAccount(account);
           this.load(this.settingsAccount.id);
+          this.eventSubscriber = this.eventManager.
+          subscribe('userExtListModification',
+              (response) => this.load(this.settingsAccount.id));
+
       });
   }
 

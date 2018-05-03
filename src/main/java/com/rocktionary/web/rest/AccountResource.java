@@ -260,6 +260,6 @@ public class AccountResource {
         map.put("token", spotifyToken.getAccessToken());
         map.put("refresh_token", spotifyToken.getRefreshToken());
 
-        return new ModelAndView(new RedirectView("http://localhost:8080"), map);
+        return new ModelAndView(new RedirectView("http://localhost:9060"), map);
     }
 }
