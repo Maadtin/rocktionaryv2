@@ -9,6 +9,7 @@ import {
     HomeComponent,
     HomeService
 } from './';
+import {ParallaxComponent} from "../parallax/parallax.component";
 
 @NgModule({
     imports: [
@@ -16,7 +17,7 @@ import {
         RouterModule.forChild([ HOME_ROUTE ])
     ],
     declarations: [
-        HomeComponent,
+        HomeComponent
     ],
     entryComponents: [
     ],

@@ -16,6 +16,8 @@ import { RocktionaryUserFollowingUserModule } from './user-following-user/user-f
 import { RocktionaryEquipoModule } from './equipo/equipo.module';
 import { PerfilModule } from './perfil/perfil.module';
 import { RoctionaryLoggedInModule } from "./logged-in/logged-in.module";
+import { HomeHomeComponent } from './home-home/home-home.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
@@ -40,7 +42,7 @@ import { RoctionaryLoggedInModule } from "./logged-in/logged-in.module";
         RoctionaryLoggedInModule
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
-    declarations: [],
+    declarations: [HomeHomeComponent, BusquedaComponent],
     entryComponents: [],
     providers: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
