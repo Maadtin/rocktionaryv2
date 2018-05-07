@@ -14,7 +14,7 @@ import {ParallaxComponent} from "../parallax/parallax.component";
 @NgModule({
     imports: [
         RocktionarySharedModule,
-        RouterModule.forChild([ HOME_ROUTE ])
+        RouterModule.forChild(HOME_ROUTE)
     ],
     declarations: [
         HomeComponent
