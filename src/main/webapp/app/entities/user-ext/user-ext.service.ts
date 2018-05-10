@@ -17,10 +17,12 @@ export class UserExtService {
     private spotifyToken;
 
 
-    constructor(private http: HttpClient, private nativeWindow: WindowService) {
-
+    constructor(
+        private http: HttpClient,
+        private nativeWindow: WindowService
+    )
+    {
         this.spotifyToken = this.nativeWindow.getNativeWindow().spotifyToken;
-
     }
 
 

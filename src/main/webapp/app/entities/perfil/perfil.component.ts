@@ -7,7 +7,8 @@ import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {JhiAlertService, JhiEventManager} from "ng-jhipster";
 import {User} from "../../shared/user/user.model";
 import {Subscription} from "rxjs/Subscription";
-
+import {PlayList} from "../../models/PlayList";
+import { UserPlaylist } from "../../models/UserPlaylist";
 
 @Component({
   selector: 'perfil',
@@ -17,12 +18,11 @@ import {Subscription} from "rxjs/Subscription";
   ]
 })
 export class PerfilComponent implements OnInit {
-   settingsAccount: any;
+    settingsAccount: any;
     userExt: UserExt;
     user : User;
     eventSubscriber: Subscription;
-
-
+    userPlaylist: UserPlaylist[];
     constructor(
       private account: AccountService,
       private principal: Principal,
@@ -41,9 +41,11 @@ export class PerfilComponent implements OnInit {
           this.eventSubscriber = this.eventManager.
           subscribe('userExtListModification',
               (response) => this.load(this.settingsAccount.id));
+          this.getUserPlaylist();
 
       });
   }
+
 
     copyAccount(account) {
         return {
@@ -62,8 +64,14 @@ export class PerfilComponent implements OnInit {
         this.userExtService.findByUser(id)
             .subscribe((userExtResponse: HttpResponse<UserExt>) => {
                 this.userExt   = userExtResponse.body;
-
             });
+    }
+
+    getUserPlaylist(){
+       this.userExtService.getUserPlayList().subscribe((playlist: PlayList) =>  {
+          this.userPlaylist = playlist.items.map(({name, images}) => ({name,images}));
+            console.log(this.userPlaylist)
+       })
     }
 
 }

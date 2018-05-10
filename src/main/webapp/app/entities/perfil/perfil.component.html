@@ -5,6 +5,7 @@
         <div class="row perfil">
             <div class="__perfil col-lg-7">
                 <span class="nom_perfil ">{{settingsAccount.login}}</span>
+
                 <a routerLink="/settings" routerLinkActive="active"  class="btn btn-primary edit_profile">
                     <span>Edit profile</span>
                 </a>
@@ -41,9 +42,13 @@
                     </div>
                 </div>
             </div>
+
             <div class="top_canciones col-lg-6  ">
                 <span jhiTranslate="perfil.top-canciones"></span>
-                <div class="__top_canciones_res"></div>
+
+                <!--<div class="__top_canciones_res" *ngFor="let playlist of userPlaylist ">-->
+                    <!--<p>{{ playlist.items.name}}</p>-->
+                <!--</div>-->
             </div>
         </div>
 
