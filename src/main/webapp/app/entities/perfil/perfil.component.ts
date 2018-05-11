@@ -22,7 +22,7 @@ export class PerfilComponent implements OnInit {
     userExt: UserExt;
     user : User;
     eventSubscriber: Subscription;
-    userPlaylist: UserPlaylist[];
+    private userPlaylist: any;
     constructor(
       private account: AccountService,
       private principal: Principal,
@@ -41,7 +41,8 @@ export class PerfilComponent implements OnInit {
           this.eventSubscriber = this.eventManager.
           subscribe('userExtListModification',
               (response) => this.load(this.settingsAccount.id));
-          this.getUserPlaylist();
+          this.getUserTracksByPlayList();
+          // this.getUserPlaylist();
 
       });
   }
@@ -67,11 +68,22 @@ export class PerfilComponent implements OnInit {
             });
     }
 
-    getUserPlaylist(){
-       this.userExtService.getUserPlayList().subscribe((playlist: PlayList) =>  {
-          this.userPlaylist = playlist.items.map(({name, images}) => ({name,images}));
-            console.log(this.userPlaylist)
-       })
+    // getUserPlaylist(){
+    //    this.userExtService.getUserPlayList().subscribe((playlist: PlayList) =>  {
+    //        console.log(playlist);
+    //       this.userPlaylist = playlist.items.map(({id,name, images}) => ({id,name,images}));
+    //         console.log(this.userPlaylist)
+    //    })
+    // }
+
+
+    getUserTracksByPlayList(){
+        this.userExtService.getUserTracksByPlayList().subscribe((list:any) => {
+            this.userPlaylist = list.items;
+            console.log(this.userPlaylist );
+
+        })
     }
+
 
 }

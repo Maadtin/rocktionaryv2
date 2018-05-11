@@ -1,6 +1,13 @@
 {
     "perfil":{
         "title": "Perfil",
-        "top-canciones": "Top canciones mas escuchados"
+        "first-name": "Nombre: ",
+        "last-name": "Apellido: ",
+        "email": "Correo electronico: ",
+        "my-playlist": "Mi lista de reproducción",
+        "edit-profile": "Editar Perfil",
+        "upload-picture": "Subir nueva imagen"
+
+
     }
 }

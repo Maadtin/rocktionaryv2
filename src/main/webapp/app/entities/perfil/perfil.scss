@@ -34,6 +34,22 @@
     top: 15%;
 }
 
+.__top_canciones_res{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 0.8em;
+}
+
+.__top_canciones_res a{
+    background-color: #8f6d0a;
+    font-size: 1.7rem;
+    width: 56%;
+    min-width: 55%;
+}
+
 ._add_profPic{
     margin-left: 50px;
     display: block;
@@ -89,6 +105,13 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.top_canciones img{
+    width: 56%;
+    min-width: 55%;
+}
+
+
 
 
 @media (min-width: 768px){

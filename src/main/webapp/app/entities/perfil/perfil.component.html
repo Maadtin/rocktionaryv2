@@ -6,8 +6,8 @@
             <div class="__perfil col-lg-7">
                 <span class="nom_perfil ">{{settingsAccount.login}}</span>
 
-                <a routerLink="/settings" routerLinkActive="active"  class="btn btn-primary edit_profile">
-                    <span>Edit profile</span>
+                <a routerLink="/settings" routerLinkActive="active"  class="btn btn-dark edit_profile text-white">
+                    <span jhiTranslate="perfil.edit-profile"></span>
                 </a>
             </div>
 
@@ -17,9 +17,9 @@
             </div>
         </div>
 
-        <button class="btn btn-primary _add_profPic" [routerLink]="['/', { outlets: { popup: 'user-ext/'+ userExt.id + '/edit'} }]">
+        <button class="btn btn-dark _add_profPic" [routerLink]="['/', { outlets: { popup: 'user-ext/'+ userExt.id + '/edit'} }]">
             <i class="fa fa-plus"></i>
-            <span>Upload New Picture</span>
+            <span class="btn" jhiTranslate="perfil.upload-picture"></span>
         </button>
 
         <div class="row">
@@ -27,16 +27,16 @@
                 <div class="__perfil_datos">
                     <div class="d-flex flex-wrap flex-row p-3 font-">
                         <div class="w-100 p-3 h4">
-                            <span>First Name:</span>
+                            <span jhiTranslate="perfil.first-name"></span>
                             <span>{{settingsAccount.firstName}}</span>
                         </div>
                         <div class="w-100 p-3 h4">
-                            <span>Last Name:</span>
+                            <span jhiTranslate="perfil.last-name"></span>
                             <span>{{settingsAccount.lastName}}</span>
                         </div>
 
                         <div class="w-100 p-3 h4">
-                            <span>Email:</span>
+                            <span jhiTranslate="perfil.email"></span>
                             <span>{{settingsAccount.email}}</span>
                         </div>
                     </div>
@@ -44,11 +44,12 @@
             </div>
 
             <div class="top_canciones col-lg-6  ">
-                <span jhiTranslate="perfil.top-canciones"></span>
+                <span jhiTranslate="perfil.my-playlist"></span>
 
-                <!--<div class="__top_canciones_res" *ngFor="let playlist of userPlaylist ">-->
-                    <!--<p>{{ playlist.items.name}}</p>-->
-                <!--</div>-->
+                <div class="__top_canciones_res" *ngFor="let playlist of userPlaylist ">
+                    <a [routerLink]="['/track', playlist.track.id]" class="text-white ">{{ playlist.track.name}}</a>
+                    <img [src]="playlist.track.images[0].url" alt="">
+                </div>
             </div>
         </div>
 

@@ -1,0 +1,13 @@
+{
+    "perfil":{
+        "title": "Profile",
+        "first-name": "Name: ",
+        "last-name": "Last name: ",
+        "email": "Email: ",
+        "my-playlist": "My Playlist",
+        "edit-profile": "Edit Profile",
+        "upload-picture": "Upload new picture"
+
+
+    }
+}
