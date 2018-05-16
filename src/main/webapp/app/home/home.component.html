@@ -79,7 +79,7 @@
                                     </div>
                                 </section>
                                 <audio *ngIf="cancion.preview_url !== null" class="home-audio" controls>
-                                    <source [src]="sanitizeUrl(cancion.preview_url)">
+                                    <source [src]="sanitizeUrl(cancion.href)">
                                 </audio>
                                 <p class="no-preview" *ngIf="cancion.preview_url === null">
                                     Esta canción no tiene preview disponible.

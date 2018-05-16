@@ -33,7 +33,7 @@ export class UserExtService {
     }
 
     getUserTracksByPlayList () {
-        return this.http.get('https://api.spotify.com/v1/users/rustyjonas/playlists/4WC2eDbEvucAjovfbFJ1cY/tracks', {
+        return this.http.get('https://api.spotify.com/v1/users/rustyjonas/playlists/65a27LRmsANxoCl1LvtcXj/tracks', {
             headers: {Authorization: this.spotifyToken}
         })
     }

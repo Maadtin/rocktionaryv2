@@ -42,7 +42,7 @@ export class PerfilComponent implements OnInit {
           subscribe('userExtListModification',
               (response) => this.load(this.settingsAccount.id));
           this.getUserTracksByPlayList();
-          // this.getUserPlaylist();
+          this.getUserPlaylist();
 
       });
   }
@@ -68,19 +68,17 @@ export class PerfilComponent implements OnInit {
             });
     }
 
-    // getUserPlaylist(){
-    //    this.userExtService.getUserPlayList().subscribe((playlist: PlayList) =>  {
-    //        console.log(playlist);
-    //       this.userPlaylist = playlist.items.map(({id,name, images}) => ({id,name,images}));
-    //         console.log(this.userPlaylist)
-    //    })
-    // }
+    getUserPlaylist(){
+       this.userExtService.getUserPlayList().subscribe((playlist: PlayList) =>  {
+           console.log(playlist);
+       })
+    }
 
 
     getUserTracksByPlayList(){
         this.userExtService.getUserTracksByPlayList().subscribe((list:any) => {
             this.userPlaylist = list.items;
-            console.log(this.userPlaylist );
+            console.log(this.userPlaylist);
 
         })
     }

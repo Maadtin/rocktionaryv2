@@ -36,18 +36,27 @@
 
 .__top_canciones_res{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
     flex-wrap: wrap;
-    margin-top: 0.8em;
 }
 
+.__top_canciones_res div{
+    width: 33%;
+    margin-top: 1.5em;
+}
 .__top_canciones_res a{
-    background-color: #8f6d0a;
-    font-size: 1.7rem;
-    width: 56%;
-    min-width: 55%;
+    display:block;
+}
+.__top_canciones_res img{
+    width: 85%;
+}
+
+.track_name{
+    font-size: 0.9rem !important;
+}
+
+.__top_canciones_res audio{
+    width: 85%;
 }
 
 ._add_profPic{
@@ -106,10 +115,6 @@
     justify-content: center;
 }
 
-.top_canciones img{
-    width: 56%;
-    min-width: 55%;
-}
 
 
 

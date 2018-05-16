@@ -23,7 +23,7 @@
         </button>
 
         <div class="row">
-            <div class="perfil_datos  col-lg-6">
+            <div class="perfil_datos  col-lg-5">
                 <div class="__perfil_datos">
                     <div class="d-flex flex-wrap flex-row p-3 font-">
                         <div class="w-100 p-3 h4">
@@ -43,12 +43,16 @@
                 </div>
             </div>
 
-            <div class="top_canciones col-lg-6  ">
+            <div class="top_canciones col-lg-7">
                 <span jhiTranslate="perfil.my-playlist"></span>
-
-                <div class="__top_canciones_res" *ngFor="let playlist of userPlaylist ">
-                    <a [routerLink]="['/track', playlist.track.id]" class="text-white ">{{ playlist.track.name}}</a>
-                    <img [src]="playlist.track.album.images[0].url" alt="">
+                <div class="__top_canciones_res" >
+                    <div *ngFor="let playlist of userPlaylist">
+                        <a [routerLink]="['/track', playlist.track.id]" class="text-white "><span class="track_name">{{ playlist.track.name}}</span></a>
+                        <img [src]="playlist.track.album.images[0].url" alt="">
+                        <audio controls>
+                            <source [src]="playlist.track.preview_url">
+                        </audio>
+                    </div>
                 </div>
             </div>
         </div>
