@@ -58,7 +58,7 @@
             let url = new URL(location.href);
             let token = url.searchParams.get('token');
             window.spotifyToken = `Bearer ${token}`;
-            window.history.pushState({}, document.title, "/#");
+            window.history.pushState({}, document.title, "/#/home");
         }
     </script>
     <noscript>

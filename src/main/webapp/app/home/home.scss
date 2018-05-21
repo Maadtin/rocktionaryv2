@@ -17,6 +17,16 @@
     margin-top: 5px;
 }
 
+.voice-recognition-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    display: block;
+    color: #fff;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
 .search-results-container {
     background-color: #000;
 }
