@@ -164,10 +164,36 @@ export class HomeComponent implements OnInit {
             this.errorText = 'No hubo resultados con la búsqueda ' + this.inputSearchText;
         } else {
             this.isError = false;
-            this.resultsText = 'Resultados de tú búsqueda con ' + this.inputSearchText
-            this.results = res[this.searchCriteria+'s'].items;
+            this.resultsText = 'Resultados de tú búsqueda con ' + this.inputSearchText;
+
+
+            if (this.searchCriteria === 'artist') {
+                this.results = res.artists.items.filter(artist =>
+                    artist.genres.indexOf('rock') >= 0 ||
+                    artist.genres.indexOf('metal') >= 0 ||
+                    artist.genres.indexOf('gothic metal') >= 0 ||
+                    artist.genres.indexOf('power metal') >= 0 ||
+                    artist.genres.indexOf('trash metal') >= 0 ||
+                    artist.genres.indexOf('pop rock') >= 0 ||
+                    artist.genres.indexOf('alternative rock') >= 0 ||
+                    artist.genres.indexOf('alternative metal') >= 0 ||
+                    artist.genres.indexOf('nu metal') >= 0 ||
+                    artist.genres.indexOf('rap metal') >= 0 ||
+                    artist.genres.indexOf('punk') >= 0
+                )
+            } else {
+                this.results = res[this.searchCriteria+'s'].items;
+            }
+
+            console.log(this.results);
+
         }
     }
+
+    is (arr, genre) {
+        return arr.indexOf(genre) >= 0;
+    }
+
     handleOnError (err) {
 
         this.isLoading = false;
