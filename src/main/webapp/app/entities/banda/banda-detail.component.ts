@@ -89,7 +89,7 @@ export class BandaDetailComponent implements OnInit {
             $e.target.parentElement.querySelector('i.fa').classList.add('fa-pause')
         }
 
-        this.bandaService.getVideoTrack(trackName).subscribe(video => {
+        this.bandaService.getVideoTrack(this.banda.name,trackName).subscribe(video => {
             // this.videoPlayerGlobals.videoTrackId = video.items[0].id.videoId;
             this.videoPlayerGlobals.videoInfo = {
                 nombre: video.items[0].snippet.title,
