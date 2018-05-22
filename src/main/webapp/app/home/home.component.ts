@@ -73,6 +73,7 @@ export class HomeComponent implements OnInit {
         const commands = {
             'Busca *criteria': criteria => {
                 this.inputSearchText = criteria;
+                this.isLoading = true;
                 this.homeService.getSearchResults({
                     searchCriteria: this.searchCriteria,
                     searchQuery: this.inputSearchText
