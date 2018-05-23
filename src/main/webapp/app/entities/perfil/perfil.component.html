@@ -45,15 +45,27 @@
 
             <div class="top_canciones col-lg-7">
                 <span jhiTranslate="perfil.my-playlist"></span>
-                <div class="__top_canciones_res" >
-                    <div *ngFor="let playlist of userPlaylist">
-                        <a [routerLink]="['/track', playlist.track.id]" class="text-white "><span class="track_name">{{ playlist.track.name}}</span></a>
-                        <img [src]="playlist.track.album.images[0].url" alt="">
-                        <audio controls>
-                            <source [src]="playlist.track.preview_url">
-                        </audio>
-                    </div>
-                </div>
+                <ul class="grid">
+                    <li *ngFor="let playlist of userPlaylist" class="grid-list">
+                        <h5 class="text-white">{{ playlist.track.name}}</h5>
+                        <div class="img-audio-container">
+                            <img [src]="playlist.track.album.images[0].url" alt="">
+                            <audio controls>
+                                <source [src]="playlist.track.preview_url">
+                            </audio>
+                        </div>
+
+                    </li>
+                </ul>
+                <!--<div class="__top_canciones_res" >-->
+                    <!--<div *ngFor="let playlist of userPlaylist">-->
+                        <!--<a [routerLink]="['/track', playlist.track.id]" class="text-white "><span class="track_name">{{ playlist.track.name}}</span></a>-->
+                        <!--<img [src]="playlist.track.album.images[0].url" alt="">-->
+                        <!--<audio controls>-->
+                            <!--<source [src]="playlist.track.preview_url">-->
+                        <!--</audio>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
         </div>
 

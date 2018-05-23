@@ -9,7 +9,7 @@ import {User} from "../../shared/user/user.model";
 import {Subscription} from "rxjs/Subscription";
 import {PlayList} from "../../models/PlayList";
 import { UserPlaylist } from "../../models/UserPlaylist";
-
+import {VideoPlayerGlobals} from '../../video-player-globals';
 @Component({
   selector: 'perfil',
   templateUrl: './perfil.component.html',
@@ -18,16 +18,25 @@ import { UserPlaylist } from "../../models/UserPlaylist";
   ]
 })
 export class PerfilComponent implements OnInit {
+    public showVideoPlayer: boolean;
+    public showVideo: boolean;
     settingsAccount: any;
     userExt: UserExt;
     user : User;
     eventSubscriber: Subscription;
     private userPlaylist: any;
+    private topTracks: object;
+
+    public showTruncatedText: boolean;
+    public activePlayer: boolean;
+    private showGeneral: boolean;
+
     constructor(
       private account: AccountService,
       private principal: Principal,
       private userExtService: UserExtService,
       private eventManager: JhiEventManager,
+      private videoPlayerGlobals: VideoPlayerGlobals
 
 
   ) {
@@ -35,6 +44,13 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit() {
+      this.showVideoPlayer = true;
+      this.showVideo = false;
+
+      this.activePlayer = false;
+      this.showTruncatedText = true;
+      this.showGeneral = true;
+
       this.principal.identity().then((account) => {
           this.settingsAccount = this.copyAccount(account);
           this.load(this.settingsAccount.id);
@@ -70,7 +86,7 @@ export class PerfilComponent implements OnInit {
 
     getUserPlaylist(){
        this.userExtService.getUserPlayList().subscribe((playlist: PlayList) =>  {
-           console.log(playlist);
+           // console.log(playlist);
        })
     }
 
@@ -78,8 +94,8 @@ export class PerfilComponent implements OnInit {
     getUserTracksByPlayList(){
         this.userExtService.getUserTracksByPlayList().subscribe((list:any) => {
             this.userPlaylist = list.items;
-            console.log(this.userPlaylist);
-
+            // console.log(this.userPlaylist);
+            console.log(this.userPlaylist.get('X-Total-Count'))
         })
     }
 
