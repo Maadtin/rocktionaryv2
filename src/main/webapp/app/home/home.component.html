@@ -32,7 +32,7 @@
             <button [class.activeFilter]="clickedButton === 'albumes'" (click)="handleOnChangePlaceHolderText('albumes');handleOnInputSearch()">Albumes</button>
             <button [class.activeFilter]="clickedButton === 'bandas'" (click)="handleOnChangePlaceHolderText('bandas');handleOnInputSearch()">Bandas</button>
         </div>
-        <form class="search-form form">
+        <form class="search-form form" style="position: relative;">
             <input
                 [(ngModel)]="inputSearchText"
                 (keyup)="handleOnInputSearch()"
@@ -41,6 +41,7 @@
                 class="form-control"
                 autocomplete="off"
             >
+            <i (click)="toggleRecognition()" [ngClass]="{'fa-microphone': isListening, 'fa-microphone-slash': !isListening}" class="fa voice-recognition-icon"></i>
         </form>
         <div *ngIf="showResultsContainer" class="search-results-container col-12">
             <div *ngIf="isLoading" class="la-ball-clip-rotate-multiple la-2x">

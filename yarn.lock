@@ -27,9 +27,9 @@
     "@ngtools/json-schema" "^1.1.0"
     rxjs "^5.5.6"
 
-"@angular/animations@^5.2.8":
-  version "5.2.8"
-  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-5.2.8.tgz#31cdb49163881323fa5ded41e89683ec5e9ac8b5"
+"@angular/animations@^5.2.10":
+  version "5.2.11"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-5.2.11.tgz#2bd3fe9e72916ca28de9bfaaddf0cb936565a0b8"
   dependencies:
     tslib "^1.7.1"
 
@@ -203,7 +203,7 @@
   version "8.0.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.18.tgz#9e96603a02a38889d08f451906f9cb56a2725ff5"
 
-"@types/youtube@^0.0.32":
+"@types/youtube@0.0.32":
   version "0.0.32"
   resolved "https://registry.yarnpkg.com/@types/youtube/-/youtube-0.0.32.tgz#b53ebc75e6646d7dc46295b8eceb5f1e596f68ae"
 
@@ -292,6 +292,10 @@ angular2-template-loader@0.6.2:
   resolved "https://registry.yarnpkg.com/angular2-template-loader/-/angular2-template-loader-0.6.2.tgz#c0d44e90fff0fac95e8b23f043acda7fd1c51d7c"
   dependencies:
     loader-utils "^0.2.15"
+
+annyang@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/annyang/-/annyang-2.6.1.tgz#93140d7014f268a9d6c4319505715b0469dec856"
 
 ansi-escapes@^1.1.0:
   version "1.4.0"
@@ -5719,6 +5723,10 @@ ngx-cookie@2.0.1:
 ngx-infinite-scroll@0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/ngx-infinite-scroll/-/ngx-infinite-scroll-0.5.1.tgz#dd9452c602ff7c3222f0ca168481aa14140286b7"
+
+ngx-parallax@^4.0.0-rc.1:
+  version "4.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/ngx-parallax/-/ngx-parallax-4.0.0-rc.1.tgz#20ce0fbf5e0d2c05efe7d82637158bc107a31763"
 
 ngx-webstorage@2.0.1:
   version "2.0.1"

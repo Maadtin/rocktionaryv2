@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
+import * as annyang from 'annyang';
 import { Account, LoginModalService, Principal } from '../shared';
 
 import { HomeService } from './home.service'
-import {HttpErrorResponse} from '@angular/common/http';
 import {UtilsService} from '../utils.service';
 import {SafeResourceUrl} from '@angular/platform-browser';
+import {WindowService} from "../windowref.service";
 
 @Component({
     selector: 'jhi-home',
@@ -32,16 +33,20 @@ export class HomeComponent implements OnInit {
     private resultsText: string;
     private errorText: string;
     private showResultsContainer: boolean;
+    public isListening: boolean;
 
     constructor (private principal: Principal,
                 private loginModalService: LoginModalService,
                 private eventManager: JhiEventManager,
                 private homeService: HomeService,
-                private utilsService: UtilsService
+                private utilsService: UtilsService,
+                private window: WindowService,
+                private detector: ChangeDetectorRef
     ) {
     }
 
     ngOnInit() {
+        this.isListening = false;
         this.placeHolderText = 'albumes';
         this.clickedButton = 'albumes';
         this.inputSearchText = '';
@@ -55,6 +60,33 @@ export class HomeComponent implements OnInit {
             this.account = account;
         });
         this.registerAuthenticationSuccess();
+    }
+
+    toggleRecognition () {
+        if (annyang.isListening()) {
+            annyang.abort();
+            this.isListening = false;
+            return
+        }
+
+
+        const commands = {
+            'Busca *criteria': criteria => {
+                this.inputSearchText = criteria;
+                this.isLoading = true;
+                this.homeService.getSearchResults({
+                    searchCriteria: this.searchCriteria,
+                    searchQuery: this.inputSearchText
+                }).subscribe( data => this.handleOnSuccess(data),
+                    error => this.handleOnError(error));
+                this.detector.detectChanges();
+            }
+        };
+        annyang.addCommands(commands);
+        annyang.start();
+        annyang.setLanguage('es-ES');
+        annyang.debug(true);
+        this.isListening = true;
     }
 
     sanitizeUrl (url: string): SafeResourceUrl {
@@ -132,10 +164,36 @@ export class HomeComponent implements OnInit {
             this.errorText = 'No hubo resultados con la búsqueda ' + this.inputSearchText;
         } else {
             this.isError = false;
-            this.resultsText = 'Resultados de tú búsqueda con ' + this.inputSearchText
-            this.results = res[this.searchCriteria+'s'].items;
+            this.resultsText = 'Resultados de tú búsqueda con ' + this.inputSearchText;
+
+
+            if (this.searchCriteria === 'artist') {
+                this.results = res.artists.items.filter(artist =>
+                    artist.genres.indexOf('rock') >= 0 ||
+                    artist.genres.indexOf('metal') >= 0 ||
+                    artist.genres.indexOf('gothic metal') >= 0 ||
+                    artist.genres.indexOf('power metal') >= 0 ||
+                    artist.genres.indexOf('trash metal') >= 0 ||
+                    artist.genres.indexOf('pop rock') >= 0 ||
+                    artist.genres.indexOf('alternative rock') >= 0 ||
+                    artist.genres.indexOf('alternative metal') >= 0 ||
+                    artist.genres.indexOf('nu metal') >= 0 ||
+                    artist.genres.indexOf('rap metal') >= 0 ||
+                    artist.genres.indexOf('punk') >= 0
+                )
+            } else {
+                this.results = res[this.searchCriteria+'s'].items;
+            }
+
+            console.log(this.results);
+
         }
     }
+
+    is (arr, genre) {
+        return arr.indexOf(genre) >= 0;
+    }
+
     handleOnError (err) {
 
         this.isLoading = false;
