@@ -34,6 +34,7 @@ import {YoutubePlayerModule} from 'ngx-youtube-player';
 import {NavbarService} from './layouts/navbar/navbar.service';
 import { ParallaxComponent } from './parallax/parallax.component';
 import { BarRatingComponent } from './bar-rating/bar-rating.component';
+import { ComentariosComponent } from './entitites/comentarios/comentarios.component';
 // import { YoutubePlayerWrapperComponent } from './youtube-player-wrapper/youtube-player-wrapper.component';
 
 @NgModule({
@@ -59,7 +60,8 @@ import { BarRatingComponent } from './bar-rating/bar-rating.component';
         FooterComponent,
         VideoPlayerComponent,
         NavbarComponent,
-        ParallaxComponent
+        ParallaxComponent,
+        ComentariosComponent
         // YoutubePlayerWrapperComponent
     ],
     providers: [

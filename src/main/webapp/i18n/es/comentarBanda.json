@@ -18,6 +18,7 @@
             },
             "comentario": "Comentario",
             "fechaComentario": "Fecha Comentario",
+            "bandaName": "Banda Name",
             "user": "User",
             "banda": "Banda"
         }

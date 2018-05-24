@@ -47,6 +47,19 @@ export class BandaService {
         return this.http.get(`${this.resourceUrl}/get-rating`)
     }
 
+
+    addComment ({ comentario, bandaName }) {
+        return this.http.post(`/api/comentar-banda`, { comentario, bandaName })
+    }
+
+    removeComment (id) {
+        return this.http.delete(`/api/delete-comment/${id}`)
+    }
+
+    getBandaComments(bandaName) {
+        return this.http.get(`/api/get-banda-comments/${bandaName}`)
+    }
+
     create(banda: Banda): Observable<EntityResponseType> {
         const copy = this.convert(banda);
         return this.http.post<Banda>(this.resourceUrl, copy, { observe: 'response' })
@@ -113,4 +126,6 @@ export class BandaService {
             .convertLocalDateToServer(banda.anosactivo);
         return copy;
     }
+
+
 }
