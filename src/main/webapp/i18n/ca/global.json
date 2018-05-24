@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "Rocktionary",
+        "title": "RockTionary",
         "browsehappy": "Està usant un navegador <strong>des-actualitzat</strong>. Si us plau <a href=\"http://browsehappy.com/?locale=en\">actualitzi el seu navegador</a> per millorar l'experiencia.",
         "menu": {
             "home": "Inici",
@@ -17,13 +17,13 @@
                 "puntuacionAlbum": "Puntuacion Album",
                 "puntuacionCancion": "Puntuacion Cancion",
                 "album": "Album",
-                "cancion": "Cancion",
+                "cancion": "Cançó",
                 "userExt": "User Ext",
                 "comentarCancion": "Comentar Cancion",
                 "comentarAlbum": "Comentar Album",
                 "comentarBanda": "Comentar Banda",
                 "userFollowingUser": "User Following User",
-                "prueba": "Prueba",
+                "prueba": "Prova",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -146,7 +146,7 @@
         "idexists": "Una nova {{entityName}} no pot ja tenir un ID"
     },
     "footer":{
-        "siguenos": "Segueix-nos:",
-        "soporte": "Amb al suport de:"
+        "siguenos": "Vols més i ho saps! ;):",
+        "soporte": "Amb el suport de..."
     }
 }
