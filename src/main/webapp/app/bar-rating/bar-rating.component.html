@@ -1,0 +1,10 @@
+<bar-rating
+    [(rate)]="rate"
+    [max]="5"
+    (rateChange)="onRateChange($event)"
+    [theme]="'stars'">
+</bar-rating>
+
+
+<p class="rocktionary-theme" *ngIf="puntuationSuccess">Has puntuado a {{ bandaName }} correctamente</p>
+
