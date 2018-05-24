@@ -14,6 +14,10 @@ import java.util.List;
 public interface PuntuacionBandaRepository extends JpaRepository<PuntuacionBanda, Long> {
 
     @Query("select puntuacion_banda from PuntuacionBanda puntuacion_banda where puntuacion_banda.user.login = ?#{principal.username}")
-    List<PuntuacionBanda> findByUserIsCurrentUser();
+    PuntuacionBanda findByUserIsCurrentUser();
+
+//
+//    @Query("update PuntuacionBanda pb set pb.valoracion = ?1 where pb.user.login = ?#{principal.username}")
+//    PuntuacionBanda updatePuntuacion(Integer newRating);
 
 }

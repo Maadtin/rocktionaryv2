@@ -5,6 +5,7 @@ export class PuntuacionBanda implements BaseEntity {
         public id?: number,
         public valoracion?: number,
         public fechaPuntuacion?: any,
+        public banda_name?: string,
         public user?: User,
         public banda?: BaseEntity,
     ) {

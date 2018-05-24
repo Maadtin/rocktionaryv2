@@ -56,7 +56,9 @@
                 <!--</div>-->
             </div>
 
-            <div class="div-50 more-info">
+            <div class="div-50 more-info mt-3">
+                <p class="text-white">Puntúa a {{ banda.name }}</p>
+                <rocktionary-bar-rating [bandaName]="banda.name"></rocktionary-bar-rating>
                 <h1 class="artist-name text-white">{{banda.name}}</h1>
                 <h3><a class="text-white artist-spotify-profile" target="_blank" [href]="banda.external_urls.spotify">Perfil de {{banda.name}} en Spotify</a></h3>
                 <p class="text-white">Seguidores <span class="followers">{{banda.followers.total | number }}</span></p>

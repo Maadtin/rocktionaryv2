@@ -3,7 +3,12 @@ package com.rocktionary.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.rocktionary.domain.Banda;
 
+import com.rocktionary.domain.PuntuacionBanda;
+import com.rocktionary.domain.User;
 import com.rocktionary.repository.BandaRepository;
+import com.rocktionary.repository.PuntuacionBandaRepository;
+import com.rocktionary.repository.UserRepository;
+import com.rocktionary.security.SecurityUtils;
 import com.rocktionary.web.rest.errors.BadRequestAlertException;
 import com.rocktionary.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +36,15 @@ public class BandaResource {
     private static final String ENTITY_NAME = "banda";
 
     private final BandaRepository bandaRepository;
+    private final UserRepository userRepository;
+    private final PuntuacionBandaRepository puntuacionBandaRepository;
 
-    public BandaResource(BandaRepository bandaRepository) {
+    public BandaResource(BandaRepository bandaRepository, UserRepository userRepository, PuntuacionBandaRepository puntuacionBandaRepository) {
         this.bandaRepository = bandaRepository;
+        this.userRepository = userRepository;
+        this.puntuacionBandaRepository = puntuacionBandaRepository;
+
+
     }
 
     /**
@@ -75,6 +87,32 @@ public class BandaResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, banda.getId().toString()))
             .body(result);
+    }
+
+
+    @PostMapping("/bandas/update-rating")
+    public PuntuacionBanda updateRatinq (@RequestBody BandaDTO bandaDTO) {
+
+//
+        PuntuacionBanda puntuacionBanda = puntuacionBandaRepository.findByUserIsCurrentUser();
+
+        if (puntuacionBanda == null) {
+            User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get();
+            puntuacionBanda = new PuntuacionBanda(user, bandaDTO.getRating(), ZonedDateTime.now(), bandaDTO.getBandaName());
+            puntuacionBandaRepository.save(puntuacionBanda);
+        } else {
+            puntuacionBanda.setValoracion(bandaDTO.getRating());
+            puntuacionBandaRepository.save(puntuacionBanda);
+        }
+
+       return  puntuacionBanda;
+        //return puntuacionBanda;
+    }
+
+
+    @GetMapping("/bandas/get-rating")
+    public Integer getRating () {
+        return puntuacionBandaRepository.findByUserIsCurrentUser().getValoracion();
     }
 
     /**

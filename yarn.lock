@@ -5716,6 +5716,10 @@ ng-semantic@^1.1.13:
   version "1.1.13"
   resolved "https://registry.yarnpkg.com/ng-semantic/-/ng-semantic-1.1.13.tgz#4a82560a5750fb1211cb12683edacd7ce5690a85"
 
+ngx-bar-rating@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ngx-bar-rating/-/ngx-bar-rating-1.1.0.tgz#47a260812b47bc6df157e0aaecae5b29249407c4"
+
 ngx-cookie@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ngx-cookie/-/ngx-cookie-2.0.1.tgz#031d8938bf9026954356b3b3ae668e2e1964e584"

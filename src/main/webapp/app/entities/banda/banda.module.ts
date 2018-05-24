@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { BarRatingModule } from 'ngx-bar-rating'
 
 import { RocktionarySharedModule } from '../../shared';
 import {
@@ -12,9 +13,10 @@ import {
     BandaDeletePopupComponent,
     BandaDeleteDialogComponent,
     bandaRoute,
-    bandaPopupRoute,
+    bandaPopupRoute
 } from './';
 import {UtilsService} from '../../utils.service';
+import {BarRatingComponent} from "../../bar-rating/bar-rating.component";
 
 const ENTITY_STATES = [
     ...bandaRoute,
@@ -24,7 +26,8 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         RocktionarySharedModule,
-        RouterModule.forChild(ENTITY_STATES)
+        RouterModule.forChild(ENTITY_STATES),
+        BarRatingModule
     ],
     declarations: [
         BandaComponent,
@@ -33,6 +36,7 @@ const ENTITY_STATES = [
         BandaDeleteDialogComponent,
         BandaPopupComponent,
         BandaDeletePopupComponent,
+        BarRatingComponent
     ],
     entryComponents: [
         BandaComponent,
