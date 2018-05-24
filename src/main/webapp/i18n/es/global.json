@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "Rocktionary",
+        "title": "RockTionary",
         "browsehappy": "Está usando un navegador <strong>no actualizado</strong>. Por favor, <a href=\"http://browsehappy.com/?locale=en\">actualice su navegador</a> para mejorar su experiencia.",
         "menu": {
             "home": "Inicio",
@@ -147,7 +147,7 @@
         "idexists": "A new {{entityName}} cannot already have an ID"
     },
     "footer":{
-        "siguenos": "Siguenos:",
-        "soporte": "Con el soporte de:"
+        "siguenos": "Quieres más y lo sabes! ;) :",
+        "soporte": "Con el soporte de..."
     }
 }
