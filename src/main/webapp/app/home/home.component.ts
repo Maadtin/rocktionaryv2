@@ -179,7 +179,12 @@ export class HomeComponent implements OnInit {
                     artist.genres.indexOf('alternative metal') >= 0 ||
                     artist.genres.indexOf('nu metal') >= 0 ||
                     artist.genres.indexOf('rap metal') >= 0 ||
-                    artist.genres.indexOf('punk') >= 0
+                    artist.genres.indexOf('punk') >= 0 ||
+                    artist.genres.indexOf('country') >= 0 ||
+                    artist.genres.indexOf('death metal') >= 0 ||
+                    artist.genres.indexOf('folk metal') >= 0 ||
+                    artist.genres.indexOf('grunge') >= 0 ||
+                    artist.genres.indexOf('groove metal') >= 0
                 )
             } else {
                 this.results = res[this.searchCriteria+'s'].items;
