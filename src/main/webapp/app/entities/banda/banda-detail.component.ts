@@ -10,6 +10,7 @@ import {UtilsService} from '../../utils.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {VideoPlayerGlobals} from '../../video-player-globals';
 import {Principal} from "../../shared";
+import {UserExtService} from "../user-ext/user-ext.service";
 
 @Component({
     selector: 'jhi-banda-detail',
@@ -40,7 +41,8 @@ export class BandaDetailComponent implements OnInit {
         private utils: UtilsService,
         private sanitizer: DomSanitizer,
         private videoPlayerGlobals: VideoPlayerGlobals,
-        private principal: Principal
+        private principal: Principal,
+        private userExtService: UserExtService
     ) {
     }
 
@@ -154,8 +156,8 @@ export class BandaDetailComponent implements OnInit {
             .subscribe(() => this.bandaComments = this.bandaComments.filter((comment: any) => comment.id !== id))
     }
 
-    addTrackToAPlaylist(tracks: string){
-        this.bandaService.addTrackToAPlaylist(tracks);
+    addTrackToAPlaylist(){
+        this.bandaService.addTrackToAPlaylist().subscribe(tracks => console.log(tracks));
     }
 
     // ngOnDestroy() {
