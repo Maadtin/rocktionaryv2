@@ -430,6 +430,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .fh5co-explore{
     padding-bottom: 40px;
+
 }
 
 .fh5co-project{
@@ -618,6 +619,11 @@ h1, h2, h3, h4, h5, h6 {
         background-size: cover;
         background-position: center center;
         position: relative;
+        p{
+            text-align: center;
+            color: white;
+
+        }
         @media screen and (max-width: $screen-sm){
             width: 100%;
         }

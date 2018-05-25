@@ -24,8 +24,9 @@
                     <ul class="grid">
                         <li (click)="toggleIcon(track.id, $event, track.name)" *ngFor="let track of topTracks.tracks" >
                             <h5>{{track.name}}</h5>
+                            <span class="addIcon" (click)="addTrackToAPlaylist()"><img src="../../../content/images/addIcon.png" alt=""></span>
                             <div class="img-audio-container">
-                                <img [src]="track.album.images[1].url">
+                                <img class="imagen-audio" [src]="track.album.images[1].url">
                                 <i
                                     [ngClass]="{'fa-play': !activePlayer, 'fa-pause': activeButton === track.id }"
                                     class="track-icon-play fa">

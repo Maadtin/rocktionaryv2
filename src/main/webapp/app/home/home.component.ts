@@ -2,13 +2,14 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import * as annyang from 'annyang';
+// import * as annyang from 'annyang';
 import { Account, LoginModalService, Principal } from '../shared';
 
 import { HomeService } from './home.service'
 import {UtilsService} from '../utils.service';
 import {SafeResourceUrl} from '@angular/platform-browser';
 import {WindowService} from "../windowref.service";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
     selector: 'jhi-home',
@@ -59,35 +60,35 @@ export class HomeComponent implements OnInit {
         this.principal.identity().then((account) => {
             this.account = account;
         });
-        this.registerAuthenticationSuccess();
+        // this.registerAuthenticationSuccess();
     }
 
-    toggleRecognition () {
-        if (annyang.isListening()) {
-            annyang.abort();
-            this.isListening = false;
-            return
-        }
+    // toggleRecognition () {
+    //     if (annyang.isListening()) {
+    //         annyang.abort();
+    //         this.isListening = false;
+    //         return
+    //     }
 
 
-        const commands = {
-            'Busca *criteria': criteria => {
-                this.inputSearchText = criteria;
-                this.isLoading = true;
-                this.homeService.getSearchResults({
-                    searchCriteria: this.searchCriteria,
-                    searchQuery: this.inputSearchText
-                }).subscribe( data => this.handleOnSuccess(data),
-                    error => this.handleOnError(error));
-                this.detector.detectChanges();
-            }
-        };
-        annyang.addCommands(commands);
-        annyang.start();
-        annyang.setLanguage('es-ES');
-        annyang.debug(true);
-        this.isListening = true;
-    }
+    //     const commands = {
+    //         'Busca *criteria': criteria => {
+    //             this.inputSearchText = criteria;
+    //             this.isLoading = true;
+    //             this.homeService.getSearchResults({
+    //                 searchCriteria: this.searchCriteria,
+    //                 searchQuery: this.inputSearchText
+    //             }).subscribe( data => this.handleOnSuccess(data),
+    //                 error => this.handleOnError(error));
+    //             this.detector.detectChanges();
+    //         }
+    //     };
+    //     annyang.addCommands(commands);
+    //     annyang.start();
+    //     annyang.setLanguage('es-ES');
+    //     annyang.debug(true);
+    //     this.isListening = true;
+    // }
 
     sanitizeUrl (url: string): SafeResourceUrl {
         return this.utilsService.sanitizeUrl(url);
@@ -157,7 +158,6 @@ export class HomeComponent implements OnInit {
 
     // error handling
     handleOnSuccess (res) {
-        console.log(res);
         this.isLoading = false;
         if (res[this.searchCriteria+'s'].items.length === 0) {
             this.isError = true;
@@ -186,11 +186,51 @@ export class HomeComponent implements OnInit {
                     artist.genres.indexOf('grunge') >= 0 ||
                     artist.genres.indexOf('groove metal') >= 0
                 )
+
+            } else if (this.searchCriteria === 'album'){
+                console.log('Antes ->', res.albums)
+                console.log(this.results = res.albums.items.filter(album =>{
+
+                    return album.artists.some(artist => {
+
+                       let esRock: boolean = false;
+                       let subscription:
+                       ;
+
+                        subscription = this.homeService
+                            .getArtist(artist.href)
+                            .subscribe(artist => {
+                                console.log('Dentro del subscribe ->', artist);
+                                esRock = artist.genres.indexOf('rock') >= 0 ||
+                                    artist.genres.indexOf('metal') >= 0 ||
+                                    artist.genres.indexOf('gothic metal') >= 0 ||
+                                    artist.genres.indexOf('power metal') >= 0 ||
+                                    artist.genres.indexOf('trash metal') >= 0 ||
+                                    artist.genres.indexOf('pop rock') >= 0 ||
+                                    artist.genres.indexOf('alternative rock') >= 0 ||
+                                    artist.genres.indexOf('alternative metal') >= 0 ||
+                                    artist.genres.indexOf('nu metal') >= 0 ||
+                                    artist.genres.indexOf('rap metal') >= 0 ||
+                                    artist.genres.indexOf('punk') >= 0 ||
+                                    artist.genres.indexOf('death metal') >= 0 ||
+                                    artist.genres.indexOf('folk metal') >= 0 ||
+                                    artist.genres.indexOf('grunge') >= 0 ||
+                                    artist.genres.indexOf('groove metal') >= 0;
+                                //return esRock;
+
+
+                            }
+                        )
+                        console.log('Subscription ->', subscription);
+                        return esRock;
+
+                    })
+
+                }));
             } else {
                 this.results = res[this.searchCriteria+'s'].items;
             }
 
-            console.log(this.results);
 
         }
     }

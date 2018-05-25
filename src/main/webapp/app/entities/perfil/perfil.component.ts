@@ -11,7 +11,7 @@ import {PlayList} from "../../models/PlayList";
 import { UserPlaylist } from "../../models/UserPlaylist";
 import {VideoPlayerGlobals} from '../../video-player-globals';
 @Component({
-  selector: 'perfil',
+  selector: 'user',
   templateUrl: './perfil.component.html',
     styleUrls: [
       'perfil.scss'
@@ -59,7 +59,6 @@ export class PerfilComponent implements OnInit {
               (response) => this.load(this.settingsAccount.id));
           this.getUserTracksByPlayList();
           this.getUserPlaylist();
-
       });
   }
 
@@ -94,8 +93,7 @@ export class PerfilComponent implements OnInit {
     getUserTracksByPlayList(){
         this.userExtService.getUserTracksByPlayList().subscribe((list:any) => {
             this.userPlaylist = list.items;
-            // console.log(this.userPlaylist);
-            console.log(this.userPlaylist.get('X-Total-Count'))
+            console.log(this.userPlaylist);
         })
     }
 
