@@ -46,15 +46,22 @@
                 <section *ngIf="showComentarios" class="comentarios">
                 <span class="resumen-label text-white">COMENTARIOS</span>
                 <form (submit)="addComment()" name="addComentForm" class="commentarios__form">
-                    <textarea name="comment" [(ngModel)]="commentText" placeholder="Deja tú comentario..."></textarea>
+                    <textarea style="position: relative;" name="comment" [(ngModel)]="commentText" placeholder="Deja tú comentario...">
+                        <div class="loader-container">
+                            <div class="loader"></div>
+                        </div>
+                    </textarea>
                     <button [disabled]="!commentText" type="submit" class="btn">Enviar</button>
                 </form>
                 <ul *ngIf="bandaComments.length" class="list-unstyled comment-section">
                     <li class="comment" *ngFor="let comment of bandaComments">
-                        <i class="comment-remove fa fa-remove text-white" *ngIf="loggedUser === comment.user.login" (click)="removeComment(comment.id)"></i>
+                        <i class="comment-remove fa fa-remove text-white" *ngIf="loggedUser === comment.user.login" (click)="removeComment($event, comment.id)"></i>
                         <span class="comment-date text-white">{{ comment.fechaComentario | date: 'short' }}</span>
                         <a [routerLink]="['/user', comment.user.login]" class="comment-user m-0 text-white">{{ comment.user.login }}</a>
                         <p class="comment-text m-0 text-white">{{ comment.comentario }}</p>
+                        <div class="loader-container">
+                            <div class="loader"></div>
+                        </div>
                     </li>
                 </ul>
                 <p *ngIf="!bandaComments.length" class="no-comments-yet text-white">

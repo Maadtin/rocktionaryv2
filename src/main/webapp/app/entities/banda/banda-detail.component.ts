@@ -120,18 +120,6 @@ export class BandaDetailComponent implements OnInit {
         });
     }
 
-    // closeYoutubeVideo (e) {
-    //     this.videoPlayerGlobals.closeYoutubeVideo(e);
-    // }
-    // minimizeYoutubeVideo () {
-    //     this.videoPlayerGlobals.minimizeYoutubeVideo()
-    // }
-
-    // sanitizeUrl (url) {
-    //     return this.sanitizer.bypassSecurityTrustUrl(url);
-    // }
-
-
     triggerClass  ($e) {
         Array.from($e.target.parentElement.children).forEach((tab: any) => tab.classList.remove('active'));
         $e.target.classList.add('active');
@@ -150,9 +138,13 @@ export class BandaDetailComponent implements OnInit {
             })
     }
 
-    removeComment(id) {
+    removeComment({ target }, id) {
+        target.parentElement.querySelector('#loader-container').style.display = 'block';
         this.bandaService.removeComment(id)
-            .subscribe(() => this.bandaComments = this.bandaComments.filter((comment: any) => comment.id !== id))
+            .subscribe(() => {
+                this.bandaComments = this.bandaComments.filter((comment: any) => comment.id !== id);
+                target.parentElement.querySelector('#loader-container').style.display = 'none';
+        })
     }
 
     // ngOnDestroy() {

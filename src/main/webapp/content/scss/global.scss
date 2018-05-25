@@ -354,3 +354,26 @@ Social button
     display: block;
 }
 
+
+#loader-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+#loader {
+    border: 5px solid grey;
+    border-radius: 50%;
+    border-top: 5px solid #fff;
+    width: 35px;
+    height: 35px;
+    animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg); }
+}
+
