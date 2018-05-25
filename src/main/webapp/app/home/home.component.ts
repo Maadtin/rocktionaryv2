@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import * as annyang from 'annyang';
+// import * as annyang from 'annyang';
 import { Account, LoginModalService, Principal } from '../shared';
 
 import { HomeService } from './home.service'
@@ -59,35 +59,35 @@ export class HomeComponent implements OnInit {
         this.principal.identity().then((account) => {
             this.account = account;
         });
-        this.registerAuthenticationSuccess();
+        // this.registerAuthenticationSuccess();
     }
 
-    toggleRecognition () {
-        if (annyang.isListening()) {
-            annyang.abort();
-            this.isListening = false;
-            return
-        }
+    // toggleRecognition () {
+    //     if (annyang.isListening()) {
+    //         annyang.abort();
+    //         this.isListening = false;
+    //         return
+    //     }
 
 
-        const commands = {
-            'Busca *criteria': criteria => {
-                this.inputSearchText = criteria;
-                this.isLoading = true;
-                this.homeService.getSearchResults({
-                    searchCriteria: this.searchCriteria,
-                    searchQuery: this.inputSearchText
-                }).subscribe( data => this.handleOnSuccess(data),
-                    error => this.handleOnError(error));
-                this.detector.detectChanges();
-            }
-        };
-        annyang.addCommands(commands);
-        annyang.start();
-        annyang.setLanguage('es-ES');
-        annyang.debug(true);
-        this.isListening = true;
-    }
+    //     const commands = {
+    //         'Busca *criteria': criteria => {
+    //             this.inputSearchText = criteria;
+    //             this.isLoading = true;
+    //             this.homeService.getSearchResults({
+    //                 searchCriteria: this.searchCriteria,
+    //                 searchQuery: this.inputSearchText
+    //             }).subscribe( data => this.handleOnSuccess(data),
+    //                 error => this.handleOnError(error));
+    //             this.detector.detectChanges();
+    //         }
+    //     };
+    //     annyang.addCommands(commands);
+    //     annyang.start();
+    //     annyang.setLanguage('es-ES');
+    //     annyang.debug(true);
+    //     this.isListening = true;
+    // }
 
     sanitizeUrl (url: string): SafeResourceUrl {
         return this.utilsService.sanitizeUrl(url);

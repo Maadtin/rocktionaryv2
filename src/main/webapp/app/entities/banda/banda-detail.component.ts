@@ -53,8 +53,9 @@ export class BandaDetailComponent implements OnInit {
 
             this.bandaService.getTopTracks(params['id'])
                 .subscribe(topTracks => this.topTracks = topTracks)
-
         });
+        //
+        // this.addTrackToAPlaylist();
 
         //this.registerChangeInBandas();
     }
@@ -112,11 +113,9 @@ export class BandaDetailComponent implements OnInit {
     // minimizeYoutubeVideo () {
     //     this.videoPlayerGlobals.minimizeYoutubeVideo()
     // }
-
     // sanitizeUrl (url) {
     //     return this.sanitizer.bypassSecurityTrustUrl(url);
     // }
-
 
     triggerClass  ($e) {
         // angular.element($e.target).siblings().removeClass('active')
@@ -129,11 +128,14 @@ export class BandaDetailComponent implements OnInit {
         // }
     };
 
+    addTrackToAPlaylist(tracks: string){
+        this.bandaService.addTrackToAPlaylist(tracks);
+    }
+
     // ngOnDestroy() {
     //     this.subscription.unsubscribe();
     //     this.eventManager.destroy(this.eventSubscriber);
     // }
-
     // registerChangeInBandas() {
     //     this.eventSubscriber = this.eventManager.subscribe(
     //         'bandaListModification',

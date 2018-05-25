@@ -20,6 +20,14 @@ export class BandaService {
 
     constructor(private http: HttpClient, private windowRef: WindowService, private dateUtils: JhiDateUtils) { }
 
+
+
+    addTrackToAPlaylist(track: string){
+        return this.http.post(`https://api.spotify.com/v1/users/rustyjonas/playlists/65a27LRmsANxoCl1LvtcXj/tracks?uris=${track}`, {
+            headers: {Authorization: this.token}
+        })
+    }
+
     getBanda (id: number) {
         const headers = { 'Authorization': this.token };
         return this.http.get(`https://api.spotify.com/v1/artists/${id}`, {headers: headers})

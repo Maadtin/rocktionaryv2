@@ -205,9 +205,9 @@
         li {
             margin-bottom: 15px;
             border: thin solid rgba(#fff, .4);
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            //display: flex;
+            //flex-wrap: wrap;
+            //justify-content: center;
             border-radius: 2px;
             transition: all ease-in 0.2s;
             cursor: pointer;
@@ -256,17 +256,26 @@
         width: 100%
     }
 
-    img {
-        transition: all cubic-bezier(0.28, 0.76, 0, 1.9) 0.2s;
-        height: 160px;
-        object-fit: cover;
-    }
 
+
+}
+
+.imagen-audio {
+    transition: all cubic-bezier(0.28, 0.76, 0, 1.9) 0.2s;
+    height: 160px;
+    object-fit: cover;
 }
 
 .resumen-label {
     padding: 10px 0;
     display: block;
+}
+.addIcon{
+    background: none;
+}
+
+.addIcon img{
+    max-width: 20%;
 }
 
 //
