@@ -6,6 +6,7 @@ import { SERVER_API_URL } from '../../app.constants';
 import { UserExt } from './user-ext.model';
 import { createRequestOption } from '../../shared';
 import {WindowService} from "../../windowref.service";
+import {YoutubeModel} from "../../models/Youtube";
 
 export type EntityResponseType = HttpResponse<UserExt>;
 
@@ -23,6 +24,11 @@ export class UserExtService {
     )
     {
         this.spotifyToken = this.nativeWindow.getNativeWindow().spotifyToken;
+    }
+
+
+    getVideoTrack (bandaName: string,trackName: string): Observable<YoutubeModel> {
+        return this.http.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${bandaName}, ${trackName}&maxResults=1&key=AIzaSyBh4jKVZPAs4VFdpr2RAdPa_3bHFVRjQXQ&type=video`)
     }
 
 
