@@ -22,12 +22,19 @@
         {
             "fieldName": "fechaComentario",
             "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "bandaName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20180203225144",
-    "entityTableName": "comentar_banda",
     "dto": "no",
-    "pagination": "no",
     "service": "no",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "comentar_banda",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
 }

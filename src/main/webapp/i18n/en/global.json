@@ -1,9 +1,10 @@
 {
     "global": {
-        "title": "Rocktionary",
+        "title": "RockTionary",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "Home",
+            "search": "Search",
             "team": "Team",
             "profile": "Profile",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
@@ -146,7 +147,7 @@
         "idexists": "A new {{ entityName }} cannot already have an ID"
     },
     "footer":{
-        "siguenos": "Follow us:",
-        "soporte": "Encourage by:"
+        "siguenos": "Can't get enough and you know it! ;) :",
+        "soporte": "Encourage by..."
     }
 }

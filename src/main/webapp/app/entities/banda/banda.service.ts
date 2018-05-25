@@ -6,7 +6,7 @@ import { SERVER_API_URL } from '../../app.constants';
 import { JhiDateUtils } from 'ng-jhipster';
 
 import { Banda } from './banda.model';
-import { createRequestOption } from '../../shared';
+import {createRequestOption, User} from '../../shared';
 import {WindowService} from '../../windowref.service';
 import {YoutubeModel} from '../../models/Youtube';
 
@@ -46,6 +46,28 @@ export class BandaService {
         return this.http.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${bandaName}, ${trackName}&maxResults=1&key=AIzaSyBh4jKVZPAs4VFdpr2RAdPa_3bHFVRjQXQ&type=video`)
     }
 
+
+    updateRating (rating, bandaName) {
+        return this.http.post(`${this.resourceUrl}/update-rating`, { rating, bandaName })
+    }
+
+    getRating () {
+        return this.http.get(`${this.resourceUrl}/get-rating`)
+    }
+
+
+    addComment ({ comentario, bandaName }) {
+        return this.http.post(`/api/comentar-banda`, { comentario, bandaName })
+    }
+
+    removeComment (id) {
+        return this.http.delete(`/api/delete-comment/${id}`)
+    }
+
+    getBandaComments(bandaName) {
+        return this.http.get(`/api/get-banda-comments/${bandaName}`)
+    }
+
     create(banda: Banda): Observable<EntityResponseType> {
         const copy = this.convert(banda);
         return this.http.post<Banda>(this.resourceUrl, copy, { observe: 'response' })
@@ -72,6 +94,8 @@ export class BandaService {
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }
+
+
 
     private convertResponse(res: EntityResponseType): EntityResponseType {
         const body: Banda = this.convertItemFromServer(res.body);
@@ -110,4 +134,6 @@ export class BandaService {
             .convertLocalDateToServer(banda.anosactivo);
         return copy;
     }
+
+
 }

@@ -3,7 +3,10 @@ package com.rocktionary.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.rocktionary.domain.ComentarBanda;
 
+import com.rocktionary.domain.User;
 import com.rocktionary.repository.ComentarBandaRepository;
+import com.rocktionary.repository.UserRepository;
+import com.rocktionary.security.SecurityUtils;
 import com.rocktionary.web.rest.errors.BadRequestAlertException;
 import com.rocktionary.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -12,9 +15,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +35,11 @@ public class ComentarBandaResource {
     private static final String ENTITY_NAME = "comentarBanda";
 
     private final ComentarBandaRepository comentarBandaRepository;
+    private final UserRepository userRepository;
 
-    public ComentarBandaResource(ComentarBandaRepository comentarBandaRepository) {
+    public ComentarBandaResource(ComentarBandaRepository comentarBandaRepository, UserRepository userRepository) {
         this.comentarBandaRepository = comentarBandaRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -44,7 +51,7 @@ public class ComentarBandaResource {
      */
     @PostMapping("/comentar-bandas")
     @Timed
-    public ResponseEntity<ComentarBanda> createComentarBanda(@RequestBody ComentarBanda comentarBanda) throws URISyntaxException {
+    public ResponseEntity<ComentarBanda> createComentarBanda(@Valid @RequestBody ComentarBanda comentarBanda) throws URISyntaxException {
         log.debug("REST request to save ComentarBanda : {}", comentarBanda);
         if (comentarBanda.getId() != null) {
             throw new BadRequestAlertException("A new comentarBanda cannot already have an ID", ENTITY_NAME, "idexists");
@@ -53,6 +60,26 @@ public class ComentarBandaResource {
         return ResponseEntity.created(new URI("/api/comentar-bandas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/comentar-banda")
+    public ComentarBanda comentarBanda (@RequestBody ComentarBandaDTO comentarBandaDTO) {
+
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get();
+        ComentarBanda comentarBanda = new ComentarBanda(user, comentarBandaDTO.getComentario(), comentarBandaDTO.getBandaName(), ZonedDateTime.now());
+
+        return comentarBandaRepository.save(comentarBanda);
+    }
+
+    @GetMapping("/get-banda-comments/{bandaName}")
+    public List<ComentarBanda> getBandaComments (@PathVariable String bandaName) {
+        return comentarBandaRepository.findByBandaName(bandaName);
+    }
+
+
+    @DeleteMapping("/delete-comment/{id}")
+    public void deleteComment (@PathVariable Long id) {
+        comentarBandaRepository.delete(id);
     }
 
     /**
@@ -66,7 +93,7 @@ public class ComentarBandaResource {
      */
     @PutMapping("/comentar-bandas")
     @Timed
-    public ResponseEntity<ComentarBanda> updateComentarBanda(@RequestBody ComentarBanda comentarBanda) throws URISyntaxException {
+    public ResponseEntity<ComentarBanda> updateComentarBanda(@Valid @RequestBody ComentarBanda comentarBanda) throws URISyntaxException {
         log.debug("REST request to update ComentarBanda : {}", comentarBanda);
         if (comentarBanda.getId() == null) {
             return createComentarBanda(comentarBanda);
@@ -102,6 +129,7 @@ public class ComentarBandaResource {
         ComentarBanda comentarBanda = comentarBandaRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(comentarBanda));
     }
+
 
     /**
      * DELETE  /comentar-bandas/:id : delete the "id" comentarBanda.

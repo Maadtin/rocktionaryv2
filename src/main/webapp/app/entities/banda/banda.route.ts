@@ -5,6 +5,7 @@ import { BandaComponent } from './banda.component';
 import { BandaDetailComponent } from './banda-detail.component';
 import { BandaPopupComponent } from './banda-dialog.component';
 import { BandaDeletePopupComponent } from './banda-delete-dialog.component';
+import {ComentariosComponent} from "../../entitites/comentarios/comentarios.component";
 
 export const bandaRoute: Routes = [
     {
@@ -23,6 +24,10 @@ export const bandaRoute: Routes = [
             pageTitle: 'rocktionaryApp.banda.home.title'
         },
         canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'banda/:id/comentarios',
+        component: ComentariosComponent
     }
 ];
 

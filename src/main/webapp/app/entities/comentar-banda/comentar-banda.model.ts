@@ -5,6 +5,7 @@ export class ComentarBanda implements BaseEntity {
         public id?: number,
         public comentario?: string,
         public fechaComentario?: any,
+        public bandaName?: string,
         public user?: User,
         public banda?: BaseEntity,
     ) {

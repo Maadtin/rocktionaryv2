@@ -2,6 +2,7 @@ package com.rocktionary.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -26,11 +27,25 @@ public class PuntuacionBanda implements Serializable {
     @Column(name = "fecha_puntuacion")
     private ZonedDateTime fechaPuntuacion;
 
+    @NotNull
+    @Column(name = "banda_name", nullable = false)
+    private String banda_name;
+
     @ManyToOne
     private User user;
 
     @ManyToOne
     private Banda banda;
+
+
+    public PuntuacionBanda () {}
+
+    public PuntuacionBanda (User user, Integer puntuacion, ZonedDateTime horaPuntuacion, String bandaName) {
+        this.user = user;
+        this.valoracion = puntuacion;
+        this.fechaPuntuacion = horaPuntuacion;
+        this.banda_name = bandaName;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -65,6 +80,19 @@ public class PuntuacionBanda implements Serializable {
 
     public void setFechaPuntuacion(ZonedDateTime fechaPuntuacion) {
         this.fechaPuntuacion = fechaPuntuacion;
+    }
+
+    public String getBanda_name() {
+        return banda_name;
+    }
+
+    public PuntuacionBanda banda_name(String banda_name) {
+        this.banda_name = banda_name;
+        return this;
+    }
+
+    public void setBanda_name(String banda_name) {
+        this.banda_name = banda_name;
     }
 
     public User getUser() {
@@ -120,6 +148,7 @@ public class PuntuacionBanda implements Serializable {
             "id=" + getId() +
             ", valoracion=" + getValoracion() +
             ", fechaPuntuacion='" + getFechaPuntuacion() + "'" +
+            ", banda_name='" + getBanda_name() + "'" +
             "}";
     }
 }

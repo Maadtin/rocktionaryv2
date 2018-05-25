@@ -25,7 +25,7 @@
         height: 100%;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
     }
 
 
@@ -266,6 +266,27 @@
     object-fit: cover;
 }
 
+.banda_perfil{
+    width: 400px;
+    position: relative;
+    margin-top: 10em;
+}
+.banda_perfil img:first-child{
+    width: 490px;
+    z-index: 1;
+    position: relative;
+}
+
+.banda_perfil img:last-child{
+    position: absolute;
+    height: 240px;
+    border-radius: 50%;
+    width: 240px;
+    left: 31%;
+    top: 15%;
+    object-fit: cover;
+}
+
 .resumen-label {
     padding: 10px 0;
     display: block;
@@ -280,6 +301,49 @@
 
 //
 .comentarios {
+
+
+    .comment-section {
+        margin-top: 10px;
+    }
+    .comment {
+        border: thin solid rgba(#fff, 0.3);
+        border-radius: 2px;
+        width: 100%;
+        position: relative;
+        padding: 10px;
+        margin-bottom: 5px;
+        transition: all ease-in 0.2s;
+
+        &:hover {
+            border-color: #fff;
+        }
+
+        &-remove {
+            cursor: pointer;
+        }
+
+        &-date {
+            font-size: 14px;
+            position: absolute;
+            top: 3px;
+            right: 5px;
+        }
+
+        &-user {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        &-text {
+            font-size: 15px;
+        }
+    }
+
+    .no-comments-yet {
+        text-align: center;
+        margin-top: 15px;
+    }
 
     form {
 

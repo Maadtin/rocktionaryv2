@@ -18,6 +18,7 @@
             },
             "valoracion": "Valoracion",
             "fechaPuntuacion": "Fecha Puntuacion",
+            "banda_name": "Banda Name",
             "user": "User",
             "banda": "Banda"
         }

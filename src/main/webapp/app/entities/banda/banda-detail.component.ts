@@ -9,6 +9,7 @@ import { BandaService } from './banda.service';
 import {UtilsService} from '../../utils.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {VideoPlayerGlobals} from '../../video-player-globals';
+import {Principal} from "../../shared";
 
 @Component({
     selector: 'jhi-banda-detail',
@@ -26,6 +27,10 @@ export class BandaDetailComponent implements OnInit {
     public showTruncatedText: boolean;
     public activePlayer: boolean;
     private activeButton: number;
+    public showComentarios: boolean;
+    public commentText: null;
+    public bandaComments: string[];
+    public loggedUser: string;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -34,7 +39,8 @@ export class BandaDetailComponent implements OnInit {
         private route: ActivatedRoute,
         private utils: UtilsService,
         private sanitizer: DomSanitizer,
-        private videoPlayerGlobals: VideoPlayerGlobals
+        private videoPlayerGlobals: VideoPlayerGlobals,
+        private principal: Principal
     ) {
     }
 
@@ -42,13 +48,20 @@ export class BandaDetailComponent implements OnInit {
         this.activePlayer = false;
         this.showTruncatedText = true;
         this.showGeneral = true;
+        this.showComentarios = false;
+
+        this.principal.identity()
+            .then(user => this.loggedUser = user.login);
 
         this.subscription = this.route.params.subscribe(params => {
             this.bandaService.getBanda(params['id'])
                 .subscribe(banda => {
                     this.banda = banda;
                     this.bandaService.getBandaBio(this.banda.name)
-                        .subscribe(info => this.bandaBio = info)
+                        .subscribe(info => this.bandaBio = info);
+
+                    this.bandaService.getBandaComments (this.banda.name)
+                        .subscribe((comments: string[]) => this.bandaComments = comments)
                 });
 
             this.bandaService.getTopTracks(params['id'])
@@ -56,6 +69,7 @@ export class BandaDetailComponent implements OnInit {
         });
         //
         // this.addTrackToAPlaylist();
+
 
         //this.registerChangeInBandas();
     }
@@ -118,15 +132,27 @@ export class BandaDetailComponent implements OnInit {
     // }
 
     triggerClass  ($e) {
-        // angular.element($e.target).siblings().removeClass('active')
-        // angular.element($e.target).addClass('active');
-        //
-        // switch ($e.target.textContent) {
-        //     case 'General': vm.showGeneral = true;vm.showComentarios=false;vm.showSeguidores=false;break;
-        //     case 'Seguidores': vm.showSeguidores = true;vm.showGeneral=false;vm.showComentarios=false;break;
-        //     case 'Comentarios': vm.showComentarios = true;vm.showGeneral=false;vm.showSeguidores=false;break;
-        // }
+        Array.from($e.target.parentElement.children).forEach((tab: any) => tab.classList.remove('active'));
+        $e.target.classList.add('active');
+        switch ($e.target.dataset.tab) {
+            case 'general': this.showComentarios = false; break;
+            // case 'Seguidores': vm.showSeguidores = true;vm.showGeneral=false;vm.showComentarios=false;break;
+            case 'comentarios': this.showComentarios = true; break;
+        }
     };
+
+    addComment () {
+        this.bandaService.addComment({ comentario: this.commentText, bandaName: this.banda.name })
+            .subscribe((newComment: string) => {
+                this.bandaComments.push(newComment);
+                this.commentText = null;
+            })
+    }
+
+    removeComment(id) {
+        this.bandaService.removeComment(id)
+            .subscribe(() => this.bandaComments = this.bandaComments.filter((comment: any) => comment.id !== id))
+    }
 
     addTrackToAPlaylist(tracks: string){
         this.bandaService.addTrackToAPlaylist(tracks);
@@ -142,4 +168,5 @@ export class BandaDetailComponent implements OnInit {
     //         (response) => this.load(this.banda.id)
     //     );
     // }
+
 }

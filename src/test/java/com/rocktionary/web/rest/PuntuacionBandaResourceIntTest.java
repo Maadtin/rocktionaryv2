@@ -49,6 +49,9 @@ public class PuntuacionBandaResourceIntTest {
     private static final ZonedDateTime DEFAULT_FECHA_PUNTUACION = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_FECHA_PUNTUACION = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
+    private static final String DEFAULT_BANDA_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_BANDA_NAME = "BBBBBBBBBB";
+
     @Autowired
     private PuntuacionBandaRepository puntuacionBandaRepository;
 
@@ -88,7 +91,8 @@ public class PuntuacionBandaResourceIntTest {
     public static PuntuacionBanda createEntity(EntityManager em) {
         PuntuacionBanda puntuacionBanda = new PuntuacionBanda()
             .valoracion(DEFAULT_VALORACION)
-            .fechaPuntuacion(DEFAULT_FECHA_PUNTUACION);
+            .fechaPuntuacion(DEFAULT_FECHA_PUNTUACION)
+            .banda_name(DEFAULT_BANDA_NAME);
         return puntuacionBanda;
     }
 
@@ -114,6 +118,7 @@ public class PuntuacionBandaResourceIntTest {
         PuntuacionBanda testPuntuacionBanda = puntuacionBandaList.get(puntuacionBandaList.size() - 1);
         assertThat(testPuntuacionBanda.getValoracion()).isEqualTo(DEFAULT_VALORACION);
         assertThat(testPuntuacionBanda.getFechaPuntuacion()).isEqualTo(DEFAULT_FECHA_PUNTUACION);
+        assertThat(testPuntuacionBanda.getBanda_name()).isEqualTo(DEFAULT_BANDA_NAME);
     }
 
     @Test
@@ -137,6 +142,24 @@ public class PuntuacionBandaResourceIntTest {
 
     @Test
     @Transactional
+    public void checkBanda_nameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = puntuacionBandaRepository.findAll().size();
+        // set the field null
+        puntuacionBanda.setBanda_name(null);
+
+        // Create the PuntuacionBanda, which fails.
+
+        restPuntuacionBandaMockMvc.perform(post("/api/puntuacion-bandas")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(puntuacionBanda)))
+            .andExpect(status().isBadRequest());
+
+        List<PuntuacionBanda> puntuacionBandaList = puntuacionBandaRepository.findAll();
+        assertThat(puntuacionBandaList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPuntuacionBandas() throws Exception {
         // Initialize the database
         puntuacionBandaRepository.saveAndFlush(puntuacionBanda);
@@ -147,7 +170,8 @@ public class PuntuacionBandaResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(puntuacionBanda.getId().intValue())))
             .andExpect(jsonPath("$.[*].valoracion").value(hasItem(DEFAULT_VALORACION)))
-            .andExpect(jsonPath("$.[*].fechaPuntuacion").value(hasItem(sameInstant(DEFAULT_FECHA_PUNTUACION))));
+            .andExpect(jsonPath("$.[*].fechaPuntuacion").value(hasItem(sameInstant(DEFAULT_FECHA_PUNTUACION))))
+            .andExpect(jsonPath("$.[*].banda_name").value(hasItem(DEFAULT_BANDA_NAME.toString())));
     }
 
     @Test
@@ -162,7 +186,8 @@ public class PuntuacionBandaResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(puntuacionBanda.getId().intValue()))
             .andExpect(jsonPath("$.valoracion").value(DEFAULT_VALORACION))
-            .andExpect(jsonPath("$.fechaPuntuacion").value(sameInstant(DEFAULT_FECHA_PUNTUACION)));
+            .andExpect(jsonPath("$.fechaPuntuacion").value(sameInstant(DEFAULT_FECHA_PUNTUACION)))
+            .andExpect(jsonPath("$.banda_name").value(DEFAULT_BANDA_NAME.toString()));
     }
 
     @Test
@@ -186,7 +211,8 @@ public class PuntuacionBandaResourceIntTest {
         em.detach(updatedPuntuacionBanda);
         updatedPuntuacionBanda
             .valoracion(UPDATED_VALORACION)
-            .fechaPuntuacion(UPDATED_FECHA_PUNTUACION);
+            .fechaPuntuacion(UPDATED_FECHA_PUNTUACION)
+            .banda_name(UPDATED_BANDA_NAME);
 
         restPuntuacionBandaMockMvc.perform(put("/api/puntuacion-bandas")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -199,6 +225,7 @@ public class PuntuacionBandaResourceIntTest {
         PuntuacionBanda testPuntuacionBanda = puntuacionBandaList.get(puntuacionBandaList.size() - 1);
         assertThat(testPuntuacionBanda.getValoracion()).isEqualTo(UPDATED_VALORACION);
         assertThat(testPuntuacionBanda.getFechaPuntuacion()).isEqualTo(UPDATED_FECHA_PUNTUACION);
+        assertThat(testPuntuacionBanda.getBanda_name()).isEqualTo(UPDATED_BANDA_NAME);
     }
 
     @Test

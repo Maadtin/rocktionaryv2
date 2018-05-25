@@ -19,6 +19,7 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="rocktionaryApp.comentarBanda.comentario">Comentario</span></th>
             <th><span jhiTranslate="rocktionaryApp.comentarBanda.fechaComentario">Fecha Comentario</span></th>
+            <th><span jhiTranslate="rocktionaryApp.comentarBanda.bandaName">Banda Name</span></th>
             <th><span jhiTranslate="rocktionaryApp.comentarBanda.user">User</span></th>
             <th><span jhiTranslate="rocktionaryApp.comentarBanda.banda">Banda</span></th>
             <th></th>
@@ -29,6 +30,7 @@
                 <td><a [routerLink]="['../comentar-banda', comentarBanda.id ]">{{comentarBanda.id}}</a></td>
                 <td>{{comentarBanda.comentario}}</td>
                 <td>{{comentarBanda.fechaComentario | date:'medium'}}</td>
+                <td>{{comentarBanda.bandaName}}</td>
                 <td>
                     {{comentarBanda.user?.login}}
                 </td>

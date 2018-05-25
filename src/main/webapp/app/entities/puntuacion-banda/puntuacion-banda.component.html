@@ -19,6 +19,7 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="rocktionaryApp.puntuacionBanda.valoracion">Valoracion</span></th>
             <th><span jhiTranslate="rocktionaryApp.puntuacionBanda.fechaPuntuacion">Fecha Puntuacion</span></th>
+            <th><span jhiTranslate="rocktionaryApp.puntuacionBanda.banda_name">Banda Name</span></th>
             <th><span jhiTranslate="rocktionaryApp.puntuacionBanda.user">User</span></th>
             <th><span jhiTranslate="rocktionaryApp.puntuacionBanda.banda">Banda</span></th>
             <th></th>
@@ -29,6 +30,7 @@
                 <td><a [routerLink]="['../puntuacion-banda', puntuacionBanda.id ]">{{puntuacionBanda.id}}</a></td>
                 <td>{{puntuacionBanda.valoracion}}</td>
                 <td>{{puntuacionBanda.fechaPuntuacion | date:'medium'}}</td>
+                <td>{{puntuacionBanda.banda_name}}</td>
                 <td>
                     {{puntuacionBanda.user?.login}}
                 </td>

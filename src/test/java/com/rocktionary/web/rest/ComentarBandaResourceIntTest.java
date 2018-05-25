@@ -4,8 +4,10 @@ import com.rocktionary.RocktionaryApp;
 
 import com.rocktionary.domain.ComentarBanda;
 import com.rocktionary.repository.ComentarBandaRepository;
+import com.rocktionary.repository.UserRepository;
 import com.rocktionary.web.rest.errors.ExceptionTranslator;
 
+import org.checkerframework.checker.units.qual.A;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,8 +51,14 @@ public class ComentarBandaResourceIntTest {
     private static final ZonedDateTime DEFAULT_FECHA_COMENTARIO = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_FECHA_COMENTARIO = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
+    private static final String DEFAULT_BANDA_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_BANDA_NAME = "BBBBBBBBBB";
+
     @Autowired
     private ComentarBandaRepository comentarBandaRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -71,7 +79,7 @@ public class ComentarBandaResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ComentarBandaResource comentarBandaResource = new ComentarBandaResource(comentarBandaRepository);
+        final ComentarBandaResource comentarBandaResource = new ComentarBandaResource(comentarBandaRepository, userRepository);
         this.restComentarBandaMockMvc = MockMvcBuilders.standaloneSetup(comentarBandaResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -88,7 +96,8 @@ public class ComentarBandaResourceIntTest {
     public static ComentarBanda createEntity(EntityManager em) {
         ComentarBanda comentarBanda = new ComentarBanda()
             .comentario(DEFAULT_COMENTARIO)
-            .fechaComentario(DEFAULT_FECHA_COMENTARIO);
+            .fechaComentario(DEFAULT_FECHA_COMENTARIO)
+            .bandaName(DEFAULT_BANDA_NAME);
         return comentarBanda;
     }
 
@@ -114,6 +123,7 @@ public class ComentarBandaResourceIntTest {
         ComentarBanda testComentarBanda = comentarBandaList.get(comentarBandaList.size() - 1);
         assertThat(testComentarBanda.getComentario()).isEqualTo(DEFAULT_COMENTARIO);
         assertThat(testComentarBanda.getFechaComentario()).isEqualTo(DEFAULT_FECHA_COMENTARIO);
+        assertThat(testComentarBanda.getBandaName()).isEqualTo(DEFAULT_BANDA_NAME);
     }
 
     @Test
@@ -137,6 +147,24 @@ public class ComentarBandaResourceIntTest {
 
     @Test
     @Transactional
+    public void checkBandaNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = comentarBandaRepository.findAll().size();
+        // set the field null
+        comentarBanda.setBandaName(null);
+
+        // Create the ComentarBanda, which fails.
+
+        restComentarBandaMockMvc.perform(post("/api/comentar-bandas")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(comentarBanda)))
+            .andExpect(status().isBadRequest());
+
+        List<ComentarBanda> comentarBandaList = comentarBandaRepository.findAll();
+        assertThat(comentarBandaList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllComentarBandas() throws Exception {
         // Initialize the database
         comentarBandaRepository.saveAndFlush(comentarBanda);
@@ -147,7 +175,8 @@ public class ComentarBandaResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(comentarBanda.getId().intValue())))
             .andExpect(jsonPath("$.[*].comentario").value(hasItem(DEFAULT_COMENTARIO.toString())))
-            .andExpect(jsonPath("$.[*].fechaComentario").value(hasItem(sameInstant(DEFAULT_FECHA_COMENTARIO))));
+            .andExpect(jsonPath("$.[*].fechaComentario").value(hasItem(sameInstant(DEFAULT_FECHA_COMENTARIO))))
+            .andExpect(jsonPath("$.[*].bandaName").value(hasItem(DEFAULT_BANDA_NAME.toString())));
     }
 
     @Test
@@ -162,7 +191,8 @@ public class ComentarBandaResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(comentarBanda.getId().intValue()))
             .andExpect(jsonPath("$.comentario").value(DEFAULT_COMENTARIO.toString()))
-            .andExpect(jsonPath("$.fechaComentario").value(sameInstant(DEFAULT_FECHA_COMENTARIO)));
+            .andExpect(jsonPath("$.fechaComentario").value(sameInstant(DEFAULT_FECHA_COMENTARIO)))
+            .andExpect(jsonPath("$.bandaName").value(DEFAULT_BANDA_NAME.toString()));
     }
 
     @Test
@@ -186,7 +216,8 @@ public class ComentarBandaResourceIntTest {
         em.detach(updatedComentarBanda);
         updatedComentarBanda
             .comentario(UPDATED_COMENTARIO)
-            .fechaComentario(UPDATED_FECHA_COMENTARIO);
+            .fechaComentario(UPDATED_FECHA_COMENTARIO)
+            .bandaName(UPDATED_BANDA_NAME);
 
         restComentarBandaMockMvc.perform(put("/api/comentar-bandas")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -199,6 +230,7 @@ public class ComentarBandaResourceIntTest {
         ComentarBanda testComentarBanda = comentarBandaList.get(comentarBandaList.size() - 1);
         assertThat(testComentarBanda.getComentario()).isEqualTo(UPDATED_COMENTARIO);
         assertThat(testComentarBanda.getFechaComentario()).isEqualTo(UPDATED_FECHA_COMENTARIO);
+        assertThat(testComentarBanda.getBandaName()).isEqualTo(UPDATED_BANDA_NAME);
     }
 
     @Test

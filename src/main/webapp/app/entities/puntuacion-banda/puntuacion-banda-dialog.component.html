@@ -24,6 +24,17 @@
                 />
             </div>
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rocktionaryApp.puntuacionBanda.banda_name" for="field_banda_name">Banda Name</label>
+            <input type="text" class="form-control" name="banda_name" id="field_banda_name"
+                [(ngModel)]="puntuacionBanda.banda_name" required/>
+            <div [hidden]="!(editForm.controls.banda_name?.dirty && editForm.controls.banda_name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.banda_name?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rocktionaryApp.puntuacionBanda.user" for="field_user">User</label>

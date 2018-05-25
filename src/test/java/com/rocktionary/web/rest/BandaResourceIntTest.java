@@ -4,6 +4,8 @@ import com.rocktionary.RocktionaryApp;
 
 import com.rocktionary.domain.Banda;
 import com.rocktionary.repository.BandaRepository;
+import com.rocktionary.repository.PuntuacionBandaRepository;
+import com.rocktionary.repository.UserRepository;
 import com.rocktionary.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -84,6 +86,13 @@ public class BandaResourceIntTest {
     @Autowired
     private BandaRepository bandaRepository;
 
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PuntuacionBandaRepository puntuacionBandaRepository;
+
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
@@ -103,7 +112,7 @@ public class BandaResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final BandaResource bandaResource = new BandaResource(bandaRepository);
+        final BandaResource bandaResource = new BandaResource(bandaRepository, userRepository, puntuacionBandaRepository);
         this.restBandaMockMvc = MockMvcBuilders.standaloneSetup(bandaResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
