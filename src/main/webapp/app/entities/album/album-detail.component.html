@@ -39,16 +39,29 @@
                     <!--</div>-->
                     <section class="album-canciones">
                         <h3>Canciones de {{album.name}}</h3>
+
+                        <!--<ul class="grid">-->
+                            <!--<li (click)="toggleIcon(track.id, $event, track.name)" *ngFor="let track of topTracks.tracks" >-->
+                                <!--<h5>{{track.name}}</h5>-->
+                                <!--<div class="img-audio-container">-->
+                                    <!--<img [src]="track.album.images[1].url">-->
+                                    <!--<i-->
+                                        <!--[ngClass]="{'fa-play': !activePlayer, 'fa-pause': activeButton === track.id }"-->
+                                        <!--class="track-icon-play fa">-->
+                                    <!--</i>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                        <!--</ul>-->
                         <ul>
                             <li *ngFor="let album of albumTracks.items">
-                                <h5>{{album.name}} {{album.explicit ? '(Explicita)' : ''}}</h5>
-                                <span>{{parseMillis(album.duration_ms)}}</span>
-                                <div class="album-cancion-container">
-                                    <audio controls>
-                                        <source [src]="sanitizeUrl(album.preview_url)">
-                                    </audio>
-                                </div>
-                            </li>
+                            <h5>{{album.name}} {{album.explicit ? '(Explicita)' : ''}}</h5>
+                            <span>{{parseMillis(album.duration_ms)}}</span>
+                            <div class="album-cancion-container">
+                                <audio controls>
+                                    <source [src]="sanitizeUrl(album.preview_url)">
+                                </audio>
+                            </div>
+                        </li>
                         </ul>
                     </section>
                 </div>
