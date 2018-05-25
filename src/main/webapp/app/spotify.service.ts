@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
+import {LocalStorageService} from "ngx-webstorage";
 
 @Injectable()
 export class SpotifyService {
 
 
-  constructor() { }
+  constructor(
+      private localStorage: LocalStorageService,
+
+
+  ) { }
 
   getToken (): String {
-      return localStorage.getItem('spotifyToken');
+      return this.localStorage.retrieve('spotifyToken');
   }
 
 

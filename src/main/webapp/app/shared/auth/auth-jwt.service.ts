@@ -13,7 +13,6 @@ export class AuthServerProvider {
     ) {}
 
     getToken() {
-
         return this.$localStorage.retrieve('authenticationToken') || this.$sessionStorage.retrieve('authenticationToken');
     }
 

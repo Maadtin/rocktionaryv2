@@ -28,7 +28,7 @@ export class HomeService {
           .get(`https://api.spotify.com/v1/search/?q=${params.searchQuery}&type=${params.searchCriteria}`, {headers: headers})
   }
 
-    getArtist (urlArtist: string): Promise<any> {
+    getArtist (urlArtist: string): Observable<any> {
         const headers = {
             'Authorization':
                 this.windowRef.getNativeWindow().spotifyToken === undefined
@@ -37,7 +37,7 @@ export class HomeService {
         };
 
         return this.http
-            .get(urlArtist, {headers: headers}).toPromise();
+            .get(urlArtist, {headers: headers});
     }
 
 

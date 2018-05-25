@@ -194,8 +194,7 @@ export class HomeComponent implements OnInit {
                     return album.artists.some(artist => {
 
                        let esRock: boolean = false;
-                       let subscription:
-                       ;
+                       let subscription;
 
                         subscription = this.homeService
                             .getArtist(artist.href)

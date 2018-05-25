@@ -9,6 +9,7 @@ import { Banda } from './banda.model';
 import {createRequestOption, User} from '../../shared';
 import {WindowService} from '../../windowref.service';
 import {YoutubeModel} from '../../models/Youtube';
+import {SpotifyService} from "../../spotify.service";
 
 export type EntityResponseType = HttpResponse<Banda>;
 
@@ -16,15 +17,19 @@ export type EntityResponseType = HttpResponse<Banda>;
 export class BandaService {
 
     private resourceUrl =  SERVER_API_URL + 'api/bandas';
-    private token = this.windowRef.getNativeWindow().spotifyToken || 'Bearer eqwe';
+    private token = this.spotifyService.getToken();
 
-    constructor(private http: HttpClient, private windowRef: WindowService, private dateUtils: JhiDateUtils) { }
+    constructor(
+        private http: HttpClient,
+        private dateUtils: JhiDateUtils,
+        private spotifyService: SpotifyService
+    ) { }
 
     addTrackToAPlaylist(){
-        console.log(this.token)
+        const headers = {Authorization:this.token};
 
         return this.http.post(`https://api.spotify.com/v1/users/rustyjonas/playlists/65a27LRmsANxoCl1LvtcXj/tracks`, {
-            headers: {Authorization: this.token}
+            headers: headers
         })
     }
 
