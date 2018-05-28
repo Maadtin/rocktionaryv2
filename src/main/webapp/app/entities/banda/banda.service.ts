@@ -18,12 +18,17 @@ export class BandaService {
 
     private resourceUrl =  SERVER_API_URL + 'api/bandas';
     private token = this.spotifyService.getToken();
+    private headers: any;
 
     constructor(
         private http: HttpClient,
         private dateUtils: JhiDateUtils,
         private spotifyService: SpotifyService
-    ) { }
+    ) {
+
+        this.headers = { Authorization: this.token }
+
+    }
 
     addTrackToAPlaylist(){
         const headers = {Authorization:this.token};
@@ -36,7 +41,7 @@ export class BandaService {
 
     getBanda (id: number) {
         const headers = { 'Authorization': this.token };
-        return this.http.get(`https://api.spotify.com/v1/artists/${id}`, {headers: headers})
+        return this.http.get(`https://api.spotify.com/v1/artists/${id}`, {headers: this.headers})
     }
 
     getBandaBio (bandaNombre: string) {
@@ -45,7 +50,7 @@ export class BandaService {
 
     getTopTracks (id: number) {
         const headers = { 'Authorization': this.token };
-        return this.http.get(`https://api.spotify.com/v1/artists/${id}/top-tracks?country=ES`, {headers: headers})
+        return this.http.get(`https://api.spotify.com/v1/artists/${id}/top-tracks?country=ES`, {headers: this.headers})
     }
 
     getVideoTrack (bandaName: string,trackName: string): Observable<YoutubeModel> {

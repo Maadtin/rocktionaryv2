@@ -5,7 +5,7 @@ import {UserRouteAccessService} from "../../shared/auth/user-route-access-servic
 
 export const perfilRoute: Routes = [
     {
-        path: 'perfil',
+        path: 'users/:userName',
         component: PerfilComponent,
         data: {
             authorities: ['ROLE_USER'],
@@ -13,4 +13,4 @@ export const perfilRoute: Routes = [
         },
         canActivate: [UserRouteAccessService]
     }
-]
+];

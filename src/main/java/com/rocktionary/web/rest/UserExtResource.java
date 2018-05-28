@@ -96,12 +96,17 @@ public class UserExtResource {
      * @param id the id of the userExt to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the userExt, or with status 404 (Not Found)
      */
-    @GetMapping("/user-exts/{id}")
-    @Timed
-    public ResponseEntity<UserExt> getUserExt(@PathVariable Long id) {
-        log.debug("REST request to get UserExt : {}", id);
-        UserExt userExt = userExtRepository.findOne(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userExt));
+//    @GetMapping("/user-exts/{id}")
+//    @Timed
+//    public ResponseEntity<UserExt> getUserExt(@PathVariable Long id) {
+//        log.debug("REST request to get UserExt : {}", id);
+//        UserExt userExt = userExtRepository.findOne(id);
+//        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userExt));
+//    }
+
+    @GetMapping("/get-user-ext/{userName}")
+    public UserExt getUserExt (@PathVariable String userName) {
+        return userExtRepository.findUserExtByName(userName);
     }
 
     @GetMapping("/user-exts/by-user/{id}")

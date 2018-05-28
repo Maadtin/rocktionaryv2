@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import { WindowService } from '../windowref.service'
 import {
     HttpClient,
@@ -7,37 +7,30 @@ import {
 } from '@angular/common/http'
 
 import { Observable } from 'rxjs/Observable';
+import {SpotifyService} from "../spotify.service";
 
 @Injectable()
-export class HomeService {
+export class HomeService implements OnInit {
 
-  constructor (private http: HttpClient,
-               private windowRef: WindowService) {
+  private headers: any;
+  private token = this.spotifyService.getToken();
 
+  constructor (private http: HttpClient, private spotifyService: SpotifyService) {}
+
+  ngOnInit () {
+      this.headers = { 'Authorization': this.token }
   }
 
   getSearchResults (params: any): Observable<any> {
-      const headers = {
-          'Authorization':
-              this.windowRef.getNativeWindow().spotifyToken === undefined
-                  ? 'Bearer eqweqw'
-                  : this.windowRef.getNativeWindow().spotifyToken
-      };
-
+      console.log('Service token ->', this.token);
       return this.http
-          .get(`https://api.spotify.com/v1/search/?q=${params.searchQuery}&type=${params.searchCriteria}`, {headers: headers})
+          .get(`https://api.spotify.com/v1/search/?q=${params.searchQuery}&type=${params.searchCriteria}`, {headers:  this.headers })
   }
 
     getArtist (urlArtist: string): Observable<any> {
-        const headers = {
-            'Authorization':
-                this.windowRef.getNativeWindow().spotifyToken === undefined
-                    ? 'Bearer eqweqw'
-                    : this.windowRef.getNativeWindow().spotifyToken
-        };
 
         return this.http
-            .get(urlArtist, {headers: headers});
+            .get(urlArtist, {headers: this.headers});
     }
 
 

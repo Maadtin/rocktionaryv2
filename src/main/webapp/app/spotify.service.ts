@@ -11,8 +11,8 @@ export class SpotifyService {
 
   ) { }
 
-  getToken (): String {
-      return this.localStorage.retrieve('spotifyToken');
+  getToken () {
+      return localStorage.getItem('spotifyToken');
   }
 
 

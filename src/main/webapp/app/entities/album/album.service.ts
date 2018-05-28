@@ -1,32 +1,35 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { SERVER_API_URL } from '../../app.constants';
 
 import { Album } from './album.model';
 import { createRequestOption } from '../../shared';
-import {WindowService} from '../../windowref.service';
+import {SpotifyService} from "../../spotify.service";
 
 export type EntityResponseType = HttpResponse<Album>;
 
 @Injectable()
-export class AlbumService {
+export class AlbumService implements OnInit {
 
     private resourceUrl =  SERVER_API_URL + 'api/albums';
-    private token = this.windowRef.getNativeWindow().spotifyToken || 'Bearer eqwe';
+    private token = this.spotifyService.getToken();
+    private headers: any;
 
-    constructor(private http: HttpClient, private windowRef: WindowService) { }
+    constructor(private http: HttpClient, private spotifyService: SpotifyService) { }
+
+    ngOnInit () {
+        this.headers = { 'Authorization': this.token }
+    }
 
     getAlbum (id: number) {
-        const headers = { 'Authorization': this.token };
-        return this.http.get(`https://api.spotify.com/v1/albums/${id}`, {headers: headers})
+        return this.http.get(`https://api.spotify.com/v1/albums/${id}`, { headers: this.headers } )
     }
 
     getAlbumTracks (id) {
-        const headers = { 'Authorization': this.token };
         return this.http.get(
             `https://api.spotify.com/v1/albums/${id}/tracks`,
-            {headers: headers}
+            { headers: this.headers }
         )
     }
 
