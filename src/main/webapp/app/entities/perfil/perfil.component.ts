@@ -62,7 +62,7 @@ export class PerfilComponent implements OnInit {
           this.subscription = this.route.params.subscribe(params => {
              console.log('Params ->', params);
           });
-          this.load(account.id);
+          this.load(account.login);
       });
   }
 
@@ -72,6 +72,7 @@ export class PerfilComponent implements OnInit {
             .subscribe((userExtResponse: HttpResponse<UserExt>) => {
                 console.log('findByUserResponse ->', userExtResponse);
                 this.userExt  = userExtResponse.body;
+                console.log(this.userExt)
             });
     }
 
