@@ -1,4 +1,5 @@
-<div class="table-responsive" *ngIf="loggers">
+<div class="table-responsive" *ngIf="loggers" class="logs">
+    <div class="main">
     <h2 jhiTranslate="logs.title">Logs</h2>
 
     <p jhiTranslate="logs.nbloggers" translateValues="{total: '{{ loggers.length }}'}">There are {{ loggers.length }} loggers.</p>
@@ -24,4 +25,5 @@
             </td>
         </tr>
     </table>
+    </div>
 </div>
