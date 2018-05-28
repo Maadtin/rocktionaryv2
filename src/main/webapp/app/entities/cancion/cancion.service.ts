@@ -21,11 +21,10 @@ export class CancionService implements OnInit {
     constructor(private http: HttpClient, private spotifyService: SpotifyService) { }
 
     ngOnInit () {
-        this.headers = { 'Authorization': this.token }
     }
 
     getCancion (id) {
-        return this.http.get(`${this.baseUrl}/${id}`, {headers: this.headers})
+        return this.http.get(`${this.baseUrl}/${id}`, {headers: { 'Authorization': this.token } })
     }
 
 

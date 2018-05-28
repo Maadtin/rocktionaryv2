@@ -14,22 +14,20 @@ export class AlbumService implements OnInit {
 
     private resourceUrl =  SERVER_API_URL + 'api/albums';
     private token = this.spotifyService.getToken();
-    private headers: any;
 
     constructor(private http: HttpClient, private spotifyService: SpotifyService) { }
 
     ngOnInit () {
-        this.headers = { 'Authorization': this.token }
     }
 
     getAlbum (id: number) {
-        return this.http.get(`https://api.spotify.com/v1/albums/${id}`, { headers: this.headers } )
+        return this.http.get(`https://api.spotify.com/v1/albums/${id}`, {headers: { 'Authorization': this.token } } )
     }
 
     getAlbumTracks (id) {
         return this.http.get(
             `https://api.spotify.com/v1/albums/${id}/tracks`,
-            { headers: this.headers }
+            {headers: { 'Authorization': this.token } }
         )
     }
 
