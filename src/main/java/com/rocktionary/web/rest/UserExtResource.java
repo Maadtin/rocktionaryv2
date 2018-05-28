@@ -104,10 +104,10 @@ public class UserExtResource {
 //        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userExt));
 //    }
 
-    @GetMapping("/get-user-ext/{userName}")
-    public UserExt getUserExt (@PathVariable String userName) {
-        return userExtRepository.findUserExtByName(userName);
-    }
+//    @GetMapping("/get-user-ext/{userName}")
+//    public UserExt getUserExt (@PathVariable String userName) {
+//        return userExtRepository.findUserExtByName(userName);
+//    }
 
     @GetMapping("/user-exts/by-user/{id}")
     @Timed

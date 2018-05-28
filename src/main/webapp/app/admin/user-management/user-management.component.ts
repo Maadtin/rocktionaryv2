@@ -7,7 +7,8 @@ import { ITEMS_PER_PAGE, Principal, User, UserService } from '../../shared';
 
 @Component({
     selector: 'jhi-user-mgmt',
-    templateUrl: './user-management.component.html'
+    templateUrl: './user-management.component.html',
+    styleUrls: ['user-management.scss']
 })
 export class UserMgmtComponent implements OnInit, OnDestroy {
 
