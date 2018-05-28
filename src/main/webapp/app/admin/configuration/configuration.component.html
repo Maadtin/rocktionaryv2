@@ -1,4 +1,5 @@
-<div *ngIf="allConfiguration && configuration">
+<div *ngIf="allConfiguration && configuration" class="configuration">
+    <div class="main">
     <h2 jhiTranslate="configuration.title">Configuration</h2>
 
     <span jhiTranslate="configuration.filter">Filter (by prefix)</span> <input type="text" [(ngModel)]="filter" class="form-control">
@@ -42,5 +43,6 @@
             </tr>
             </tbody>
         </table>
+    </div>
     </div>
 </div>

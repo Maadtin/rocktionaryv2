@@ -6,7 +6,8 @@ import { JhiMetricsService } from './metrics.service';
 
 @Component({
     selector: 'jhi-metrics',
-    templateUrl: './metrics.component.html'
+    templateUrl: './metrics.component.html',
+    styleUrls:['metrics.scss']
 })
 export class JhiMetricsMonitoringComponent implements OnInit {
     metrics: any = {};
