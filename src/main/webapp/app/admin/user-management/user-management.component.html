@@ -1,4 +1,4 @@
-<div>
+<div class="user-management">
     <h2>
         <span jhiTranslate="userManagement.home.title">Users</span>
         <button class="btn btn-primary float-right jh-create-entity" [routerLink]="['/', { outlets: { popup: ['user-management-new'] } }]">
@@ -6,7 +6,7 @@
         </button>
     </h2>
     <jhi-alert></jhi-alert>
-    <div class="table-responsive" *ngIf="users">
+    <div class="tabla table-responsive" *ngIf="users">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
