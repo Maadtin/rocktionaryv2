@@ -47,6 +47,10 @@ export class UserExtService {
         })
     }
 
+    getUserExt (id) {
+        return this.http.get(`/api/get-user-ext/${id}`)
+    }
+
     create(userExt: UserExt): Observable<EntityResponseType> {
         const copy = this.convert(userExt);
         return this.http.post<UserExt>(this.resourceUrl, copy, { observe: 'response' })

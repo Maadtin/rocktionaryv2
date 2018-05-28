@@ -1,34 +1,35 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { SERVER_API_URL } from '../../app.constants';
 
 import { Cancion } from './cancion.model';
 import { createRequestOption } from '../../shared';
-import {WindowService} from '../../windowref.service';
 import {YoutubeModel} from '../../models/Youtube';
+import {SpotifyService} from "../../spotify.service";
 
 export type EntityResponseType = HttpResponse<Cancion>;
 
 @Injectable()
-export class CancionService {
+export class CancionService implements OnInit {
 
     private resourceUrl =  SERVER_API_URL + 'api/cancions';
-    private token = this.windowRef.getNativeWindow().spotifyToken || 'Bearer eqwe';
+    private token = this.spotifyService.getToken();
     private baseUrl = `https://api.spotify.com/v1/tracks`;
+    private headers: any;
 
-    constructor(private http: HttpClient, private windowRef: WindowService) { }
+    constructor(private http: HttpClient, private spotifyService: SpotifyService) { }
 
+    ngOnInit () {
+    }
 
     getCancion (id) {
-        const headers = { 'Authorization': this.token };
-        return this.http.get(`${this.baseUrl}/${id}`, {headers: headers})
+        return this.http.get(`${this.baseUrl}/${id}`, {headers: { 'Authorization': this.token } })
     }
 
 
     getCountryFlag (ccode) {
         let url = `http://flagpedia.net/data/flags/normal/${ccode}.png`;
-
         return this.http.get(url)
     }
 

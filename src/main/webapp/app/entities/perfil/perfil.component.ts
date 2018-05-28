@@ -10,6 +10,7 @@ import {Subscription} from "rxjs/Subscription";
 import {PlayList} from "../../models/PlayList";
 import { UserPlaylist } from "../../models/UserPlaylist";
 import {VideoPlayerGlobals} from '../../video-player-globals';
+import {ActivatedRoute} from "@angular/router";
 @Component({
   selector: 'user',
   templateUrl: './perfil.component.html',
@@ -20,10 +21,9 @@ import {VideoPlayerGlobals} from '../../video-player-globals';
 export class PerfilComponent implements OnInit {
     public showVideoPlayer: boolean;
     public showVideo: boolean;
-    settingsAccount: any;
     userExt: UserExt;
     user : User;
-    eventSubscriber: Subscription;
+    subscription: Subscription;
     private userPlaylist: any;
     private topTracks: object;
 
@@ -36,8 +36,8 @@ export class PerfilComponent implements OnInit {
       private principal: Principal,
       private userExtService: UserExtService,
       private eventManager: JhiEventManager,
-      private videoPlayerGlobals: VideoPlayerGlobals
-
+      private videoPlayerGlobals: VideoPlayerGlobals,
+      private route: ActivatedRoute
 
   ) {
 
@@ -52,34 +52,26 @@ export class PerfilComponent implements OnInit {
       this.showGeneral = true;
 
       this.principal.identity().then((account) => {
-          this.settingsAccount = this.copyAccount(account);
-          this.load(this.settingsAccount.id);
-          this.eventSubscriber = this.eventManager.
-          subscribe('userExtListModification',
-              (response) => this.load(this.settingsAccount.id));
-          this.getUserTracksByPlayList();
-          this.getUserPlaylist();
+          console.log('Indentity -> ', account);
+          // this.load(account.id);
+          // this.eventSubscriber = this.eventManager.
+          // subscribe('userExtListModification', () => this.load(account.id));
+          // this.getUserTracksByPlayList();
+          // this.getUserPlaylist();
+          //console.log('UserExt ->', this.userExt);
+          this.subscription = this.route.params.subscribe(params => {
+             console.log('Params ->', params);
+          });
+          this.load(account.id);
       });
   }
 
 
-    copyAccount(account) {
-        return {
-            activated: account.activated,
-            email: account.email,
-            firstName: account.firstName,
-            langKey: account.langKey,
-            lastName: account.lastName,
-            login: account.login,
-            imageUrl: account.imageUrl,
-            id: account.id
-        };
-    }
-
     load(id) {
-        this.userExtService.findByUser(id)
+        this.userExtService.getUserExt(id)
             .subscribe((userExtResponse: HttpResponse<UserExt>) => {
-                this.userExt   = userExtResponse.body;
+                console.log('findByUserResponse ->', userExtResponse);
+                this.userExt  = userExtResponse.body;
             });
     }
 

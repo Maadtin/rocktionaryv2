@@ -23,7 +23,9 @@ export class BandaService {
         private http: HttpClient,
         private dateUtils: JhiDateUtils,
         private spotifyService: SpotifyService
-    ) { }
+    ) {
+
+    }
 
     // addTrackToAPlaylist(){
     //     const headers = {Authorization:this.token};

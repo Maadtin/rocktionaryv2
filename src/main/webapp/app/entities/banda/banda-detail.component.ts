@@ -150,9 +150,13 @@ export class BandaDetailComponent implements OnInit {
             })
     }
 
-    removeComment(id) {
+    removeComment(e, id) {
+        e.target.parentElement.querySelector('.loader-container').style.display = 'block';
         this.bandaService.removeComment(id)
-            .subscribe(() => this.bandaComments = this.bandaComments.filter((comment: any) => comment.id !== id))
+            .subscribe(() => {
+                this.bandaComments = this.bandaComments.filter((comment: any) => comment.id !== id);
+                e.target.parentElement.querySelector('.loader-container').style.display = 'none';
+            })
     }
 
     // ngOnDestroy() {

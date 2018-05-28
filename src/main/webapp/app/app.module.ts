@@ -35,6 +35,7 @@ import {NavbarService} from './layouts/navbar/navbar.service';
 import { ParallaxComponent } from './parallax/parallax.component';
 import { BarRatingComponent } from './bar-rating/bar-rating.component';
 import { ComentariosComponent } from './entitites/comentarios/comentarios.component';
+import {SpotifyService} from "./spotify.service";
 // import { YoutubePlayerWrapperComponent } from './youtube-player-wrapper/youtube-player-wrapper.component';
 
 @NgModule({
@@ -70,6 +71,7 @@ import { ComentariosComponent } from './entitites/comentarios/comentarios.compon
         PaginationConfig,
         UserRouteAccessService,
         NavbarService,
+        SpotifyService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

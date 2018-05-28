@@ -158,6 +158,7 @@ export class HomeComponent implements OnInit {
 
     // error handling
     handleOnSuccess (res) {
+        console.log('Res -> ', res);
         this.isLoading = false;
         if (res[this.searchCriteria+'s'].items.length === 0) {
             this.isError = true;
@@ -188,7 +189,7 @@ export class HomeComponent implements OnInit {
                 )
 
             } else if (this.searchCriteria === 'album'){
-                console.log('Antes ->', res.albums)
+                console.log('Antes ->', res.albums);
                 console.log(this.results = res.albums.items.filter(album =>{
 
                     return album.artists.some(artist => {
@@ -219,7 +220,7 @@ export class HomeComponent implements OnInit {
 
 
                             }
-                        )
+                        );
                         console.log('Subscription ->', subscription);
                         return esRock;
 
