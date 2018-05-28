@@ -17,7 +17,7 @@ export type EntityResponseType = HttpResponse<Banda>;
 export class BandaService {
 
     private resourceUrl =  SERVER_API_URL + 'api/bandas';
-    private token = this.spotifyService.getToken();
+    // private token = this.spotifyService.getToken();
 
     constructor(
         private http: HttpClient,
@@ -25,28 +25,28 @@ export class BandaService {
         private spotifyService: SpotifyService
     ) { }
 
-    addTrackToAPlaylist(){
-        const headers = {Authorization:this.token};
+    // addTrackToAPlaylist(){
+    //     const headers = {Authorization:this.token};
+    //
+    //     return this.http.post(`https://api.spotify.com/v1/users/rustyjonas/playlists/65a27LRmsANxoCl1LvtcXj/tracks`, {
+    //         headers: headers
+    //     })
+    // }
 
-        return this.http.post(`https://api.spotify.com/v1/users/rustyjonas/playlists/65a27LRmsANxoCl1LvtcXj/tracks`, {
-            headers: headers
-        })
-    }
 
-
-    getBanda (id: number) {
-        const headers = { 'Authorization': this.token };
-        return this.http.get(`https://api.spotify.com/v1/artists/${id}`, {headers: headers})
-    }
+    // getBanda (id: number) {
+    //     const headers = { 'Authorization': this.token };
+    //     return this.http.get(`https://api.spotify.com/v1/artists/${id}`, {headers: headers})
+    // }
 
     getBandaBio (bandaNombre: string) {
         return this.http.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&api_key=10ceb7a9cb40ae1b5c0b517bc625c8f5&artist=${bandaNombre}&format=json`)
     }
-
-    getTopTracks (id: number) {
-        const headers = { 'Authorization': this.token };
-        return this.http.get(`https://api.spotify.com/v1/artists/${id}/top-tracks?country=ES`, {headers: headers})
-    }
+    //
+    // getTopTracks (id: number) {
+    //     const headers = { 'Authorization': this.token };
+    //     return this.http.get(`https://api.spotify.com/v1/artists/${id}/top-tracks?country=ES`, {headers: headers})
+    // }
 
     getVideoTrack (bandaName: string,trackName: string): Observable<YoutubeModel> {
         return this.http.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${bandaName}, ${trackName}&maxResults=1&key=AIzaSyBh4jKVZPAs4VFdpr2RAdPa_3bHFVRjQXQ&type=video`)
