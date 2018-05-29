@@ -422,6 +422,17 @@ h1, h2, h3, h4, h5, h6 {
     @media screen and (max-width: $screen-sm) {
         padding: 3em 0;
     }
+
+    .shrink img {
+        transition: 1s ease;
+    }
+
+    .shrink img:hover{
+        -webkit-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+        transform: scale(0.8);
+        transition: 1s ease;
+    }
 }
 #fh5co-services{
     padding-bottom: 0;

@@ -17,10 +17,9 @@ export class HomeService {
           .get(`https://api.spotify.com/v1/search/?q=${params.searchQuery}&type=${params.searchCriteria}`, {headers: { 'Authorization': this.token } })
   }
 
-    getArtist (urlArtist: string): Observable<any> {
-
+    getArtist (urlArtist: string): Promise<any> {
         return this.http
-            .get(urlArtist, {headers: { 'Authorization': this.token } });
+            .get(urlArtist, {headers: { 'Authorization': this.token } }).toPromise();
     }
 
 

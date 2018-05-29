@@ -190,39 +190,34 @@ export class HomeComponent implements OnInit {
 
             } else if (this.searchCriteria === 'album'){
                 console.log('Antes ->', res.albums);
-                console.log(this.results = res.albums.items.filter(album =>{
-
-                    return album.artists.some(artist => {
-
-                       let esRock: boolean = false;
-                       let subscription;
-
-                        subscription = this.homeService
-                            .getArtist(artist.href)
-                            .subscribe(artist => {
-                                console.log('Dentro del subscribe ->', artist);
-                                esRock = artist.genres.indexOf('rock') >= 0 ||
-                                    artist.genres.indexOf('metal') >= 0 ||
-                                    artist.genres.indexOf('gothic metal') >= 0 ||
-                                    artist.genres.indexOf('power metal') >= 0 ||
-                                    artist.genres.indexOf('trash metal') >= 0 ||
-                                    artist.genres.indexOf('pop rock') >= 0 ||
-                                    artist.genres.indexOf('alternative rock') >= 0 ||
-                                    artist.genres.indexOf('alternative metal') >= 0 ||
-                                    artist.genres.indexOf('nu metal') >= 0 ||
-                                    artist.genres.indexOf('rap metal') >= 0 ||
-                                    artist.genres.indexOf('punk') >= 0 ||
-                                    artist.genres.indexOf('death metal') >= 0 ||
-                                    artist.genres.indexOf('folk metal') >= 0 ||
-                                    artist.genres.indexOf('grunge') >= 0 ||
-                                    artist.genres.indexOf('groove metal') >= 0;
-                                //return esRock;
+                console.log('filtered ->', this.results = res.albums.items.filter(album =>{
+                    let esRock: boolean = false;
+                    return album.artists.some(async artist => {
 
 
-                            }
-                        );
-                        console.log('Subscription ->', subscription);
-                        return esRock;
+
+                        esRock = await this.homeService.getArtist(artist.href)
+                           .then(artist => {
+                                   return artist.genres.indexOf('rock') >= 0 ||
+                                       artist.genres.indexOf('metal') >= 0 ||
+                                       artist.genres.indexOf('gothic metal') >= 0 ||
+                                       artist.genres.indexOf('power metal') >= 0 ||
+                                       artist.genres.indexOf('trash metal') >= 0 ||
+                                       artist.genres.indexOf('pop rock') >= 0 ||
+                                       artist.genres.indexOf('alternative rock') >= 0 ||
+                                       artist.genres.indexOf('alternative metal') >= 0 ||
+                                       artist.genres.indexOf('nu metal') >= 0 ||
+                                       artist.genres.indexOf('rap metal') >= 0 ||
+                                       artist.genres.indexOf('punk') >= 0 ||
+                                       artist.genres.indexOf('death metal') >= 0 ||
+                                       artist.genres.indexOf('folk metal') >= 0 ||
+                                       artist.genres.indexOf('grunge') >= 0 ||
+                                       artist.genres.indexOf('groove metal') >= 0;
+                               });
+
+
+                       return esRock;
+
 
                     })
 
