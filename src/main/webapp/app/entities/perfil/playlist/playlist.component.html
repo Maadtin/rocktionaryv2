@@ -1,0 +1,25 @@
+<div class="play-list-page" *ngIf="playList && spotifyUser">
+    <p class="text-white">PlayList</p>
+    <p class="text-white playlist-name">{{ playList.name }}</p>
+    <p class="text-white playlist-desc">{{ playList.description }}</p>
+    <a (click)="goBack()" class="d-inline-block rocktionary-theme btn-sm text-white gobackbutton">
+        <i class="fa fa-chevron-left"></i>
+        Volver a lista de playlists
+    </a>
+
+    <ng-container *ngIf="playList.tracks.items.length">
+        <div *ngFor="let Track of playList.tracks.items" class="tracks-container">
+            <audio [src]="sanitizeUrl(Track.track.preview_url)"></audio>
+        </div>
+    </ng-container>
+
+</div>
+
+
+<div class="play-list-page" *ngIf="!playList && !spotifyUser">
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+</div>
+
+<!--<button ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." popoverTitle="Añadiendo cancion a {{ playList.name }}" class="rocktionary-theme btn-sm playlist-add-track-btn" (click)="showAddTrackToPlayListForm = !showAddTrackToPlayListForm">Añadir canción</button>-->

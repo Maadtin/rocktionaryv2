@@ -144,7 +144,7 @@
             </li>
             <!---------------------Perfil--------------------------->
             <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="perfil" (click)="collapseNavbar()">
+                <a class="nav-link" [routerLink]="['users', user.login]" (click)="collapseNavbar()">
                     <span>
                         <i class="fa fa-user" aria-hidden="true"></i>
                         <a jhiTranslate="perfil.title"></a>

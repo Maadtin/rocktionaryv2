@@ -4,7 +4,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiLanguageService } from 'ng-jhipster';
 
 import { ProfileService } from '../profiles/profile.service';
-import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from '../../shared';
+import {JhiLanguageHelper, Principal, LoginModalService, LoginService, User} from '../../shared';
 
 import { VERSION } from '../../app.constants';
 import {NavbarService} from "./navbar.service";
@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
     modalRef: NgbModalRef;
     version: string;
     perfilShow: boolean;
+    user: User;
 
     constructor(
         private loginService: LoginService,
@@ -40,6 +41,7 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.principal.identity().then((user: User) => this.user = user);
         this.languageHelper.getAll().then((languages) => {
             this.languages = languages;
         });

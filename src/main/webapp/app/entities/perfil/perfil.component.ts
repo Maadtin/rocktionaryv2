@@ -11,6 +11,8 @@ import {PlayList} from "../../models/PlayList";
 import { UserPlaylist } from "../../models/UserPlaylist";
 import {VideoPlayerGlobals} from '../../video-player-globals';
 import {ActivatedRoute} from "@angular/router";
+import {SpotifyUser} from "../../models/SpotifyUser";
+import {PlayLists} from "../../models/PlayLists";
 @Component({
   selector: 'user',
   templateUrl: './perfil.component.html',
@@ -23,13 +25,15 @@ export class PerfilComponent implements OnInit {
     public showVideo: boolean;
     userExt: UserExt;
     user : User;
+    spotifyUser: SpotifyUser;
     subscription: Subscription;
-    private userPlaylist: any;
+    public playLists: PlayLists;
     private topTracks: object;
 
     public showTruncatedText: boolean;
     public activePlayer: boolean;
     private showGeneral: boolean;
+    private routeUserName: any;
 
     constructor(
       private account: AccountService,
@@ -51,43 +55,12 @@ export class PerfilComponent implements OnInit {
       this.showTruncatedText = true;
       this.showGeneral = true;
 
-      this.principal.identity().then((account) => {
-          console.log('Indentity -> ', account);
-          // this.load(account.id);
-          // this.eventSubscriber = this.eventManager.
-          // subscribe('userExtListModification', () => this.load(account.id));
-          // this.getUserTracksByPlayList();
-          // this.getUserPlaylist();
-          //console.log('UserExt ->', this.userExt);
-          this.subscription = this.route.params.subscribe(params => {
-             console.log('Params ->', params);
+      this.route.params.subscribe(param => {
+          this.routeUserName = param.userName;
+          this.userExtService.getUserExt(this.routeUserName).subscribe(user => {
+              this.userExt = user;
           });
-          this.load(account.id);
-      });
+      })
   }
-
-
-    load(id) {
-        this.userExtService.getUserExt(id)
-            .subscribe((userExtResponse: HttpResponse<UserExt>) => {
-                console.log('findByUserResponse ->', userExtResponse);
-                this.userExt  = userExtResponse.body;
-            });
-    }
-
-    getUserPlaylist(){
-       this.userExtService.getUserPlayList().subscribe((playlist: PlayList) =>  {
-           // console.log(playlist);
-       })
-    }
-
-
-    getUserTracksByPlayList(){
-        this.userExtService.getUserTracksByPlayList().subscribe((list:any) => {
-            this.userPlaylist = list.items;
-            console.log(this.userPlaylist);
-        })
-    }
-
 
 }

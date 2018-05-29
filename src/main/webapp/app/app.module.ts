@@ -33,7 +33,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {YoutubePlayerModule} from 'ngx-youtube-player';
 import {NavbarService} from './layouts/navbar/navbar.service';
 import { ParallaxComponent } from './parallax/parallax.component';
-import { BarRatingComponent } from './bar-rating/bar-rating.component';
 import { ComentariosComponent } from './entitites/comentarios/comentarios.component';
 import {SpotifyService} from "./spotify.service";
 // import { YoutubePlayerWrapperComponent } from './youtube-player-wrapper/youtube-player-wrapper.component';
@@ -63,7 +62,6 @@ import {SpotifyService} from "./spotify.service";
         NavbarComponent,
         ParallaxComponent,
         ComentariosComponent
-        // YoutubePlayerWrapperComponent
     ],
     providers: [
         VideoPlayerGlobals,

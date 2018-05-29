@@ -156,7 +156,7 @@ export class BandaDetailComponent implements OnInit {
             .subscribe(() => {
                 this.bandaComments = this.bandaComments.filter((comment: any) => comment.id !== id);
                 e.target.parentElement.querySelector('.loader-container').style.display = 'none';
-            })
+        })
     }
 
     // ngOnDestroy() {
