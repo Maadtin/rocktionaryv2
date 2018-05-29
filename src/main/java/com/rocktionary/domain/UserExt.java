@@ -48,6 +48,15 @@ public class UserExt implements Serializable {
     @JoinColumn(unique = true)
     private User user;
 
+    public UserExt(User user, byte[] foto, String fotoContentType,  String localidad) {
+        this.user = user;
+        this.foto = foto;
+        this.fotoContentType = fotoContentType;
+        this.localidad = localidad;
+    }
+
+    public UserExt () {}
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;

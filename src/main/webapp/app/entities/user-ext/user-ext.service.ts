@@ -5,8 +5,11 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { UserExt } from './user-ext.model';
 import { createRequestOption } from '../../shared';
-import {WindowService} from "../../windowref.service";
 import {YoutubeModel} from "../../models/Youtube";
+import {SpotifyService} from "../../spotify.service";
+import {PlayList} from "../../models/PlayList";
+import {PlayLists} from "../../models/PlayLists";
+import {SpotifyUser} from "../../models/SpotifyUser";
 
 export type EntityResponseType = HttpResponse<UserExt>;
 
@@ -15,16 +18,14 @@ export class UserExtService {
 
     private resourceUrl =  SERVER_API_URL + 'api/user-exts';
     private resourceUrl2 =  SERVER_API_URL + 'api/user-exts/by-user';
-    private spotifyToken;
+    private token = this.spotifyService.getToken();
 
 
-    constructor(
-        private http: HttpClient,
-        private nativeWindow: WindowService
-    )
-    {
-        this.spotifyToken = this.nativeWindow.getNativeWindow().spotifyToken;
-    }
+    public playLists: PlayLists;
+    public spotifyUser: SpotifyUser;
+
+
+    constructor(private http: HttpClient, private spotifyService: SpotifyService) {}
 
 
     getVideoTrack (bandaName: string,trackName: string): Observable<YoutubeModel> {
@@ -33,22 +34,38 @@ export class UserExtService {
 
 
 
+    getSpotifyUser () {
+        return this.http.get('https://api.spotify.com/v1/me/', { headers: { Authorization: this.token } })
+    }
 
+    createPlayList (userId, playListData) {
+        return this.http.post(`https://api.spotify.com/v1/users/${userId}/playlists`, playListData, { headers: { Authorization: this.token }})
+    }
 
-    getUserPlayList () {
-        return this.http.get('https://api.spotify.com/v1/me/playlists', {
-            headers: {Authorization: this.spotifyToken}
-        })
+    getUserPlayLists (): Observable<PlayLists> {
+        return this.http.get<PlayLists>('https://api.spotify.com/v1/me/playlists', {
+            headers: { Authorization: this.token }
+        });
+    }
+
+    getPlayList (userId, playListId) {
+        return this.http.get<PlayList>(`https://api.spotify.com/v1/users/${userId}/playlists/${playListId}`, {headers: {Authorization: this.token}})
     }
 
     getUserTracksByPlayList () {
         return this.http.get('https://api.spotify.com/v1/users/rustyjonas/playlists/65a27LRmsANxoCl1LvtcXj/tracks', {
-            headers: {Authorization: this.spotifyToken}
+            headers: {Authorization: this.token}
         })
     }
 
-    getUserExt (id) {
-        return this.http.get(`/api/get-user-ext/${id}`)
+    removePlayList(userId: string, playListId: string) {
+        return this.http.delete(`https://api.spotify.com/v1/users/${userId}/playlists/${playListId}/followers`, {
+            headers: {Authorization: this.token}
+        })
+    }
+
+    getUserExt (userName) {
+        return this.http.get(`/api/get-user-ext/${userName}`)
     }
 
     create(userExt: UserExt): Observable<EntityResponseType> {
@@ -112,4 +129,6 @@ export class UserExtService {
         const copy: UserExt = Object.assign({}, userExt);
         return copy;
     }
+
+
 }

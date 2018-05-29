@@ -216,7 +216,7 @@ public class AccountResource {
         String state = generateRandomString(16);
         attrs.addAttribute("response_type", "code");
         attrs.addAttribute("client_id", "acb078a8d60f4603bfbfb488651a6ca4");
-        attrs.addAttribute("scope", "user-read-private user-read-email user-follow-read");
+        attrs.addAttribute("scope", "user-read-private user-read-email user-follow-read playlist-modify-private playlist-modify-public");
         attrs.addAttribute("redirect_uri", "http://localhost:8080/api/account/callback");
         attrs.addAttribute("state", state);
         attrs.addAttribute("show_dialog", "true");

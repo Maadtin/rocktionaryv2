@@ -25,6 +25,10 @@
     object-fit: cover;
 }
 
+img {
+    object-fit: cover;
+}
+
 .grid-list{
     margin-bottom: 15px;
     border: thin solid rgba(255, 255, 255, 0.4);
@@ -101,14 +105,9 @@
     width: 160px;
 }
 
-._add_profPic{
-    margin-left: 50px;
+.change-profile-pic{
     display: block;
-    width: 20%;
-}
-
-.__perfil{
-    text-align: center;
+    margin-right: auto;
 }
 
 .edit_profile{
@@ -119,7 +118,7 @@
     font-size: 1.2rem;
 }
 
-.nom_perfil{
+.nom_perfil, .no-user-found{
     display: block;
     font-family: 'New Rocker', cursive;
     font-size: 4rem;
@@ -129,15 +128,10 @@
     -webkit-text-stroke: 2px white;
 }
 
+
+
 /*<!--Datos de perfil-->*/
 
-.perfil_datos{
-    padding: 1.5rem;
-}
-
-.__perfil_datos{
-    color: white;
-}
 
 /*<!--top canciones mas escuchados-->*/
 
@@ -147,14 +141,17 @@
 }
 
 .top_canciones span{
-    font-size: 2rem;
     color: white;
 }
 
 .perfil{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 2em 0;
+}
+
+.perfil-username-container {
+    text-align: center;
 }
 
 
@@ -177,14 +174,8 @@
 
 
 @media (min-width: 1200px){
-    .__perfil{
-        order: 1;
-        text-align: left;
-        padding-left: 4em;
-    }
 
-
-    .top_canciones span{
+    .top_canciones .play-list-title{
         font-size: 2.6rem;
     }
     .nom_perfil{
@@ -192,5 +183,54 @@
     }
 
 
+}
+
+.playlist-item {
+    position: relative;
+    background-color: #000;
+    padding: 1em;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    border: thin solid rgba(#fff, 0.4);
+    transition: all ease-in 0.2s;
+    &:hover {
+        border-color: #fff;
+    }
+}
+
+.playlist-options {
+    position: static;
+}
+.playlist-options-toggle {
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 5px;
+    border: thin solid rgba(#fff, 0.4);
+    background-color: #000;
+    border-radius: 2px;
+    color: #fff;
+    transition: all ease-in 0.2s;
+    &:hover {
+        border-color: #fff;
+    }
+
+}
+.playlist-dropdown-menu {
+    padding: 5px 10px;
+    border: thin solid rgba(#fff, 0.4);
+    background-color: #000;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    transition: all ease-in 0.2s;
+    &:hover {
+        border-color: #fff;
+    }
+}
+.playlist-options-toggle::after {
+    content: none;
 }
 

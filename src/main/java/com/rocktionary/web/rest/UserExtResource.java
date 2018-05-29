@@ -93,7 +93,7 @@ public class UserExtResource {
     /**
      * GET  /user-exts/:id : get the "id" userExt.
      *
-     * @param id the id of the userExt to retrieve
+     * @param userName the id of the userExt to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the userExt, or with status 404 (Not Found)
      */
 //    @GetMapping("/user-exts/{id}")
@@ -104,10 +104,10 @@ public class UserExtResource {
 //        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userExt));
 //    }
 
-//    @GetMapping("/get-user-ext/{userName}")
-//    public UserExt getUserExt (@PathVariable String userName) {
-//        return userExtRepository.findUserExtByName(userName);
-//    }
+    @GetMapping("/get-user-ext/{userName}")
+    public UserExt getUserExt (@PathVariable String userName) {
+        return userExtRepository.findByLogin(userName);
+    }
 
     @GetMapping("/user-exts/by-user/{id}")
     @Timed

@@ -1,73 +1,55 @@
 
 
 <div class="main">
-    <div class="_container">
+    <div *ngIf="userExt" class="_container">
         <div class="row perfil">
-            <div class="__perfil col-lg-7">
-                <span class="nom_perfil ">{{settingsAccount.login}}</span>
+            <div class="col-5">
+                <div class="img_perfil">
+                    <img src="../../entities/equipo/img/rockframeV2.png" alt="">
+                    <img [src]="'data:' + userExt.fotoContentType + ';base64,' + userExt.foto" alt="userExt image"/>
+                </div>
 
+                <div class="perfil-datos mt-5">
+                    <div class="text-white">
+                        <span jhiTranslate="perfil.first-name"></span>
+                        <span>{{userExt.user.firstName}}</span>
+                    </div>
+                    <div class="text-white">
+                        <span jhiTranslate="perfil.last-name"></span>
+                        <span>{{userExt.user.lastName}}</span>
+                    </div>
+
+                    <div class="text-white">
+                        <span jhiTranslate="perfil.email"></span>
+                        <span>{{userExt.user.email}}</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="perfil-username-container col-6">
+                <span class="nom_perfil ">{{ userExt.user.login }}</span>
                 <a routerLink="/settings" routerLinkActive="active"  class="btn btn-dark edit_profile text-white">
                     <span jhiTranslate="perfil.edit-profile"></span>
                 </a>
-            </div>
 
-            <div class="img_perfil col-lg-5">
-                <img src="../../entities/equipo/img/rockframeV2.png" alt="">
-                <img [src]="'data:' + userExt.fotoContentType + ';base64,' + userExt.foto" alt="userExt image"/>
-            </div>
-        </div>
-
-        <button class="btn btn-dark _add_profPic" [routerLink]="['/', { outlets: { popup: 'user-ext/'+ userExt.id + '/edit'} }]">
-            <i class="fa fa-plus"></i>
-            <span class="btn" jhiTranslate="perfil.upload-picture"></span>
-        </button>
-
-        <div class="row">
-            <div class="perfil_datos  col-lg-5">
-                <div class="__perfil_datos">
-                    <div class="d-flex flex-wrap flex-row p-3 font-">
-                        <div class="w-100 p-3 h4">
-                            <span jhiTranslate="perfil.first-name"></span>
-                            <span>{{settingsAccount.firstName}}</span>
-                        </div>
-                        <div class="w-100 p-3 h4">
-                            <span jhiTranslate="perfil.last-name"></span>
-                            <span>{{settingsAccount.lastName}}</span>
-                        </div>
-
-                        <div class="w-100 p-3 h4">
-                            <span jhiTranslate="perfil.email"></span>
-                            <span>{{settingsAccount.email}}</span>
-                        </div>
-                    </div>
+                <div class="mt-5">
+                    <router-outlet></router-outlet>
                 </div>
+
             </div>
 
-            <div class="top_canciones col-lg-7">
-                <span jhiTranslate="perfil.my-playlist"></span>
-                <ul class="grid">
-                    <li *ngFor="let playlist of userPlaylist" class="grid-list">
-                        <h5 class="text-white">{{ playlist.track.name}}</h5>
-                        <div class="img-audio-container">
-                            <img [src]="playlist.track.album.images[0].url" alt="">
-                            <audio controls>
-                            <source [src]="playlist.track.preview_url">
-                        </audio>
-                        </div>
+            <!--<button class="ml-5 change-profile-pic rocktionary-theme" [routerLink]="['/', { outlets: { popup: 'user-ext/'+ userExt.user.id + '/edit'} }]">-->
+                <!--<i class="fa fa-plus"></i>-->
+                <!--<span class="btn" jhiTranslate="perfil.upload-picture"></span>-->
+            <!--</button>-->
 
-                    </li>
-                </ul>
-                <!--<div class="__top_canciones_res" >-->
-                    <!--<div *ngFor="let playlist of userPlaylist">-->
-                        <!--<a [routerLink]="['/track', playlist.track.id]" class="text-white "><span class="track_name">{{ playlist.track.name}}</span></a>-->
-                        <!--<img [src]="playlist.track.album.images[0].url" alt="">-->
-                        <!--<audio controls>-->
-                            <!--<source [src]="playlist.track.preview_url">-->
-                        <!--</audio>-->
-                    <!--</div>-->
-                <!--</div>-->
-            </div>
         </div>
 
+
+    <div *ngIf="!userExt" class="container my-5">
+        <p class="no-user-found text-center">No se ha encontrado ningún usuario con el nombre {{ routeUserName }}</p>
     </div>
+
 </div>
