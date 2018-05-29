@@ -61,6 +61,7 @@ export class PerfilComponent implements OnInit {
               this.userExt = user;
           });
       })
+      // blabla
   }
 
 }
