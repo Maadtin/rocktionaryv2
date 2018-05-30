@@ -408,6 +408,17 @@ h1, h2, h3, h4, h5, h6 {
             margin: 0 0 60px 0;
         }
     }
+    .grow img{
+        transition: 1s ease;
+    }
+
+    .grow img:hover{
+        -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        transform: scale(1.2);
+        transition: 1s ease;
+    }
+
 }
 
 
