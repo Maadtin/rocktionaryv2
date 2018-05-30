@@ -52,19 +52,17 @@ export class CancionDetailComponent implements OnInit {
         this.rangeVal = 0;
 
         this.subscription = this.route.params.subscribe((params) => {
-            //this.load(params['id']);
-            // this.cancionService.getCancion(params['id']).subscribe(cancion => {
-            //     this.cancion = cancion;
-            //     this.bandaService.getBanda(this.cancion.album.artists[0].id).subscribe(banda => this.banda = banda);
-            //     this.cancionService.getYoutubeVideo(this.cancion.album.artists[0].name, this.cancion.name).subscribe(video => {
-            //         console.log(video);
-            //         console.log(cancion);
-            //         this.id = video.items[0].id.videoId;
-            //         //this.videoUrl = this.utilsService.sanitizeUrl(`https://www.youtube.com/embed/${video.items[0].id.videoId}?autoplay=1&rel=0`);
-            //     })
-            // });
-
-
+            this.load(params['id']);
+            this.cancionService.getCancion(params['id']).subscribe(cancion => {
+                this.cancion = cancion;
+                this.bandaService.getBanda(this.cancion.album.artists[0].id).subscribe(banda => this.banda = banda);
+                this.cancionService.getYoutubeVideo(this.cancion.album.artists[0].name, this.cancion.name).subscribe(video => {
+                    console.log(video);
+                    console.log(cancion);
+                    this.id = video.items[0].id.videoId;
+                    this.videoUrl = this.utilsService.sanitizeUrl(`https://www.youtube.com/embed/${video.items[0].id.videoId}?autoplay=1&rel=0`);
+                })
+            });
         });
         // this.registerChangeInCancions();
     }
