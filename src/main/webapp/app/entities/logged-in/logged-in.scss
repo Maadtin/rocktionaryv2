@@ -1,6 +1,6 @@
 .main{
     background-image: url('../../../content/images/fondo/fondoPerfil.jpg');
-    padding-bottom: 18em;
+    padding: 10em 0;
 }
 
 .container h1{
@@ -32,4 +32,9 @@
 button{
     width: 20%;
     margin-top: 2em;
+    background-color: #1db954;
+}
+
+button:hover{
+    background-color: #1ed760;
 }
