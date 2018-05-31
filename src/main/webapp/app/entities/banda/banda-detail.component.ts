@@ -53,21 +53,21 @@ export class BandaDetailComponent implements OnInit {
         this.principal.identity()
             .then(user => this.loggedUser = user.login);
 
-        // this.subscription = this.route.params.subscribe(params => {
-            // this.bandaService.getBanda(params['id'])
-            //     .subscribe(banda => {
-            //         this.banda = banda;
-            //         this.bandaService.getBandaBio(this.banda.name)
-            //             .subscribe(info => this.bandaBio = info);
-            //
-            //         this.bandaService.getBandaComments (this.banda.name)
-            //             .subscribe((comments: string[]) => this.bandaComments = comments)
-            //     });
+        this.subscription = this.route.params.subscribe(params => {
+            this.bandaService.getBanda(params['id'])
+                .subscribe(banda => {
+                    this.banda = banda;
+                    this.bandaService.getBandaBio(this.banda.name)
+                        .subscribe(info => this.bandaBio = info);
 
-            // this.bandaService.getTopTracks(params['id'])
-            //     .subscribe(topTracks => this.topTracks = topTracks)
+                    this.bandaService.getBandaComments (this.banda.name)
+                        .subscribe((comments: string[]) => this.bandaComments = comments)
+                });
 
-        // });
+            this.bandaService.getTopTracks(params['id'])
+                .subscribe(topTracks => this.topTracks = topTracks)
+
+        });
 
 
         //this.registerChangeInBandas();

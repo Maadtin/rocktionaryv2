@@ -9,6 +9,7 @@
                 <div class="album_perfil">
                     <img src="../../entities/equipo/img/rockframeV2.png" alt="">
                     <img [src]="cancion.album.images[0].url"  alt="Imagen de album"/>
+                    <!--<input type="range" min="0" max="100" value="40" id="fader" step="1">-->
                 </div>
                 <div class="album-detail__stats">
                     <!--<a class="active" (click)="triggerClass($event)" href="">General</a>-->
@@ -74,41 +75,4 @@
         </div>
 
     </div>
-    <!--<h2><span jhiTranslate="rocktionaryApp.cancion.detail.title">Cancion</span> {{cancion.id}}</h2>-->
-    <!--<hr>-->
-    <!--<jhi-alert-error></jhi-alert-error>-->
-    <!--<dl class="row-md jh-entity-details">-->
-        <!--<dt><span jhiTranslate="rocktionaryApp.cancion.nombre">Nombre</span></dt>-->
-        <!--<dd>-->
-            <!--<span>{{cancion.nombre}}</span>-->
-        <!--</dd>-->
-        <!--<dt><span jhiTranslate="rocktionaryApp.cancion.duracion">Duracion</span></dt>-->
-        <!--<dd>-->
-            <!--<span>{{cancion.duracion}}</span>-->
-        <!--</dd>-->
-        <!--<dt><span jhiTranslate="rocktionaryApp.cancion.letra">Letra</span></dt>-->
-        <!--<dd>-->
-            <!--<span>{{cancion.letra}}</span>-->
-        <!--</dd>-->
-        <!--<dt><span jhiTranslate="rocktionaryApp.cancion.album">Album</span></dt>-->
-        <!--<dd>-->
-            <!--<div *ngIf="cancion.album">-->
-                <!--<a [routerLink]="['/album', cancion.album?.id]">{{cancion.album?.nombre}}</a>-->
-            <!--</div>-->
-        <!--</dd>-->
-    <!--</dl>-->
-
-    <!--<button type="submit"-->
-            <!--(click)="previousState()"-->
-            <!--class="btn btn-info">-->
-        <!--<span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>-->
-    <!--</button>-->
-
-    <!--<button type="button"-->
-            <!--[routerLink]="['/', { outlets: { popup: 'cancion/'+ cancion.id + '/edit'} }]"-->
-            <!--replaceUrl="true"-->
-            <!--queryParamsHandling="merge"-->
-            <!--class="btn btn-primary">-->
-        <!--<span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>-->
-    <!--</button>-->
 </div>
