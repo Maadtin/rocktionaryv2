@@ -1,0 +1,15 @@
+<div class="length">
+    <input [(ngModel)]="rangeVal" (input)="musicPlayerService.dragg()" (change)="musicPlayerService.dragg()" type="range" step="0.1"  min="0" [max]="musicPlayerService.max">
+    <p class="font-weight-bold mb-0">
+        {{ musicPlayerService.currentDuration }} /
+        {{ musicPlayerService.totalDuration }}
+    </p>
+</div>
+
+<youtube-player
+    *ngIf="musicPlayerService.videoId"
+    [videoId]="musicPlayerService.videoId"
+    (ready)="savePlayer($event)"
+    (change)="onStateChange($event)"
+></youtube-player>
+

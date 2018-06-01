@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 
 import com.google.gson.Gson;
 import com.rocktionary.domain.User;
+import com.rocktionary.domain.UserExt;
+import com.rocktionary.repository.UserExtRepository;
 import com.rocktionary.repository.UserRepository;
 import com.rocktionary.security.SecurityUtils;
 import com.rocktionary.service.MailService;
@@ -43,13 +45,16 @@ public class AccountResource {
 
     private final UserRepository userRepository;
 
+    private final UserExtRepository userExtRepository;
+
     private final UserService userService;
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    public AccountResource(UserRepository userRepository, UserExtRepository userExtRepository, UserService userService, MailService mailService) {
 
         this.userRepository = userRepository;
+        this.userExtRepository = userExtRepository;
         this.userService = userService;
         this.mailService = mailService;
     }
@@ -219,7 +224,7 @@ public class AccountResource {
         attrs.addAttribute("scope", "user-read-private user-read-email user-follow-read playlist-modify-private playlist-modify-public");
         attrs.addAttribute("redirect_uri", "http://localhost:8080/api/account/callback");
         attrs.addAttribute("state", state);
-        attrs.addAttribute("show_dialog", "true");
+//        attrs.addAttribute("show_dialog", "true");
         return new RedirectView("https://accounts.spotify.com/authorize");
 
     }
@@ -262,4 +267,22 @@ public class AccountResource {
 
         return new ModelAndView(new RedirectView("http://localhost:9060"), map);
     }
+
+
+
+    @PostMapping("/insert-token")
+    public void insertToken(@RequestBody SpotifyToken spotifyToken) {
+        if (SecurityUtils.getCurrentUserLogin().isPresent()) {
+            UserExt userExt = this.userExtRepository.findByLogin(SecurityUtils.getCurrentUserLogin().get());
+            if (userExt != null) {
+                userExt.setSpotifyToken(spotifyToken.getAccessToken());
+                userExt.setRefreshToken(spotifyToken.getRefreshToken());
+                this.userExtRepository.save(userExt);
+            }
+        }
+    }
+
+
+
+
 }

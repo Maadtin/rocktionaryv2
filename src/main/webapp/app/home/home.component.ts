@@ -10,6 +10,7 @@ import {UtilsService} from '../utils.service';
 import {SafeResourceUrl} from '@angular/platform-browser';
 import {WindowService} from "../windowref.service";
 import {Subscription} from "rxjs/Subscription";
+import {SpotifyService} from "../spotify.service";
 
 @Component({
     selector: 'jhi-home',
@@ -42,9 +43,17 @@ export class HomeComponent implements OnInit {
                 private homeService: HomeService,
                 private utilsService: UtilsService,
                 private window: WindowService,
-                private detector: ChangeDetectorRef
+                private detector: ChangeDetectorRef,
+                private spotifyService: SpotifyService
     ) {
     }
+
+
+    toSeconds (millis: number) {
+        return this.utilsService.parseMillis(millis);
+    }
+
+
 
     ngOnInit() {
         this.isListening = false;
@@ -59,7 +68,14 @@ export class HomeComponent implements OnInit {
 
         this.principal.identity().then((account) => {
             this.account = account;
+            this.homeService.inserToken(
+                localStorage.getItem('spotifyToken').split(' ')[1],
+                localStorage.getItem('refreshToken')
+            )
+                .subscribe(response => console.log(response))
         });
+
+
         // this.registerAuthenticationSuccess();
     }
 
@@ -112,24 +128,7 @@ export class HomeComponent implements OnInit {
 
     // métodos de búsqueda
     handleOnChangePlaceHolderText(filter: string): void {
-        this.placeHolderText = filter;
-        this.clickedButton = filter;
-        this.handleOnSearchCriteriaChange(this.placeHolderText);
-        console.log(this.searchCriteria)
-    }
-
-    handleOnSearchCriteriaChange (searchCriteria: string) {
-        switch (searchCriteria) {
-            case 'albumes':
-                this.searchCriteria = 'album';
-                break;
-            case 'canciones':
-                this.searchCriteria = 'track';
-                break;
-            case 'bandas':
-                this.searchCriteria = 'artist';
-                break;
-        }
+        this.clickedButton = this.placeHolderText = filter;
     }
 
     handleOnInputSearch() {
@@ -139,103 +138,94 @@ export class HomeComponent implements OnInit {
 
             this.isLoading = true;
 
-            const params: any = {
-                searchCriteria: this.searchCriteria,
-                searchQuery: this.inputSearchText
-            };
             clearTimeout(this.timeOut);
             this.timeOut = setTimeout(() => {
-                this.homeService
-                    .getSearchResults(params)
-                    .subscribe(
-                        data => this.handleOnSuccess(data),
-                        error => this.handleOnError(error)
-                    )
+                switch (this.placeHolderText) {
+                    case 'canciones':
+                        this.homeService.getCanciones(this.inputSearchText).subscribe(this.handleOnSuccess.bind(this), this.handleOnError.bind(this));
+                        break;
+                    case 'albumes':
+                        this.homeService.getAlbumes(this.inputSearchText).subscribe(this.handleOnSuccess.bind(this), this.handleOnError.bind(this));
+                        break;
+                    case 'bandas':
+                        this.homeService.getBandas(this.inputSearchText).subscribe(this.handleOnSuccess.bind(this), this.handleOnError.bind(this));
+                        break;
+                }
             }, 500);
         }
 
     }
 
     // error handling
-    handleOnSuccess (res) {
-        console.log('Res -> ', res);
+    handleOnSuccess (response) {
+
+        let hayResultados,
+            resultados,
+            modifier = '';
+
+        switch (this.placeHolderText) {
+            case 'canciones':
+                modifier = 'ninguna canción';
+                break;
+            case 'albumes':
+                modifier = 'ningún albúm';
+                break;
+            case 'bandas':
+                modifier = 'ningúna banda';
+                break;
+        }
+
         this.isLoading = false;
-        if (res[this.searchCriteria+'s'].items.length === 0) {
+
+
+        if (!response.length) {
             this.isError = true;
-            this.errorText = 'No hubo resultados con la búsqueda ' + this.inputSearchText;
+            this.errorText = `No se encontro ${modifier} con el nombre de "${this.inputSearchText}" `;
         } else {
             this.isError = false;
-            this.resultsText = 'Resultados de tú búsqueda con ' + this.inputSearchText;
-
-
-            if (this.searchCriteria === 'artist') {
-                this.results = res.artists.items.filter(artist =>
-                    artist.genres.indexOf('rock') >= 0 ||
-                    artist.genres.indexOf('metal') >= 0 ||
-                    artist.genres.indexOf('gothic metal') >= 0 ||
-                    artist.genres.indexOf('power metal') >= 0 ||
-                    artist.genres.indexOf('trash metal') >= 0 ||
-                    artist.genres.indexOf('pop rock') >= 0 ||
-                    artist.genres.indexOf('alternative rock') >= 0 ||
-                    artist.genres.indexOf('alternative metal') >= 0 ||
-                    artist.genres.indexOf('nu metal') >= 0 ||
-                    artist.genres.indexOf('rap metal') >= 0 ||
-                    artist.genres.indexOf('punk') >= 0 ||
-                    artist.genres.indexOf('country') >= 0 ||
-                    artist.genres.indexOf('death metal') >= 0 ||
-                    artist.genres.indexOf('folk metal') >= 0 ||
-                    artist.genres.indexOf('grunge') >= 0 ||
-                    artist.genres.indexOf('groove metal') >= 0
-                )
-
-            } else if (this.searchCriteria === 'album'){
-                console.log('Antes ->', res.albums);
-                console.log('filtered ->', this.results = res.albums.items.filter(album =>{
-                    let esRock: boolean = false;
-                    return album.artists.some(async artist => {
-
-
-
-                        esRock = await this.homeService.getArtist(artist.href)
-                           .then(artist => {
-                                   return artist.genres.indexOf('rock') >= 0 ||
-                                       artist.genres.indexOf('metal') >= 0 ||
-                                       artist.genres.indexOf('gothic metal') >= 0 ||
-                                       artist.genres.indexOf('power metal') >= 0 ||
-                                       artist.genres.indexOf('trash metal') >= 0 ||
-                                       artist.genres.indexOf('pop rock') >= 0 ||
-                                       artist.genres.indexOf('alternative rock') >= 0 ||
-                                       artist.genres.indexOf('alternative metal') >= 0 ||
-                                       artist.genres.indexOf('nu metal') >= 0 ||
-                                       artist.genres.indexOf('rap metal') >= 0 ||
-                                       artist.genres.indexOf('punk') >= 0 ||
-                                       artist.genres.indexOf('death metal') >= 0 ||
-                                       artist.genres.indexOf('folk metal') >= 0 ||
-                                       artist.genres.indexOf('grunge') >= 0 ||
-                                       artist.genres.indexOf('groove metal') >= 0;
-                               });
-
-
-                       return esRock;
-
-
-                    })
-
-                }));
-            } else {
-                this.results = res[this.searchCriteria+'s'].items;
-            }
-
-
+            this.resultsText = `Resultados con tú búsqueda con "${this.inputSearchText}"`;
+            this.results = response;
         }
-    }
 
-    is (arr, genre) {
-        return arr.indexOf(genre) >= 0;
+        // this.isLoading = false;
+        // // albums | artists | tracks .items
+        // if (res[this.searchCriteria+'s'].items.length === 0) {
+
+        // } else {
+        //     this.isError = false;
+        //     this.resultsText = 'Resultados de tú búsqueda con ' + this.inputSearchText;
+        //
+        //     if (this.searchCriteria === 'artist') {
+        //         this.results = res.artists.items.filter(artist =>
+        //             artist.genres.indexOf('rock') >= 0 ||
+        //             artist.genres.indexOf('metal') >= 0 ||
+        //             artist.genres.indexOf('gothic metal') >= 0 ||
+        //             artist.genres.indexOf('power metal') >= 0 ||
+        //             artist.genres.indexOf('trash metal') >= 0 ||
+        //             artist.genres.indexOf('pop rock') >= 0 ||
+        //             artist.genres.indexOf('alternative rock') >= 0 ||
+        //             artist.genres.indexOf('alternative metal') >= 0 ||
+        //             artist.genres.indexOf('nu metal') >= 0 ||
+        //             artist.genres.indexOf('rap metal') >= 0 ||
+        //             artist.genres.indexOf('punk') >= 0 ||
+        //             artist.genres.indexOf('country') >= 0 ||
+        //             artist.genres.indexOf('death metal') >= 0 ||
+        //             artist.genres.indexOf('folk metal') >= 0 ||
+        //             artist.genres.indexOf('grunge') >= 0 ||
+        //             artist.genres.indexOf('groove metal') >= 0
+        //         )
+        //
+        //     } else if (this.searchCriteria === 'album') {
+        //         this.homeService.getAlbumes(this.placeHolderText).subscribe(album => this.results = album);
+        //     } else {
+        //         this.results = res[this.searchCriteria+'s'].items;
+        //     }
+        //
+        //
+        // }
     }
 
     handleOnError (err) {
-
         this.isLoading = false;
         this.isError = true;
         switch(err.status) {
@@ -246,6 +236,9 @@ export class HomeComponent implements OnInit {
 
     }
 
+    commaSeparated(artists: string[]): string {
+        return artists.join(',')
+    }
 }
 
 

@@ -6,9 +6,7 @@ import locale from '@angular/common/locales/es';
 import {
     RocktionarySharedLibsModule,
     JhiLanguageHelper,
-    FindLanguageFromKeyPipe,
-    JhiAlertComponent,
-    JhiAlertErrorComponent
+    FindLanguageFromKeyPipe
 } from './';
 
 @NgModule({
@@ -16,9 +14,7 @@ import {
         RocktionarySharedLibsModule
     ],
     declarations: [
-        FindLanguageFromKeyPipe,
-        JhiAlertComponent,
-        JhiAlertErrorComponent
+        FindLanguageFromKeyPipe
     ],
     providers: [
         JhiLanguageHelper,
@@ -30,9 +26,7 @@ import {
     ],
     exports: [
         RocktionarySharedLibsModule,
-        FindLanguageFromKeyPipe,
-        JhiAlertComponent,
-        JhiAlertErrorComponent
+        FindLanguageFromKeyPipe
     ]
 })
 export class RocktionarySharedCommonModule {

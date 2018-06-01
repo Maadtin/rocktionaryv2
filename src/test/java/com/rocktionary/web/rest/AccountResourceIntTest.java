@@ -5,6 +5,7 @@ import com.rocktionary.RocktionaryApp;
 import com.rocktionary.domain.Authority;
 import com.rocktionary.domain.User;
 import com.rocktionary.repository.AuthorityRepository;
+import com.rocktionary.repository.UserExtRepository;
 import com.rocktionary.repository.UserRepository;
 import com.rocktionary.security.AuthoritiesConstants;
 import com.rocktionary.service.MailService;
@@ -31,7 +32,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
-import java.time.LocalDate;
 
 import java.util.*;
 
@@ -54,6 +54,9 @@ public class AccountResourceIntTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserExtRepository userExtRepository;
 
     @Autowired
     private AuthorityRepository authorityRepository;
@@ -85,10 +88,10 @@ public class AccountResourceIntTest {
         MockitoAnnotations.initMocks(this);
         doNothing().when(mockMailService).sendActivationEmail(anyObject());
         AccountResource accountResource =
-            new AccountResource(userRepository, userService, mockMailService);
+            new AccountResource(userRepository, userExtRepository, userService, mockMailService);
 
         AccountResource accountUserMockResource =
-            new AccountResource(userRepository, mockUserService, mockMailService);
+            new AccountResource(userRepository, userExtRepository, mockUserService, mockMailService);
         this.restMvc = MockMvcBuilders.standaloneSetup(accountResource)
             .setMessageConverters(httpMessageConverters)
             .setControllerAdvice(exceptionTranslator)

@@ -74,17 +74,12 @@
                                          alt="Foto">
                                     <div class="cancion-artistas">
                                         <p class="text-uppercase busqueda-track-name">{{cancion.name}}</p>
-                                        <div class="busqueda-artistas-name">
-                                            <p *ngFor="let artista of cancion.artists">{{artista.name}}</p>
+                                        <span class="text-white">{{ toSeconds(cancion.durationMs) }}</span>
+                                        <div class="text-left busqueda-artistas-name">
+                                            <span *ngFor="let artist of cancion.artists">{{ artist.name }}, </span>
                                         </div>
                                     </div>
                                 </section>
-                                <audio *ngIf="cancion.preview_url !== null" class="home-audio" controls>
-                                    <source [src]="sanitizeUrl(cancion.href)">
-                                </audio>
-                                <p class="no-preview" *ngIf="cancion.preview_url === null">
-                                    Esta canción no tiene preview disponible.
-                                </p>
                             </div>
                         </section>
                         <section *ngSwitchCase="'bandas'">

@@ -35,6 +35,7 @@ import {NavbarService} from './layouts/navbar/navbar.service';
 import { ParallaxComponent } from './parallax/parallax.component';
 import { ComentariosComponent } from './entitites/comentarios/comentarios.component';
 import {SpotifyService} from "./spotify.service";
+import { MusicPlayerComponent } from './music-player/music-player.component';
 // import { YoutubePlayerWrapperComponent } from './youtube-player-wrapper/youtube-player-wrapper.component';
 
 @NgModule({
@@ -47,8 +48,8 @@ import {SpotifyService} from "./spotify.service";
         RocktionaryHomeModule,
         RocktionaryAdminModule,
         RocktionaryAccountModule,
-        RocktionaryEntityModule,
-        YoutubePlayerModule
+        RocktionaryEntityModule
+
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [

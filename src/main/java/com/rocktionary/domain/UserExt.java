@@ -55,6 +55,23 @@ public class UserExt implements Serializable {
         this.localidad = localidad;
     }
 
+    public UserExt (User user, Long id, byte[] foto, String spotifyToken, String fotoContentType, String localidad) {
+        this.user = user;
+        this.id = id;
+        this.foto = foto;
+        this.spotifyToken = spotifyToken;
+        this.fotoContentType = fotoContentType;
+        this.localidad = localidad;
+    }
+
+    public UserExt(User user, byte[] foto, String spotifyToken, String fotoContentType, String localidad) {
+        this.foto = foto;
+        this.fotoContentType = fotoContentType;
+        this.localidad = localidad;
+        this.spotifyToken = spotifyToken;
+        this.user = user;
+    }
+
     public UserExt () {}
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

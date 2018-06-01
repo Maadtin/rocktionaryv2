@@ -57,7 +57,9 @@
         if (location.search !== '') {
             let url = new URL(location.href);
             let token = url.searchParams.get('token');
+            let refreshToken = url.searchParams.get('refresh_token');
             localStorage.setItem('spotifyToken', `Bearer ${token}`);
+            localStorage.setItem('refreshToken',  refreshToken);
             window.history.pushState({}, document.title, "/#/home");
         }
     </script>

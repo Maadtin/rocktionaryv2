@@ -1,0 +1,35 @@
+div.length input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 8px;
+    width: 8px;
+    border-radius: 10px;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+
+div.length {
+    margin: 15px auto;
+    color: #999;
+    font-size: 10px;
+}
+
+
+div.length input[type="range"] {
+    -webkit-appearance: none;
+    background-color: #999;
+    height: 5px;
+    border-radius: 2px;
+    border: none;
+    outline: 0;
+}
+
+::-moz-selection { /* Code for Firefox */
+    color: rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, .0);
+}
+
+::selection {
+    color: rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, .0);
+}

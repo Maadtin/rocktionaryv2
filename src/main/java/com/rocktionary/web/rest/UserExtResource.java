@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.rocktionary.domain.UserExt;
 
 import com.rocktionary.repository.UserExtRepository;
+import com.rocktionary.security.SecurityUtils;
 import com.rocktionary.web.rest.errors.BadRequestAlertException;
 import com.rocktionary.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -86,6 +87,9 @@ public class UserExtResource {
     @GetMapping("/user-exts")
     @Timed
     public List<UserExt> getAllUserExts() {
+
+        log.debug(SecurityUtils.getCurrentUserLogin().get());
+
         log.debug("REST request to get all UserExts");
         return userExtRepository.findAll();
         }

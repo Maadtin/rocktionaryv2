@@ -1,6 +1,7 @@
 package com.rocktionary.service.dto;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,6 +9,7 @@ public class SpotifyToken {
 
     @SerializedName("access_token")
     @Expose
+    @JsonDeserialize
     private String accessToken;
     @SerializedName("token_type")
     @Expose

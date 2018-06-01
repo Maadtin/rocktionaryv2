@@ -70,4 +70,8 @@ export class AllplaylistComponent implements OnInit {
     addTrackToPlayList($event) {
         console.log('adding track...')
     }
+
+    editPlayList(userId: string, playListId: string) {
+        console.log(userId, playListId)
+    }
 }

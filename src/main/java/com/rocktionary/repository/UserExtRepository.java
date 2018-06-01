@@ -17,7 +17,7 @@ public interface UserExtRepository extends JpaRepository<UserExt, Long> {
 
     UserExt findByUserId(Long id);
 
-    @Query("select new UserExt(u.user, u.foto, u.fotoContentType, u.localidad) from UserExt u where u.user.login = :username")
+    @Query("select new UserExt(u.user, u.id, u.foto, u.spotifyToken, u.fotoContentType, u.localidad) from UserExt u where u.user.login = :username")
     UserExt findByLogin(@Param("username") String userName);
 
 }

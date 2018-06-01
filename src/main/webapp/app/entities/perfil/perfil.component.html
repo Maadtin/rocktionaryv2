@@ -1,6 +1,6 @@
 
 
-<div class="main">
+<div class="main mt-5">
     <div *ngIf="userExt" class="_container">
         <div class="row perfil">
             <div class="col-5">
@@ -34,6 +34,7 @@
                     <span jhiTranslate="perfil.edit-profile"></span>
                 </a>
 
+
                 <div class="mt-5">
                     <router-outlet></router-outlet>
                 </div>
@@ -51,5 +52,7 @@
     <div *ngIf="!userExt" class="container my-5">
         <p class="no-user-found text-center">No se ha encontrado ningún usuario con el nombre {{ routeUserName }}</p>
     </div>
+
+</div>
 
 </div>
