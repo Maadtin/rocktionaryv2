@@ -37,7 +37,6 @@ export class SettingsComponent implements OnInit {
 
         this.account.save(this.settingsAccount).subscribe(() => {
             this.router.navigate(['perfil']);
-            console.log(this.settingsAccount);
             this.error = null;
             this.success = 'OK';
             this.principal.identity(true).then((account) => {
