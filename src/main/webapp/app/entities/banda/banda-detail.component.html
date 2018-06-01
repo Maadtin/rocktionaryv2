@@ -23,14 +23,16 @@
                     <h3 class="text-white">Top canciones de {{banda.name}}</h3>
                     <ul class="grid">
                         <li (click)="toggleIcon(track.id, $event, track.name)" *ngFor="let track of topTracks.tracks" >
-                            <h5>{{track.name}}</h5>
-                            <span class="addIcon" (click)="addTrackToAPlaylist()"><img src="../../../content/images/addIcon.png" alt=""></span>
+                            <h5> {{track.name}} </h5>
                             <div class="img-audio-container">
                                 <img class="imagen-audio" [src]="track.album.images[1].url">
                                 <i
                                     [ngClass]="{'fa-play': !activePlayer, 'fa-pause': activeButton === track.id }"
                                     class="track-icon-play fa">
                                 </i>
+                            </div>
+                            <div class="options">
+                                <img class="addIcon" (click)="addTrackToAPlaylist()" src="../../../content/images/addIcon.png" alt="">
                             </div>
                         </li>
                     </ul>

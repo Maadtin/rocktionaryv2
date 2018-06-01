@@ -228,6 +228,7 @@
         align-items: center;
         justify-content: center;
         font-size: 15px;
+        height: 50px;
     }
 
     .img-audio-container {
@@ -293,6 +294,12 @@
 }
 .addIcon{
     background: none;
+    position: relative;
+    display: block;
+    transition: all ease-in 0.2s;
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 .addIcon img{
