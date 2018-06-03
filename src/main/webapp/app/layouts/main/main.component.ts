@@ -2,15 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 
 import { JhiLanguageHelper } from '../../shared';
+import {MusicPlayerService} from "../../music-player/music-player.service";
 
 @Component({
     selector: 'jhi-main',
     templateUrl: './main.component.html'
 })
 export class JhiMainComponent implements OnInit {
+
     constructor(
         private jhiLanguageHelper: JhiLanguageHelper,
-        private router: Router
+        private router: Router,
+        public musicPlayerService: MusicPlayerService
     ) {}
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
@@ -20,6 +23,11 @@ export class JhiMainComponent implements OnInit {
         }
         return title;
     }
+
+
+    onSavePlayer(player) {
+    }
+
 
     ngOnInit() {
         this.router.events.subscribe((event) => {

@@ -3,71 +3,100 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class MusicPlayerService {
 
-    public videoId: string;
-    public isPlaying: boolean = false;
     public player: YT.Player;
-    public currentDuration :any;
-    public totalDuration :any;
+    public currentTime: any = '0:00';
+    public duration: any;
+    public progressBar: any;
     public videoInterval: any;
-    public rangeVal: any;
-    public max: any;
+    public isPlaying = false;
+    public videoId: any = null;
 
-    toggleVideo () {
-        console.log(this.player.getPlayerState());
-        if (this.player.getPlayerState() === 5) {
+    public showPlayer: boolean = false;
+
+    public rangeMax: any = 0;
+    public rangeValue: any;
+    albumImage: any;
+    songInfo: any;
+
+
+    onSavePlayer(player) {
+        player.getIframe().hidden = true;
+        console.log('YT.Player loaded ->', player);
+        this.player = player;
+    }
+
+    onStateChange ({ target, data }) {
+        if (data === 1) {
+            this.initialize();
             this.isPlaying = true;
-            this.player.playVideo();
-            this.initInterval();
-        } else {
-
-            if (this.player.getPlayerState() === 1) {
-                this.isPlaying = false;
-                this.player.pauseVideo();
-                clearInterval(this.videoInterval)
-            } else {
-                this.isPlaying = true;
-                this.player.playVideo();
-                this.initInterval();
-            }
-
+            this.showPlayer = true;
+        } else if (data === 2) {
+            this.isPlaying = false;
         }
     }
 
-    static secondsToMinutes (seconds: number): string {
-        let minutes = Math.floor(seconds / 60);
-        return minutes + ':' + MusicPlayerService.pad( (seconds - minutes * 60) );
-    }
+    initialize () {
+        this.updateTimerDisplay();
+        this.updateProgressBar();
 
-    static pad(num) {
-        return ("0"+num).slice(-2);
-    }
+        clearInterval(this.videoInterval);
 
-    initInterval () {
         this.videoInterval = setInterval(() => {
-            let currentTime = parseInt(this.player.getCurrentTime().toFixed(0));
-            let totalDuration = parseInt(this.player.getDuration().toFixed(1));
-            this.rangeVal = currentTime;
-            this.max = totalDuration;
-            this.currentDuration = MusicPlayerService.secondsToMinutes(currentTime);
-            this.totalDuration = MusicPlayerService.secondsToMinutes(totalDuration);
-
-            console.log('current Duration ->', this.currentDuration);
-            console.log('total Duration ->', this.totalDuration)
-        }, 1000);
-    }
-
-    dragg () {
-        this.player.seekTo(this.rangeVal, true);
-    }
+            this.updateTimerDisplay();
+            this.updateProgressBar();
 
 
-    onSavePlayer (player) {
-        this.player = player;
-        console.log('Player from MusicPlayerService ->', this.player);
+        }, 1000)
+
     }
-    onStatechange (e) {
-        console.log('Player state from MusicPlayerService ->', this.player.getPlayerState())
+
+    formatTime (time) {
+
+        time = Math.round(time);
+
+        const minutes = Math.floor(time / 60),
+            seconds = time - minutes * 60;
+
+        return minutes + ':' + (seconds < 10 ? '0' + seconds : seconds);
     }
+
+    updateTimerDisplay () {
+        this.currentTime = this.formatTime(this.player.getCurrentTime());
+        this.duration = this.formatTime(this.player.getDuration());
+
+        this.rangeValue = this.player.getCurrentTime().toFixed(1);
+        this.rangeMax = this.player.getDuration().toFixed(1)
+    }
+
+
+    onProgressBarDrag () {
+        this.player.seekTo(this.rangeValue, true);
+    }
+
+    updateProgressBar () {
+        this.progressBar = (this.player.getCurrentTime() / this.player.getDuration()) / 100;
+
+        this.rangeValue = this.player.getCurrentTime().toFixed(1);
+        this.rangeMax = this.player.getDuration().toFixed(1)
+    }
+
+
+    togglePlay() {
+        if (this.isPlaying) {
+            this.player.pauseVideo();
+            this.isPlaying = false;
+        } else {
+            this.player.playVideo();
+            this.isPlaying = true;
+        }
+    }
+
+
+
+
+
+
+
 
 
 }

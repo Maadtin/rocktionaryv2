@@ -1,15 +1,36 @@
-<div class="length">
-    <input [(ngModel)]="rangeVal" (input)="musicPlayerService.dragg()" (change)="musicPlayerService.dragg()" type="range" step="0.1"  min="0" [max]="musicPlayerService.max">
-    <p class="font-weight-bold mb-0">
-        {{ musicPlayerService.currentDuration }} /
-        {{ musicPlayerService.totalDuration }}
-    </p>
-</div>
+<div class="music-player-container" [ngClass]="{'showPlayer': musicPlayerService.showPlayer, 'hidePlayer': !musicPlayerService.showPlayer}">
 
-<youtube-player
-    *ngIf="musicPlayerService.videoId"
-    [videoId]="musicPlayerService.videoId"
-    (ready)="savePlayer($event)"
-    (change)="onStateChange($event)"
-></youtube-player>
+
+        <div class="music-player-img">
+            <img  [src]="musicPlayerService.albumImage" alt="">
+            <i (click)="musicPlayerService.togglePlay()" class="track-icon-play fa {{ musicPlayerService.isPlaying ? 'fa-pause' : 'fa-play' }}"></i>
+        </div>
+
+        <p class="music-player-song-info">{{ musicPlayerService.songInfo }}</p>
+
+        <div class="length controls">
+            <input
+                [(ngModel)]="musicPlayerService.rangeValue"
+                (input)="musicPlayerService.onProgressBarDrag()"
+                [max]="musicPlayerService.rangeMax"
+                type="range"
+                step="0.1"
+            >
+
+            <p class="font-weight-bold mb-0 timer">
+                {{ musicPlayerService.currentTime }} /
+                {{ musicPlayerService.duration }}
+            </p>
+        </div>
+
+    <youtube-player
+        [videoId]="musicPlayerService.videoId"
+        (ready)="musicPlayerService.onSavePlayer($event)"
+        (change)="musicPlayerService.onStateChange($event)"
+    ></youtube-player>
+
+
+
+
+</div>
 

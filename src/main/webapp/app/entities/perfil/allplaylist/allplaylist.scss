@@ -108,3 +108,7 @@
 .playlist-options-toggle::after {
     content: none;
 }
+
+iframe {
+    display: none !important;
+}

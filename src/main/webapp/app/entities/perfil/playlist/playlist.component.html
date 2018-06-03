@@ -11,14 +11,11 @@
     <ng-container *ngIf="playList.tracks.items.length">
         <div class="tracks-container">
             <h3 class="text-white">Canciones de {{ playList.name }}</h3>
-            <ul class="grid">
-                <li *ngFor="let Track of playList.tracks.items" (click)="toggleIcon(Track.track.id, $event, Track.track.name)">
+            <ul class="grid" #grid>
+                <li *ngFor="let Track of playList.tracks.items" (click)="toggleIcon(Track.track.name, Track.track.artists[0].name, Track.track.album.images[0].url)">
                     <h5>{{Track.track.name}}</h5>
                     <div class="img-audio-container">
                         <img class="imagen-audio" [src]="Track.track.album.images[0].url">
-                        <p class="text-white">{{ musicPlayerService.isPlaying }}</p>
-                        <i class="track-icon-play fa fa-{{ musicPlayerService.isPlaying ? 'pause' : 'play' }}"></i>
-                        <music-player [banda]="Track.track.artists[0].name" [cancion]="Track.track.name"></music-player>
                     </div>
                 </li>
             </ul>

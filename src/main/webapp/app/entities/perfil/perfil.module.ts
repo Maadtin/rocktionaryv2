@@ -25,15 +25,13 @@ const ENTITY_STATES = [
     RocktionarySharedModule,
     RouterModule.forChild(ENTITY_STATES),
     NgbDropdownModule,
-    NgbPopoverModule,
-    YoutubePlayerModule
+    NgbPopoverModule
   ],
   declarations: [
       PerfilComponent,
       PlaylistComponent,
       TrackComponent,
-      AllplaylistComponent,
-      MusicPlayerComponent
+      AllplaylistComponent
   ],
   entryComponents: [
       PerfilComponent

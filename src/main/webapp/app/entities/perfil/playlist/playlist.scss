@@ -19,15 +19,18 @@
             grid-template-columns: repeat(3, 1fr);
         }
         grid-gap: 5px;
+        img {
+            transition: all ease-in 0.2s;
+        }
         li {
             margin-bottom: 15px;
             border: thin solid rgba(#fff, .4);
             //display: flex;
             //flex-wrap: wrap;
             //justify-content: center;
+            cursor: pointer;
             border-radius: 2px;
             transition: all ease-in 0.2s;
-            cursor: pointer;
             &:hover {
                 border-color: #fff;
             }
@@ -45,6 +48,7 @@
         align-items: center;
         justify-content: center;
         font-size: 15px;
+        height: 50px;
     }
 
     .img-audio-container {
@@ -171,4 +175,8 @@ div.length input[type="range"] {
         opacity: 0.6;
     }
 
+}
+
+iframe {
+    display: none !important;
 }

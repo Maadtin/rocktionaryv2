@@ -1,10 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PlayList} from "../../../models/PlayList";
 import {SpotifyUser} from "../../../models/SpotifyUser";
 import {UserExtService} from "../../user-ext";
 import {PlayLists} from "../../../models/PlayLists";
-import {ActivatedRoute} from "@angular/router";
-import {PerfilComponent} from "../perfil.component";
 
 @Component({
   selector: 'jhi-allplaylist',

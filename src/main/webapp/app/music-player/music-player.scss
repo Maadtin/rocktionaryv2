@@ -33,3 +33,54 @@ div.length input[type="range"] {
     color: rgba(255, 255, 255, 1);
     background: rgba(255, 255, 255, .0);
 }
+
+
+iframe {
+    display: none !important;
+}
+
+.music-player-container {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 10000;
+    width: 100%;
+    padding: 1em;
+    background-color: #000;
+
+    div.music-player-img-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-size: cover;
+        filter: blur(10px);
+        z-index: 15;
+    }
+
+    .music-player-content {
+        position: relative;
+        z-index: 20;
+    }
+
+    .music-player-img {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+
+            .track-icon-play {
+                position: absolute;
+                outline: 0;
+                color: #fff;
+                font-size: 20px;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                background-color: rgba(#000, 0.7);
+                padding: 1em;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+    }
+}

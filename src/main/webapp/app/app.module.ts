@@ -36,6 +36,7 @@ import { ParallaxComponent } from './parallax/parallax.component';
 import { ComentariosComponent } from './entitites/comentarios/comentarios.component';
 import {SpotifyService} from "./spotify.service";
 import { MusicPlayerComponent } from './music-player/music-player.component';
+import {MusicPlayerService} from "./music-player/music-player.service";
 // import { YoutubePlayerWrapperComponent } from './youtube-player-wrapper/youtube-player-wrapper.component';
 
 @NgModule({
@@ -48,8 +49,8 @@ import { MusicPlayerComponent } from './music-player/music-player.component';
         RocktionaryHomeModule,
         RocktionaryAdminModule,
         RocktionaryAccountModule,
-        RocktionaryEntityModule
-
+        RocktionaryEntityModule,
+        YoutubePlayerModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
@@ -62,7 +63,8 @@ import { MusicPlayerComponent } from './music-player/music-player.component';
         VideoPlayerComponent,
         NavbarComponent,
         ParallaxComponent,
-        ComentariosComponent
+        ComentariosComponent,
+        MusicPlayerComponent
     ],
     providers: [
         VideoPlayerGlobals,
@@ -71,6 +73,7 @@ import { MusicPlayerComponent } from './music-player/music-player.component';
         UserRouteAccessService,
         NavbarService,
         SpotifyService,
+        MusicPlayerService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
