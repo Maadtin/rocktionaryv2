@@ -67,8 +67,10 @@ export class AllplaylistComponent implements OnInit {
     }
 
     removePlayList(userId: string, playListId: string) {
-        this.userExtService.removePlayList(userId, playListId)
-            .subscribe((response: Response) => this.playLists.items = this.playLists.items.filter((list: PlayList) => list.id !== playListId))
+        if (confirm('¿Seguro que quieres borrar esta playlist? (esto afectará a tu cuenta de spotify también.)')) {
+            this.userExtService.removePlayList(userId, playListId)
+                .subscribe((response: Response) => this.playLists.items = this.playLists.items.filter((list: PlayList) => list.id !== playListId))
+        }
     }
 
     addTrackToPlayList($event) {

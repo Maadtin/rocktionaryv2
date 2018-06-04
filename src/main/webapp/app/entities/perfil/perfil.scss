@@ -164,6 +164,16 @@ img {
     }
 }
 
+.choose-picture {
+    position: absolute;
+    color: #fff;
+    top: 50px;
+    left: 100px;
+    z-index: 20;
+    font-size: 30px;
+    cursor: pointer;
+}
+
 
 @media (min-width: 992px){
     .nom_perfil{

@@ -81,10 +81,11 @@ export class PlaylistComponent implements OnInit {
     }
 
     removePlayListTrack(track: Track) {
-      console.log(this.playList.tracks.items);
-         this.userExtService.removeTrackFromPlayList(this.spotifyUser.id, this.playList.id,  track.uri)
-             .subscribe(res => {
-                 this.playList.tracks.items = this.playList.tracks.items.filter((currentTrack: TrackItem) => currentTrack.track.id !== track.id)
-             });
+        if (confirm('Seguro que quieres borrar esta canción de esta playlist?')) {
+            this.userExtService.removeTrackFromPlayList(this.spotifyUser.id, this.playList.id,  track.uri)
+                .subscribe(res => {
+                    this.playList.tracks.items = this.playList.tracks.items.filter((currentTrack: TrackItem) => currentTrack.track.id !== track.id)
+                });
+        }
     }
 }

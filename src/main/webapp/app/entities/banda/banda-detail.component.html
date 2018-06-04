@@ -6,6 +6,7 @@
             <p>{{ showVideoPlayer }}</p>
         </div>
         <div class="container container-mid">
+
             <div class="banda_perfil">
                     <img src="../../entities/equipo/img/rockframeV2.png" alt="">
                     <img [src]="banda.images[0].url"  alt="Imagen de banda"/>
@@ -27,13 +28,15 @@
                             <div class="img-audio-container">
                                 <img class="imagen-audio" [src]="track.album.images[1].url">
                             </div>
-                            <div class="options" ngbDropdown [autoClose]="'outside'">
+                            <div class="options" ngbDropdown [autoClose]="'outside'" #dropDown="ngbDropdown">
                                 <img class="addIcon" ngbDropdownToggle src="../../../content/images/addIcon.png" alt="">
                                 <ul class="rocktionary-dropdown" ngbDropdownMenu>
                                     <li ngbDropdown ngbDropdownToggle [placement]="'right'">
                                         Añadir a playlist <i class="pl-1 fa fa-chevron-right"></i>
                                         <ul class="rocktionary-dropdown" ngbDropdownMenu>
-                                            <li>This is BTS</li>
+                                            <li *ngFor="let playlist of playLists.items" (click)="addTrackToPlayList(playlist, track, dropDown);">
+                                                {{ playlist.name }}
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>

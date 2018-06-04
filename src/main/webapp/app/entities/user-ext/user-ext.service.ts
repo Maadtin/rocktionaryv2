@@ -10,6 +10,7 @@ import {SpotifyService} from "../../spotify.service";
 import {PlayList} from "../../models/PlayList";
 import {PlayLists} from "../../models/PlayLists";
 import {SpotifyUser} from "../../models/SpotifyUser";
+import {Track} from "../../interfaces/SpotifyInterfaces";
 
 export type EntityResponseType = HttpResponse<UserExt>;
 
@@ -66,6 +67,13 @@ export class UserExtService {
         };
 
         return this.http.delete(`https://api.spotify.com/v1/users/${userId}/playlists/${id}/tracks`, options)
+    }
+
+    addTrackToPlayList (playList: PlayList, track: Track) {
+        let tracks = {uris: [track.uri]};
+        return this.http.post(`https://api.spotify.com/v1/users/${playList.owner.id}/playlists/${playList.id}/tracks`, tracks, {
+            headers: { Authorization: this.token }
+        })
     }
 
     removePlayList(userId: string, trackId: string) {
@@ -141,4 +149,7 @@ export class UserExtService {
     }
 
 
+    updateImage(base64Image, contentType, userLogin) {
+        return this.http.put(`/api/user-ext/update-img`, { base64Image, contentType, userLogin });
+    }
 }

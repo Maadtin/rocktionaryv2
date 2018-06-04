@@ -3,10 +3,13 @@
 <div class="main mt-5">
     <div *ngIf="userExt" class="_container">
         <div class="row perfil">
-            <div class="col-5">
+            <div class="col-5" style="position: relative;">
+                <label class="fa fa-camera choose-picture">
+                    <input style="display: none" type="file" (change)="onFileInputChange($event)" accept="image/*">
+                </label>
                 <div class="img_perfil">
                     <img src="../../entities/equipo/img/rockframeV2.png" alt="">
-                    <img [src]="'data:' + userExt.fotoContentType + ';base64,' + userExt.foto" alt="userExt image"/>
+                    <img [src]="userExt.fotoUrl" alt="userExt image"/>
                 </div>
 
                 <div class="perfil-datos mt-5">

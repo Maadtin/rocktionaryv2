@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,6 +78,20 @@ public class UserExtResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, userExt.getId().toString()))
             .body(result);
+    }
+
+    @PutMapping("/user-ext/update-img")
+    public UserExt updateImage (@RequestBody UserImage image) {
+//        System.out.println("Imagen -> " + bytes);
+       UserExt userExt = this.userExtRepository.findByLogin(image.getUserLogin());
+
+       if (userExt != null) {
+           userExt.setFoto(image.getBase64Image());
+           userExt.setFotoContentType(image.getContentType());
+       }
+
+        return this.userExtRepository.save(userExt);
+
     }
 
     /**

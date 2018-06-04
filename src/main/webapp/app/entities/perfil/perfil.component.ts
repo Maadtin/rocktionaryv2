@@ -7,6 +7,11 @@ import {User} from "../../shared/user/user.model";
 import {Subscription} from "rxjs/Subscription";
 import {VideoPlayerGlobals} from '../../video-player-globals';
 import {ActivatedRoute} from "@angular/router";
+import {JhiDataUtils, JhiEventManager} from "ng-jhipster";
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
+import {NgForm} from "@angular/forms";
+import {UtilsService} from "../../utils.service";
 @Component({
   selector: 'user',
   templateUrl: './perfil.component.html',
@@ -26,13 +31,17 @@ export class PerfilComponent implements OnInit {
     private showGeneral: boolean;
     private routeUserName: any;
 
+    private isSaving = false;
+    private eventManager: JhiEventManager;
+
     constructor(
       private account: AccountService,
       private principal: Principal,
       private userExtService: UserExtService,
       private videoPlayerGlobals: VideoPlayerGlobals,
-      private route: ActivatedRoute
-
+      private route: ActivatedRoute,
+      private dataUtils: JhiDataUtils,
+      private utils: UtilsService
   ) {
 
   }
@@ -49,9 +58,26 @@ export class PerfilComponent implements OnInit {
           this.routeUserName = param.userName;
           this.userExtService.getUserExt(this.routeUserName).subscribe(user => {
               this.userExt = user;
+
+              this.userExt.fotoUrl = this.utils.sanitizeUrl(`data:${this.userExt.fotoContentType};base64, ${this.userExt.foto}`)
           });
       })
       // blabla
   }
 
+    onFileInputChange(e) {
+        let files = e.target.files[0];
+
+        if (files) {
+            let reader = new FileReader();
+            reader.onload = (e: any) => {
+                this.userExtService.updateImage (btoa(e.target.result), files.type, this.userExt.user.login)
+                    .subscribe((userExt: UserExt) => {
+                        this.userExt.fotoUrl = this.utils.sanitizeUrl(`data:${userExt.fotoContentType};base64, ${userExt.foto}`)
+                    });
+            };
+            console.log(files);
+            reader.readAsBinaryString(files);
+        }
+    }
 }

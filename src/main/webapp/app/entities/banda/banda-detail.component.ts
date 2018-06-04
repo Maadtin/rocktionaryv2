@@ -11,6 +11,11 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {VideoPlayerGlobals} from '../../video-player-globals';
 import {Principal} from "../../shared";
 import {MusicPlayerService} from "../../music-player/music-player.service";
+import {UserExtService} from "../user-ext";
+import {PlayList} from "../../models/PlayList";
+import {PlayLists} from "../../models/PlayLists";
+import {Track} from "../../interfaces/SpotifyInterfaces";
+import {NgbDropdown} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
     selector: 'jhi-banda-detail',
@@ -32,8 +37,9 @@ export class BandaDetailComponent implements OnInit {
     public commentText: null;
     public bandaComments: string[];
     public loggedUser: string;
+    public playLists: PlayLists;
 
-    constructor(
+    constructor (
         private eventManager: JhiEventManager,
         private dataUtils: JhiDataUtils,
         private bandaService: BandaService,
@@ -42,9 +48,9 @@ export class BandaDetailComponent implements OnInit {
         private sanitizer: DomSanitizer,
         private videoPlayerGlobals: VideoPlayerGlobals,
         private principal: Principal,
-        private musicPlayerService: MusicPlayerService
-    ) {
-    }
+        private musicPlayerService: MusicPlayerService,
+        private userExtService: UserExtService
+    ) {}
 
     ngOnInit() {
         this.activePlayer = false;
@@ -70,6 +76,12 @@ export class BandaDetailComponent implements OnInit {
                 .subscribe(topTracks => this.topTracks = topTracks)
 
         });
+
+
+        this.userExtService.getUserPlayLists()
+            .subscribe((playLists: PlayLists) => {
+                this.playLists = playLists;
+            })
 
 
         //this.registerChangeInBandas();
@@ -130,5 +142,14 @@ export class BandaDetailComponent implements OnInit {
                 e.target.parentElement.querySelector('.loader-container').style.display = 'none';
         })
     }
-
+    addTrackToPlayList (playlist: PlayList, track: Track, dropDown: NgbDropdown) {
+        this.userExtService.addTrackToPlayList(playlist, track)
+            .subscribe((response: any) => {
+                if (response.snapshot_id) {
+                    dropDown.close()
+                } else {
+                    alert('No se pudo añadir canción a playlist: error 500')
+                }
+            });
+    }
 }
