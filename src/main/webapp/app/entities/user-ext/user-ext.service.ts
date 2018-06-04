@@ -58,8 +58,18 @@ export class UserExtService {
         })
     }
 
-    removePlayList(userId: string, playListId: string) {
-        return this.http.delete(`https://api.spotify.com/v1/users/${userId}/playlists/${playListId}/followers`, {
+    removeTrackFromPlayList (userId: string, id, uri) {
+
+        let options = {
+            headers: { Authorization: this.token },
+            body: { tracks: [{ uri }] }
+        };
+
+        return this.http.delete(`https://api.spotify.com/v1/users/${userId}/playlists/${id}/tracks`, options)
+    }
+
+    removePlayList(userId: string, trackId: string) {
+        return this.http.delete(`https://api.spotify.com/v1/users/${userId}/playlists/${trackId}/followers`, {
             headers: {Authorization: this.token}
         })
     }

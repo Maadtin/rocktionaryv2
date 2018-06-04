@@ -10,6 +10,7 @@ import {UtilsService} from '../../utils.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {VideoPlayerGlobals} from '../../video-player-globals';
 import {Principal} from "../../shared";
+import {MusicPlayerService} from "../../music-player/music-player.service";
 
 @Component({
     selector: 'jhi-banda-detail',
@@ -40,7 +41,8 @@ export class BandaDetailComponent implements OnInit {
         private utils: UtilsService,
         private sanitizer: DomSanitizer,
         private videoPlayerGlobals: VideoPlayerGlobals,
-        private principal: Principal
+        private principal: Principal,
+        private musicPlayerService: MusicPlayerService
     ) {
     }
 
@@ -93,44 +95,14 @@ export class BandaDetailComponent implements OnInit {
 
 
 
-    toggleIcon (playerId, $e, trackName) {
-        this.activeButton = playerId;
-        $e.target.parentElement.querySelector('i.fa').classList.remove('fa-pause', 'fa-play');
-
-        if ($e.target.parentElement.querySelector('i.fa').classList.contains('fa-pause')) {
-            $e.target.parentElement.querySelector('i.fa').classList.add('fa-play')
-        } else {
-            $e.target.parentElement.querySelector('i.fa').classList.add('fa-pause')
-        }
-
-        this.bandaService.getVideoTrack(this.banda.name,trackName).subscribe(video => {
-            // this.videoPlayerGlobals.videoTrackId = video.items[0].id.videoId;
-            this.videoPlayerGlobals.videoInfo = {
-                nombre: video.items[0].snippet.title,
-                bandaNombre: this.banda.name,
-                bandaId: this.banda.id
-            };
-
-            console.log(video);
-            this.videoPlayerGlobals.videoUrl = this
-                .sanitizer
-                .bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${video.items[0].id.videoId}?rel=0&autoplay=1`);
-            this.videoPlayerGlobals.showVideoPlayer = true;
-            this.videoPlayerGlobals.showVideo = true;
+    toggleIcon (song, albumImage) {
+        this.bandaService.getVideoTrack(song, this.banda.name).subscribe(video => {
+            this.musicPlayerService.player.loadVideoById(video.items[0].id.videoId);
+            this.musicPlayerService.group = this.banda.name;
+            this.musicPlayerService.song = song;
+            this.musicPlayerService.albumImage = albumImage;
         });
     }
-
-    // closeYoutubeVideo (e) {
-    //     this.videoPlayerGlobals.closeYoutubeVideo(e);
-    // }
-    // minimizeYoutubeVideo () {
-    //     this.videoPlayerGlobals.minimizeYoutubeVideo()
-    // }
-
-    // sanitizeUrl (url) {
-    //     return this.sanitizer.bypassSecurityTrustUrl(url);
-    // }
-
 
     triggerClass  ($e) {
         Array.from($e.target.parentElement.children).forEach((tab: any) => tab.classList.remove('active'));
@@ -158,17 +130,5 @@ export class BandaDetailComponent implements OnInit {
                 e.target.parentElement.querySelector('.loader-container').style.display = 'none';
         })
     }
-
-    // ngOnDestroy() {
-    //     this.subscription.unsubscribe();
-    //     this.eventManager.destroy(this.eventSubscriber);
-    // }
-
-    // registerChangeInBandas() {
-    //     this.eventSubscriber = this.eventManager.subscribe(
-    //         'bandaListModification',
-    //         (response) => this.load(this.banda.id)
-    //     );
-    // }
 
 }

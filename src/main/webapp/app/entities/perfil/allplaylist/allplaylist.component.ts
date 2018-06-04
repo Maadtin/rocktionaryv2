@@ -20,6 +20,10 @@ export class AllplaylistComponent implements OnInit {
     public showAddTrackToPlayListForm: boolean = false;
     public showFormError: boolean = false;
 
+
+    public playListName: string;
+    public playListDescripcion: string;
+
     constructor(private userExtService: UserExtService) {}
 
     ngOnInit() {
@@ -39,12 +43,12 @@ export class AllplaylistComponent implements OnInit {
         console.log(this);
     }
 
-    createPlayList({ target: form }) {
+    createPlayList() {
         const playListData = {
-            name: form.nombre.value,
+            name: this.playListName,
             public: true,
             collaborative: false,
-            description: form.description.value
+            description: this.playListDescripcion
         };
 
         if (!playListData.name) {
@@ -52,11 +56,13 @@ export class AllplaylistComponent implements OnInit {
             return;
         }
 
-        this.userExtService.createPlayList (this.spotifyUser.id, playListData).subscribe((createdPlayList: PlayList) => {
-            this.playLists.items.push(createdPlayList);
-            form.reset();
-            this.showFormError = false;
-            this.showCreatePlayListform = false;
+        this.userExtService.createPlayList (this.spotifyUser.id, playListData)
+            .subscribe((createdPlayList: PlayList) => {
+                console.log(createdPlayList);
+                this.playLists.items.push(createdPlayList);
+                this.showFormError = false;
+                this.showCreatePlayListform = false;
+                this.playListName = this.playListDescripcion = null;
         });
     }
 

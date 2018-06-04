@@ -48,7 +48,7 @@ export interface TrackItem {
     added_by?: AddedBy;
     is_local? :boolean;
     primary_color?: null;
-    track? :Track;
+    track? : Track;
     video_thumbnail? :VideoThumbNail
 }
 
@@ -83,7 +83,7 @@ export interface Track {
     track? :boolean;
     track_number? :number;
     type? :string;
-    url? :string;
+    uri? :string;
 }
 
 export interface TrackAlbum {

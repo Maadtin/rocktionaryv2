@@ -5,6 +5,10 @@
 
 .tracks-container {
 
+    .remove-track-icon {
+        cursor: pointer;
+    }
+
     h3 {
         text-align: center;
         padding: 20px 0;
@@ -25,10 +29,6 @@
         li {
             margin-bottom: 15px;
             border: thin solid rgba(#fff, .4);
-            //display: flex;
-            //flex-wrap: wrap;
-            //justify-content: center;
-            cursor: pointer;
             border-radius: 2px;
             transition: all ease-in 0.2s;
             &:hover {
@@ -49,6 +49,7 @@
         justify-content: center;
         font-size: 15px;
         height: 50px;
+        cursor: pointer;
     }
 
     .img-audio-container {

@@ -203,24 +203,29 @@
         }
         grid-gap: 5px;
         li {
-            margin-bottom: 15px;
             border: thin solid rgba(#fff, .4);
-            //display: flex;
-            //flex-wrap: wrap;
-            //justify-content: center;
             border-radius: 2px;
             transition: all ease-in 0.2s;
-            cursor: pointer;
             &:hover {
                 border-color: #fff;
             }
-            &:hover img {
+            //&:hover img:not(.addIcon) {
+            //    transform: scale(1.1);
+            //}
+        }
+
+        .addIcon {
+            cursor: pointer;
+            width: 50px;
+            margin: 5px;
+            &:hover {
                 transform: scale(1.1);
             }
         }
     }
 
     h5 {
+        cursor: pointer;
         color: #fff;
         padding: .5em .8em;
         width: 100%;

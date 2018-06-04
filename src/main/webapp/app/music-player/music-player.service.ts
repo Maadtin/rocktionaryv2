@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+import {Track} from "../interfaces/SpotifyInterfaces";
 
 @Injectable()
 export class MusicPlayerService {
@@ -15,8 +16,19 @@ export class MusicPlayerService {
 
     public rangeMax: any = 0;
     public rangeValue: any;
-    albumImage: any;
-    songInfo: any;
+    public albumImage: any;
+
+
+    public track: Track;
+
+    public song: any;
+    public group: any;
+    public artistId: any;
+
+    public showBackButton = false;
+    public playListId;
+    public playListName;
+    public userLogin;
 
 
     onSavePlayer(player) {
@@ -92,11 +104,8 @@ export class MusicPlayerService {
     }
 
 
-
-
-
-
-
-
-
+    closePlayer() {
+        this.showPlayer = false;
+        this.player.stopVideo();
+    }
 }

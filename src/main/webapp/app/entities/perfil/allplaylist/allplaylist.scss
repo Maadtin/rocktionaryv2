@@ -112,3 +112,24 @@
 iframe {
     display: none !important;
 }
+
+.play-list-form-container {
+
+
+    input[type=text], textarea {
+        box-shadow: none !important;
+        background-color: #000;
+        border: thin solid rgba(#fff, 0.3);
+        transition: all ease-in 0.2s;
+        color: #fff;
+
+        &:focus {
+            border-color: #fff;
+        }
+
+        &::placeholder {
+            color: #fff;
+        }
+    }
+
+}

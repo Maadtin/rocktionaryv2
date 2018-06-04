@@ -17,6 +17,7 @@ import {
 } from './';
 import {UtilsService} from '../../utils.service';
 import {BarRatingComponent} from "../../bar-rating/bar-rating.component";
+import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
 
 const ENTITY_STATES = [
     ...bandaRoute,
@@ -27,7 +28,8 @@ const ENTITY_STATES = [
     imports: [
         RocktionarySharedModule,
         RouterModule.forChild(ENTITY_STATES),
-        BarRatingModule
+        BarRatingModule,
+        NgbDropdownModule
     ],
     declarations: [
         BandaComponent,

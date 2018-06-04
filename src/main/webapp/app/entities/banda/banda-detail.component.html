@@ -22,17 +22,21 @@
                 <section *ngIf="!showComentarios" class="top-tracks-container">
                     <h3 class="text-white">Top canciones de {{banda.name}}</h3>
                     <ul class="grid">
-                        <li (click)="toggleIcon(track.id, $event, track.name)" *ngFor="let track of topTracks.tracks" >
-                            <h5> {{track.name}} </h5>
+                        <li *ngFor="let track of topTracks.tracks" >
+                            <h5 (click)="toggleIcon(track.name, track.album.images[1].url)">{{track.name}}</h5>
                             <div class="img-audio-container">
                                 <img class="imagen-audio" [src]="track.album.images[1].url">
-                                <i
-                                    [ngClass]="{'fa-play': !activePlayer, 'fa-pause': activeButton === track.id }"
-                                    class="track-icon-play fa">
-                                </i>
                             </div>
-                            <div class="options">
-                                <img class="addIcon" (click)="addTrackToAPlaylist()" src="../../../content/images/addIcon.png" alt="">
+                            <div class="options" ngbDropdown [autoClose]="'outside'">
+                                <img class="addIcon" ngbDropdownToggle src="../../../content/images/addIcon.png" alt="">
+                                <ul class="rocktionary-dropdown" ngbDropdownMenu>
+                                    <li ngbDropdown ngbDropdownToggle [placement]="'right'">
+                                        Añadir a playlist <i class="pl-1 fa fa-chevron-right"></i>
+                                        <ul class="rocktionary-dropdown" ngbDropdownMenu>
+                                            <li>This is BTS</li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
                         </li>
                     </ul>

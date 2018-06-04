@@ -1,7 +1,7 @@
 export class YoutubeModel {
     constructor(
         public etag?: string,
-        public items?: any[],
+        public items?: YoutubeItems[],
         public kind?: string,
         public nextPageToken?: string,
         public pageInfo?: {
@@ -11,4 +11,12 @@ export class YoutubeModel {
     ) {
 
     }
+}
+
+export interface YoutubeItems {
+    id: YoutubeItemsId
+}
+
+export interface  YoutubeItemsId {
+    videoId
 }

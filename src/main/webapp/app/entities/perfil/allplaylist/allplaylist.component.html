@@ -2,14 +2,13 @@
     <div class="create-playlist">
         <p class="text-white play-list-title">Crear nueva playlist</p>
         <button (click)="showCreatePlayListform = !showCreatePlayListform" class="rocktionary-theme">{{ showCreatePlayListform ? 'Cancelar' : 'Crear playlist' }}</button>
-        <form (submit)="createPlayList($event)" *ngIf="showCreatePlayListform">
+        <form (submit)="createPlayList()" *ngIf="showCreatePlayListform" class="mt-3 play-list-form-container">
             <div class="form-row">
                 <div class="form-group col-12">
-                    <input name="nombre" type="text" placeholder="Nombre de la playlist" class="form-control form-control-sm">
+                    <input name="nombre" [(ngModel)]="playListName" type="text" placeholder="Nombre de la playlist" class="form-control form-control-sm">
                 </div>
                 <div class="form-group col-12">
-                    <span>Descripcion (opcional)</span>
-                    <textarea class="form-control form-control-sm" name="description" placeholder="Descripción"></textarea>
+                    <textarea [(ngModel)]="playListDescripcion" class="form-control form-control-sm" name="description" placeholder="Descripcion (opcional)"></textarea>
                 </div>
                 <div class="form-group col-12">
                     <input type="submit" class="rocktionary-theme" value="Crear playlist">
