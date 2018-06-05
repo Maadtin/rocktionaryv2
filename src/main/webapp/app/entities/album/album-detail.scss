@@ -271,4 +271,63 @@
     }
 }
 
+.album-tracks-container {
+
+    .album-track {
+        justify-content: space-between;
+        padding: .5em;
+        border: thin solid rgba(#fff, 0.3);
+        transition: all ease-in 0.2s;
+        margin-bottom: 10px;
+        cursor: pointer;
+        &:hover {
+            border-color: #fff;
+        }
+    }
+
+
+}
+
+.comment-section {
+    margin-top: 10px;
+}
+.comment {
+    border: thin solid rgba(#fff, 0.3);
+    border-radius: 2px;
+    width: 100%;
+    position: relative;
+    padding: 10px;
+    margin-bottom: 5px;
+    transition: all ease-in 0.2s;
+
+    &:hover {
+        border-color: #fff;
+    }
+
+    &-remove {
+        cursor: pointer;
+    }
+
+    &-date {
+        font-size: 14px;
+        position: absolute;
+        top: 3px;
+        right: 5px;
+    }
+
+    &-user {
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+    &-text {
+        font-size: 15px;
+    }
+}
+
+.no-comments-yet {
+    text-align: center;
+    margin-top: 15px;
+}
+
 

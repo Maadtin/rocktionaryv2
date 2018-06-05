@@ -77,7 +77,7 @@ public class ComentarBandaResource {
     }
 
 
-    @DeleteMapping("/delete-comment/{id}")
+    @DeleteMapping("/delete-banda-comment/{id}")
     public void deleteComment (@PathVariable Long id) {
         comentarBandaRepository.delete(id);
     }

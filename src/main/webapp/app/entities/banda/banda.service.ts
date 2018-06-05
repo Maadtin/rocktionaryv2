@@ -69,7 +69,7 @@ export class BandaService {
     }
 
     removeComment (id) {
-        return this.http.delete(`/api/delete-comment/${id}`)
+        return this.http.delete(`/api/delete-banda-comment/${id}`)
     }
 
     getBandaComments(bandaName) {

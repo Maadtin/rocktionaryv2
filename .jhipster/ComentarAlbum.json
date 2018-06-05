@@ -22,12 +22,21 @@
         {
             "fieldName": "fechaComentario",
             "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "albumName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": "0"
         }
     ],
     "changelogDate": "20180203225143",
-    "entityTableName": "comentar_album",
     "dto": "no",
-    "pagination": "no",
     "service": "no",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "comentar_album",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
 }

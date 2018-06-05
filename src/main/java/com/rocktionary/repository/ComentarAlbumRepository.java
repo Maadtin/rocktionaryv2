@@ -16,4 +16,6 @@ public interface ComentarAlbumRepository extends JpaRepository<ComentarAlbum, Lo
     @Query("select comentar_album from ComentarAlbum comentar_album where comentar_album.user.login = ?#{principal.username}")
     List<ComentarAlbum> findByUserIsCurrentUser();
 
+    List<ComentarAlbum> findByAlbumName(String albumName);
+
 }

@@ -97,4 +97,16 @@ export class AlbumService implements OnInit {
         const copy: Album = Object.assign({}, album);
         return copy;
     }
+
+    addComment({ comentario, albumName }) {
+        return this.http.post(`/api/comentar-album`, { comentario, albumName })
+    }
+
+    getAlbumComments(albumName) {
+        return this.http.get(`/api/get-album-comments/${albumName}`)
+    }
+
+    removeComment(commentId) {
+        return this.http.delete(`/api/delete-album-comment/${commentId}`)
+    }
 }

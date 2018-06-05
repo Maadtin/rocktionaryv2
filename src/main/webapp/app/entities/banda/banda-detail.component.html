@@ -13,7 +13,10 @@
             </div>
             <div class="banda-detail__stats">
                 <a data-tab="general" class="active" (click)="triggerClass($event)">General</a>
-                <a data-tab="comentarios" (click)="triggerClass($event)" >Comentarios <span *ngIf="bandaComments.length">({{ bandaComments.length }})</span></a>
+                <a data-tab="comentarios" (click)="triggerClass($event)" >
+                    Comentarios
+                    <span *ngIf="bandaComments.length">({{ bandaComments.length }})</span>
+                </a>
             </div>
         </div>
     </div>

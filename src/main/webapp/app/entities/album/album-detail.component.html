@@ -13,9 +13,12 @@
                     <img [src]="album.images[0].url"  alt="Imagen de album"/>
                 </div>
                 <div class="album-detail__stats">
-                    <a class="active" (click)="triggerClass($event)" href="">General</a>
-                    <a (click)="triggerClass($event)" href="">Seguidores</a>
-                    <a (click)="triggerClass($event)" href="">Comentarios</a>
+                    <a data-tab="general" class="active" (click)="triggerClass($event)">General</a>
+                    <!--<a (click)="triggerClass($event)" href="">Seguidores</a>-->
+                    <a data-tab="comentarios" (click)="triggerClass($event)">
+                        Comentarios
+                        <span *ngIf="albumComments.length">({{ albumComments.length }})</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -26,41 +29,43 @@
                     <!--<span class="resumen-label">INFORMACIÓN GENERAL</span>-->
                     <!--<p>{{vm.album.localizacion}}</p>-->
                     <!--</div>-->
-                    <!--<div ng-if="vm.showSeguidores" class="seguidores">-->
+                    <!--<div *ngIf="showSeguidores" class="seguidores">-->
                     <!--<span class="resumen-label">SEGUIDORES</span>-->
                     <!--<p>{{vm.album.localizacion}}</p>-->
                     <!--</div>-->
-                    <!--<div ng-if="vm.showComentarios" class="comentarios">-->
-                    <!--<span class="resumen-label">COMENTARIOS</span>-->
-                    <!--<form ng-submit="vm.addComment()" name="addComentForm" class="commentarios__form">-->
-                    <!--<textarea name="comment" ng-model="vm.commentText" placeholder="Deja tú comentario..." required></textarea>-->
-                    <!--<button ng-disabled="addComentForm.$invalid" type="submit">Enviar</button>-->
-                    <!--</form>-->
-                    <!--</div>-->
-                    <section class="album-canciones">
-                        <h3>Canciones de {{album.name}}</h3>
-
-                        <!--<ul class="grid">-->
-                            <!--<li (click)="toggleIcon(track.id, $event, track.name)" *ngFor="let track of topTracks.tracks" >-->
-                                <!--<h5>{{track.name}}</h5>-->
-                                <!--<div class="img-audio-container">-->
-                                    <!--<img [src]="track.album.images[1].url">-->
-                                    <!--<i-->
-                                        <!--[ngClass]="{'fa-play': !activePlayer, 'fa-pause': activeButton === track.id }"-->
-                                        <!--class="track-icon-play fa">-->
-                                    <!--</i>-->
-                                <!--</div>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                        <ul>
-                            <li *ngFor="let album of albumTracks.items">
-                            <h5>{{album.name}} {{album.explicit ? '(Explicita)' : ''}}</h5>
-                            <span>{{parseMillis(album.duration_ms)}}</span>
-                            <div class="album-cancion-container">
-                                <audio controls>
-                                    <source [src]="sanitizeUrl(album.preview_url)">
-                                </audio>
+                    <section *ngIf="showComentarios" class="comentarios">
+                    <span class="resumen-label">COMENTARIOS</span>
+                        <form (submit)="addComment()" name="addComentForm" class="commentarios__form">
+                            <textarea style="position: relative;" name="comment" [(ngModel)]="commentText" placeholder="Deja tú comentario..." required></textarea>
+                            <div class="loader-container">
+                                <div class="loader"></div>
                             </div>
+                            <button [disabled]="!commentText" type="submit">Enviar</button>
+                        </form>
+                        <ul *ngIf="albumComments.length" class="list-unstyled comment-section">
+                            <li class="comment" *ngFor="let comment of albumComments">
+                                <i class="comment-remove fa fa-remove text-white" *ngIf="loggedUser === comment.user.login" (click)="removeComment($event, comment.id)"></i>
+                                <span class="comment-date text-white">{{ comment.fechaComentario | date: 'short' }}</span>
+                                <a [routerLink]="['/user', comment.user.login]" class="comment-user m-0 text-white">{{ comment.user.login }}</a>
+                                <p class="comment-text m-0 text-white">{{ comment.comentario }}</p>
+                                <div class="loader-container">
+                                    <div class="loader"></div>
+                                </div>
+                            </li>
+                        </ul>
+                        <p *ngIf="!albumComments.length" class="no-comments-yet text-white">
+                            Aún no hay comentarios sobre {{ album.name }} <br>
+                            <strong>¡Sé el primero en comentar!</strong>
+                        </p>
+                    </section>
+
+                    <section *ngIf="!showComentarios" class="album-canciones">
+                        <h3>Canciones de {{album.name}}</h3>
+                        <ul class="list-unstyled album-tracks-container">
+                            <li (click)="playTrack(track)" *ngFor="let track of albumTracks.items" class="album-track">
+                            <p class="font-weight-light text-white mb-0">{{track.name}}</p>
+                            <span>{{parseMillis(track.duration_ms)}}</span>
+                            <p style="font-size: 14px; width: 100%" class="mb-0">{{track.explicit ? '(Explicita)' : ''}}</p>
                         </li>
                         </ul>
                     </section>
@@ -75,53 +80,4 @@
         </div>
 
     </div>
-    <!--<h2><span jhiTranslate="rocktionaryApp.album.detail.title">Album</span> {{album.id}}</h2>-->
-    <!--<hr>-->
-    <!--<jhi-alert-error></jhi-alert-error>-->
-    <!--<dl class="row-md jh-entity-details">-->
-        <!--<dt><span jhiTranslate="rocktionaryApp.album.genero">Genero</span></dt>-->
-        <!--<dd>-->
-            <!--<span>{{album.genero}}</span>-->
-        <!--</dd>-->
-        <!--<dt><span jhiTranslate="rocktionaryApp.album.nombre">Nombre</span></dt>-->
-        <!--<dd>-->
-            <!--<span>{{album.nombre}}</span>-->
-        <!--</dd>-->
-        <!--<dt><span jhiTranslate="rocktionaryApp.album.numCanciones">Num Canciones</span></dt>-->
-        <!--<dd>-->
-            <!--<span>{{album.numCanciones}}</span>-->
-        <!--</dd>-->
-        <!--<dt><span jhiTranslate="rocktionaryApp.album.formato">Formato</span></dt>-->
-        <!--<dd>-->
-            <!--<span>{{album.formato}}</span>-->
-        <!--</dd>-->
-        <!--<dt><span jhiTranslate="rocktionaryApp.album.numCopias">Num Copias</span></dt>-->
-        <!--<dd>-->
-            <!--<span>{{album.numCopias}}</span>-->
-        <!--</dd>-->
-        <!--<dt><span jhiTranslate="rocktionaryApp.album.reviews">Reviews</span></dt>-->
-        <!--<dd>-->
-            <!--<span>{{album.reviews}}</span>-->
-        <!--</dd>-->
-        <!--<dt><span jhiTranslate="rocktionaryApp.album.discografica">Discografica</span></dt>-->
-        <!--<dd>-->
-            <!--<div *ngIf="album.discografica">-->
-                <!--<a [routerLink]="['/discografica', album.discografica?.id]">{{album.discografica?.nombre}}</a>-->
-            <!--</div>-->
-        <!--</dd>-->
-    <!--</dl>-->
-
-    <!--<button type="submit"-->
-            <!--(click)="previousState()"-->
-            <!--class="btn btn-info">-->
-        <!--<span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>-->
-    <!--</button>-->
-
-    <!--<button type="button"-->
-            <!--[routerLink]="['/', { outlets: { popup: 'album/'+ album.id + '/edit'} }]"-->
-            <!--replaceUrl="true"-->
-            <!--queryParamsHandling="merge"-->
-            <!--class="btn btn-primary">-->
-        <!--<span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>-->
-    <!--</button>-->
 </div>

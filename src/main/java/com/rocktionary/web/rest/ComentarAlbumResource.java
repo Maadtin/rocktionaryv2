@@ -3,7 +3,10 @@ package com.rocktionary.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.rocktionary.domain.ComentarAlbum;
 
+import com.rocktionary.domain.User;
 import com.rocktionary.repository.ComentarAlbumRepository;
+import com.rocktionary.repository.UserRepository;
+import com.rocktionary.security.SecurityUtils;
 import com.rocktionary.web.rest.errors.BadRequestAlertException;
 import com.rocktionary.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +34,11 @@ public class ComentarAlbumResource {
     private static final String ENTITY_NAME = "comentarAlbum";
 
     private final ComentarAlbumRepository comentarAlbumRepository;
+    private final UserRepository userRepository;
 
-    public ComentarAlbumResource(ComentarAlbumRepository comentarAlbumRepository) {
+    public ComentarAlbumResource(ComentarAlbumRepository comentarAlbumRepository, UserRepository userRepository) {
         this.comentarAlbumRepository = comentarAlbumRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -53,6 +59,27 @@ public class ComentarAlbumResource {
         return ResponseEntity.created(new URI("/api/comentar-albums/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+
+    @PostMapping("/comentar-album")
+    public ComentarAlbum comentarAlbum (@RequestBody ComentarAlbumDTO comentarBandaDTO) {
+
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get();
+        ComentarAlbum comentarAlbum = new ComentarAlbum(user, comentarBandaDTO.getComentario(), comentarBandaDTO.getAlbumName(), ZonedDateTime.now());
+
+        return comentarAlbumRepository.save(comentarAlbum);
+    }
+
+    @GetMapping("/get-album-comments/{albumName}")
+    public List<ComentarAlbum> getAlbumComments (@PathVariable String albumName) {
+        return comentarAlbumRepository.findByAlbumName(albumName);
+    }
+
+
+    @DeleteMapping("/delete-album-comment/{id}")
+    public void deleteComment (@PathVariable Long id) {
+        comentarAlbumRepository.delete(id);
     }
 
     /**

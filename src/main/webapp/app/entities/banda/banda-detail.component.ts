@@ -87,6 +87,9 @@ export class BandaDetailComponent implements OnInit {
         //this.registerChangeInBandas();
     }
 
+
+
+
     load(id) {
         this.bandaService.find(id)
             .subscribe((bandaResponse: HttpResponse<Banda>) => {

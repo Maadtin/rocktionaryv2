@@ -18,6 +18,7 @@
             },
             "comentario": "Comentario",
             "fechaComentario": "Fecha Comentario",
+            "albumName": "Album Name",
             "user": "User",
             "album": "Album"
         }

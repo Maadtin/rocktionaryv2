@@ -7,6 +7,11 @@ import { JhiEventManager } from 'ng-jhipster';
 import { Album } from './album.model';
 import { AlbumService } from './album.service';
 import {UtilsService} from '../../utils.service';
+import {MusicPlayerService} from "../../music-player/music-player.service";
+import {UserExtService} from "../user-ext";
+import {Track, TrackItem} from "../../interfaces/SpotifyInterfaces";
+import {YoutubeModel} from "../../models/Youtube";
+import {Principal, User} from "../../shared";
 
 @Component({
     selector: 'jhi-album-detail',
@@ -20,15 +25,30 @@ export class AlbumDetailComponent implements OnInit {
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
+    public commentText: string;
+    public showComentarios: boolean = false;
+
+    public albumComments: string[];
+    public loggedUser: string;
+
     constructor(
         private eventManager: JhiEventManager,
         private albumService: AlbumService,
         private route: ActivatedRoute,
-        private utilsService: UtilsService
+        private utilsService: UtilsService,
+        private musicPlayerService: MusicPlayerService,
+        private userExtService: UserExtService,
+        private principal: Principal
     ) {
     }
 
     ngOnInit() {
+
+        this.albumComments = [];
+
+        this.principal.identity()
+            .then((user: User) => this.loggedUser = user.login);
+
         this.subscription = this.route.params.subscribe((params) => {
 
             this.albumService.getAlbum(params['id']).subscribe(album => {
@@ -36,7 +56,13 @@ export class AlbumDetailComponent implements OnInit {
             });
 
             this.albumService.getAlbumTracks(params['id']).subscribe(albumTrack => {
-                this.albumTracks = albumTrack
+                this.albumTracks = albumTrack;
+
+                this.albumService.getAlbumComments (this.album.name)
+                    .subscribe((comments: string[]) => {
+                        console.log(comments);
+                        this.albumComments = comments
+                    })
             })
 
             // this.load(params['id']);
@@ -63,6 +89,23 @@ export class AlbumDetailComponent implements OnInit {
         window.history.back();
     }
 
+    addComment () {
+        this.albumService.addComment({ comentario: this.commentText, albumName: this.album.name })
+            .subscribe((newComment: string) => {
+                this.albumComments.push(newComment);
+                this.commentText = null;
+            })
+    }
+
+    removeComment(e, id) {
+        e.target.parentElement.querySelector('.loader-container').style.display = 'block';
+        this.albumService.removeComment(id)
+            .subscribe(() => {
+                this.albumComments = this.albumComments.filter((comment: any) => comment.id !== id);
+                e.target.parentElement.querySelector('.loader-container').style.display = 'none';
+            })
+    }
+
     // ngOnDestroy() {
     //     this.subscription.unsubscribe();
     //     this.eventManager.destroy(this.eventSubscriber);
@@ -73,5 +116,26 @@ export class AlbumDetailComponent implements OnInit {
             'albumListModification',
             (response) => this.load(this.album.id)
         );
+    }
+
+
+    triggerClass  ($e) {
+        Array.from($e.target.parentElement.children).forEach((tab: any) => tab.classList.remove('active'));
+        $e.target.classList.add('active');
+        switch ($e.target.dataset.tab) {
+            case 'general': this.showComentarios = false; break;
+            // case 'Seguidores': vm.showSeguidores = true;vm.showGeneral=false;vm.showComentarios=false;break;
+            case 'comentarios': this.showComentarios = true; break;
+        }
+    };
+
+    playTrack(track) {
+        this.userExtService.getVideoTrack(track.artists[0].name, track.name)
+            .subscribe((video: YoutubeModel) => {
+                this.musicPlayerService.player.loadVideoById(video.items[0].id.videoId);
+                this.musicPlayerService.group = track.artists[0].name;
+                this.musicPlayerService.artistId = track.artists[0].id;
+                this.musicPlayerService.song = track.name;
+            })
     }
 }
